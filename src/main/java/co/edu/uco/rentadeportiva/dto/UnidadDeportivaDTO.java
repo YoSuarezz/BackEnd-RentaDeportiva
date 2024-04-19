@@ -8,81 +8,96 @@ public class UnidadDeportivaDTO {
     private String nombre;
     private int numeroDeDocumento;
     private String direccion;
-    private String telefono;
+    private int telefono;
     private CiudadDTO ciudad;
     private ValidacionDTO correo;
     private ResponsableDTO responsable;
     private TipoDeDocumentoDTO tipoDeDocumento;
 
-    public int getId() {
+    //public UnidadDeportivaDTO() {
+    //}
+
+    //public UnidadDeportivaDTO() {
+    //}
+
+    public final int getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public final UnidadDeportivaDTO setId(final int id) {
         this.id = id;
+        return this;
     }
 
-    public String getNombre() {
+    public final String getNombre() {
         return nombre;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public final UnidadDeportivaDTO setNombre(final String nombre) {
+        this.nombre = TextHelper.applyTrim(nombre);
+        return this;
     }
 
-    public int getNumeroDeDocumento() {
+    public final int getNumeroDeDocumento() {
         return numeroDeDocumento;
     }
 
-    public void setNumeroDeDocumento(int numeroDeDocumento) {
+    public final UnidadDeportivaDTO setNumeroDeDocumento(final int numeroDeDocumento) {
         this.numeroDeDocumento = numeroDeDocumento;
+        return this;
     }
 
-    public String getDireccion() {
+    public final String getDireccion() {
         return direccion;
     }
 
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
+    public final UnidadDeportivaDTO setDireccion(final String direccion) {
+        this.direccion = TextHelper.applyTrim(direccion);
+        return this;
     }
 
-    public String getTelefono() {
+    public final int getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(String telefono) {
+    public final UnidadDeportivaDTO setTelefono(final int telefono) {
         this.telefono = telefono;
+        return this;
     }
 
-    public CiudadDTO getCiudad() {
+    public final CiudadDTO getCiudad() {
         return ciudad;
     }
 
-    public void setCiudad(CiudadDTO ciudad) {
-        this.ciudad = ciudad;
+    public final UnidadDeportivaDTO setCiudad(final CiudadDTO ciudad) {
+        this.ciudad = ObjectHelper.getObjectHelper().getDefault(ciudad, CiudadDTO.build());
+        return this;
     }
 
-    public ValidacionDTO getCorreo() {
+    public final ValidacionDTO getCorreo() {
         return correo;
     }
 
-    public void setCorreo(ValidacionDTO correo) {
-        this.correo = correo;
+    public final UnidadDeportivaDTO setCorreo(final ValidacionDTO correo) {
+        this.correo = ObjectHelper.getObjectHelper().getDefault(correo, ValidacionDTO.build());
+        return this;
     }
 
-    public ResponsableDTO getResponsable() {
+    public final ResponsableDTO getResponsable() {
         return responsable;
     }
 
-    public void setResponsable(ResponsableDTO responsable) {
-        this.responsable = responsable;
+    public final UnidadDeportivaDTO setResponsable(final ResponsableDTO responsable) {
+        this.responsable = ObjectHelper.getObjectHelper().getDefault(responsable, ResponsableDTO.build());
+        return this;
     }
 
-    public TipoDeDocumentoDTO getTipoDeDocumento() {
+    public final TipoDeDocumentoDTO getTipoDeDocumento() {
         return tipoDeDocumento;
     }
 
-    public void setTipoDeDocumento(TipoDeDocumentoDTO tipoDeDocumento) {
-        this.tipoDeDocumento = tipoDeDocumento;
+    public final UnidadDeportivaDTO setTipoDeDocumento(final TipoDeDocumentoDTO tipoDeDocumento) {
+        this.tipoDeDocumento = ObjectHelper.getObjectHelper().getDefault(tipoDeDocumento, TipoDeDocumentoDTO.build());
+        return this;
     }
 }
