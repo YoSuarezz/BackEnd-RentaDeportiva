@@ -42,7 +42,6 @@ public class DepartamentoDTO {
     }
 
 
-
     public final PaisDTO getPais() {
         return pais;
     }
