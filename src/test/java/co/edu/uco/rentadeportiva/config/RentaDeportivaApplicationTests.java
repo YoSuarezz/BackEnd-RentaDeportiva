@@ -1,4 +1,4 @@
-package co.edu.uco.rentadeportiva.condfig;
+package co.edu.uco.rentadeportiva.config;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
