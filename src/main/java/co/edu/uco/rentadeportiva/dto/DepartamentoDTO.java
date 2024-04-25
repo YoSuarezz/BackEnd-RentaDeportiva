@@ -41,7 +41,6 @@ public class DepartamentoDTO {
         return this;
     }
 
-
     public final PaisDTO getPais() {
         return pais;
     }
