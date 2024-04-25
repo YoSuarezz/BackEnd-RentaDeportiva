@@ -3,6 +3,8 @@ package co.edu.uco.rentadeportiva.dto;
 import co.edu.uco.rentadeportiva.crosscutting.helpers.ObjectHelper;
 import co.edu.uco.rentadeportiva.crosscutting.helpers.TextHelper;
 
+import java.sql.SQLOutput;
+
 public class CiudadDTO {
     private int id;
     private String nombre;
@@ -52,5 +54,6 @@ public class CiudadDTO {
 
     public static void main(String[] args) {
         System.out.println(CiudadDTO.build().getDepartamento().getPais().getNombre());
+        System.out.println("Hello world");
     }
 }
