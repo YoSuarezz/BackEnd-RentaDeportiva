@@ -1,0 +1,98 @@
+-- Crear el esquema rentadeportiva
+CREATE SCHEMA rentadeportiva;
+
+-- Crear la tabla Pais
+CREATE TABLE rentadeportiva.pais (
+    id SERIAL PRIMARY KEY,
+    nombre VARCHAR(255) NOT NULL
+);
+
+-- Crear la tabla Departamento
+CREATE TABLE rentadeportiva.departamento (
+    id SERIAL PRIMARY KEY,
+    nombre VARCHAR(255) NOT NULL,
+    pais_id INT NOT NULL REFERENCES rentadeportiva.pais(id)
+);
+
+-- Crear la tabla Ciudad
+CREATE TABLE rentadeportiva.ciudad (
+    id SERIAL PRIMARY KEY,
+    nombre VARCHAR(255) NOT NULL,
+    departamento_id INT NOT NULL REFERENCES rentadeportiva.departamento(id)
+);
+
+-- Crear la tabla Responsable
+CREATE TABLE rentadeportiva.responsable (
+    id SERIAL PRIMARY KEY,
+    nombre VARCHAR(255) NOT NULL,
+    apellido VARCHAR(255) NOT NULL,
+    correo VARCHAR(255) NOT NULL,
+    telefono INT NOT NULL,
+    estado VARCHAR(255) NOT NULL
+);
+
+-- Crear la tabla TipoDeDocumento
+CREATE TABLE rentadeportiva.tipodedocumento (
+    id SERIAL PRIMARY KEY,
+    nombre VARCHAR(255) NOT NULL
+);
+
+-- Crear la tabla Validacion
+CREATE TABLE rentadeportiva.validacion (
+    id SERIAL PRIMARY KEY,
+    correo VARCHAR(255) NOT NULL,
+    contrasena VARCHAR(255) NOT NULL
+);
+
+-- Crear la tabla UnidadDeportiva
+CREATE TABLE rentadeportiva.unidaddeportiva (
+    id SERIAL PRIMARY KEY,
+    nombre VARCHAR(255) NOT NULL,
+    numero_documento INT NOT NULL,
+    direccion VARCHAR(255) NOT NULL,
+    telefono INT NOT NULL,
+    ciudad_id INT NOT NULL REFERENCES rentadeportiva.ciudad(id),
+    correo_id INT NOT NULL REFERENCES rentadeportiva.validacion(id),
+    responsable_id INT NOT NULL REFERENCES rentadeportiva.responsable(id),
+    tipo_documento_id INT NOT NULL REFERENCES rentadeportiva.tipodedocumento(id)
+);
+
+-- Insertar datos en la tabla Pais
+INSERT INTO rentadeportiva.pais (nombre) VALUES
+    ('Colombia'),
+    ('Estados Unidos'),
+    ('España');
+
+-- Insertar datos en la tabla Departamento
+INSERT INTO rentadeportiva.departamento (nombre, pais_id) VALUES
+    ('Antioquia', 1),
+    ('California', 2),
+    ('Madrid', 3);
+
+-- Insertar datos en la tabla Ciudad
+INSERT INTO rentadeportiva.ciudad (nombre, departamento_id) VALUES
+    ('Medellín', 1),
+    ('Los Angeles', 2),
+    ('Madrid', 3);
+
+-- Insertar datos en la tabla TipoDeDocumento
+INSERT INTO rentadeportiva.tipodedocumento (nombre) VALUES
+    ('Cédula'),
+    ('Pasaporte'),
+    ('Licencia');
+
+-- Insertar datos en la tabla Validacion
+INSERT INTO rentadeportiva.validacion (correo, contrasena) VALUES
+    ('correo1@example.com', 'contraseña1'),
+    ('correo2@example.com', 'contraseña2'),
+    ('correo3@example.com', 'contraseña3');
+
+-- Insertar datos en la tabla Responsable
+INSERT INTO rentadeportiva.responsable (nombre, apellido, correo, telefono, estado) VALUES
+    ('Juan', 'Pérez', 'juan@example.com', 123456789, 'Activo'),
+    ('María', 'González', 'maria@example.com', 987654321, 'Inactivo');
+
+-- Insertar datos en la tabla UnidadDeportiva
+INSERT INTO rentadeportiva.unidaddeportiva (nombre, numero_documento, direccion, telefono, ciudad_id, correo_id, responsable_id, tipo_documento_id) VALUES
+    ('Polideportivo Medellín', 12345678, 'Calle 123', 321654987, 1, 1, 1, 1),
+    ('Sports Center LA', 87654321, 'Main Street', 654987321, 2, 2, 2, 2);
