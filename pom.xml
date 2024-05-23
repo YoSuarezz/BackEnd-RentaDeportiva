@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>co.edu.uco.rentadeportiva</groupId>
-	<artifactId>RentaDeportiva</artifactId>
+	<artifactId>UnidadDeportivaElBernabeu</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>RentaDeportiva</name>
 	<description>Aplicación que contiene todos los servicios de negocio expuestos para los clientes que consumen las APIs de Renta Deportiva</description>
@@ -32,6 +32,12 @@
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<version>42.7.3</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>RELEASE</version>
+			<scope>test</scope>
 		</dependency>
 
 	</dependencies>
