@@ -1,6 +1,6 @@
 package co.edu.uco.unidaddeportivaelbernabeu.api.controller;
 
-import co.edu.uco.unidaddeportivaelbernabeu.api.response.pais.DeporteResponse;
+import co.edu.uco.unidaddeportivaelbernabeu.api.response.deporte.DeporteResponse;
 import co.edu.uco.unidaddeportivaelbernabeu.business.fachade.concrete.ConsultarDeportesFachadaImpl;
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.UnidadDeportivaElBernabeuException;
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.helpers.NumericHelper;

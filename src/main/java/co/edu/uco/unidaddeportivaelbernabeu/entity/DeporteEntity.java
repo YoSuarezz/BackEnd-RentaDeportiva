@@ -8,7 +8,7 @@ public class DeporteEntity {
     private int id;
     private String nombre;
 
-    public DeporteEntity(final int id, final String nombre) {
+    private DeporteEntity(final int id, final String nombre) {
         setId(id);
         setNombre(TextHelper.EMPTY);
     }

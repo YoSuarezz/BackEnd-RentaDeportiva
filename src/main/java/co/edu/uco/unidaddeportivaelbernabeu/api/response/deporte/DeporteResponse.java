@@ -1,4 +1,4 @@
-package co.edu.uco.unidaddeportivaelbernabeu.api.response.pais;
+package co.edu.uco.unidaddeportivaelbernabeu.api.response.deporte;
 
 import co.edu.uco.unidaddeportivaelbernabeu.api.response.Response;
 import co.edu.uco.unidaddeportivaelbernabeu.dto.DeporteDTO;
