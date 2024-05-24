@@ -56,9 +56,4 @@ public abstract class DAOFactory {
 	public abstract void cerrarConexion();
 
 	public abstract DeporteDAO getDeporteDAO();
-
-	public static void main(String[] args) {
-		DAOFactory.getFactory(Factory.POSTGRESQL).getDeporteDAO().crear(DeporteEntity.build(1,"Futbol"));
-		System.out.println("CREÉ");
-	}
 }

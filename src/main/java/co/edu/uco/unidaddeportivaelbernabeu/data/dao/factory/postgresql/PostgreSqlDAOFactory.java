@@ -4,9 +4,7 @@ import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.custom.DataU
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.messagecatalog.MessageCatalogStrategy;
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.messagecatalog.data.CodigoMensaje;
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.helpers.SQLHelper;
-
 import co.edu.uco.unidaddeportivaelbernabeu.data.dao.DeporteDAO;
-
 import co.edu.uco.unidaddeportivaelbernabeu.data.dao.factory.DAOFactory;
 import co.edu.uco.unidaddeportivaelbernabeu.data.dao.factory.enums.Factory;
 import co.edu.uco.unidaddeportivaelbernabeu.data.dao.sql.postgresql.DeportePostgreSqlDAO;
@@ -28,7 +26,7 @@ public final class PostgreSqlDAOFactory extends DAOFactory {
 
 	@Override
 	protected void obtenerConexion() {
-		final String connectionUrl = "jdbc:sqlserver://wednesday.database.windows.net:1433;databaseName=wednesday;user=wednesdayDmlUser;password=w3dn3sd4y!";
+		final String connectionUrl = ""; //TODO: Ingresar string base de datos propia
 		try {
 			connection = DriverManager.getConnection(connectionUrl);
 		} catch (final SQLException excepcion) {
