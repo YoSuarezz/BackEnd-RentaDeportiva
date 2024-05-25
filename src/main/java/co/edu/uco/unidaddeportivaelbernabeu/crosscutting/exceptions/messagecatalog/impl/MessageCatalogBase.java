@@ -61,6 +61,18 @@ public final class MessageCatalogBase implements MessageCatalog {
 				"Se ha presentado un problema INESPERADO tratando de confirmar una transaccion SQL con la fuente de informacion deseada..."));
 		mensajes.put(CodigoMensaje.M00022.getIdentificador(), new Mensaje(CodigoMensaje.M00022,
 				"Se ha presentado un problema tratando de confirmar una transaccion SQL con la fuente de informacion deseada..."));
+		mensajes.put(CodigoMensaje.M00031.getIdentificador(), new Mensaje(CodigoMensaje.M00031,
+				"No ha sido posible llevar a cabo la consulta de la informacion de la unidad deportiva. Por favor intente de nuevo y en caso de pérsisitir el problema, comuniquese con el administrador de la Unidad Deportiva El Bernabeu..."));
+		mensajes.put(CodigoMensaje.M00032.getIdentificador(), new Mensaje(CodigoMensaje.M00032,
+				"No ha sido posible llevar a cabo el registro de la información del nuevo deporte. Por favor intente de nuevo y en caso de pérsisitir el problema, comuniquese con el administrador de la Unidad Deportiva El Bernabeu..."));
+		mensajes.put(CodigoMensaje.M00033.getIdentificador(), new Mensaje(CodigoMensaje.M00033,
+				"No ha sido posible llevar a cabo la actualizacion de la informacion del deporte deseado. Por favor intente de nuevo y en caso de pérsisitir el problema, comuniquese con el administrador de la Unidad Deportiva El Bernabeu..."));
+		mensajes.put(CodigoMensaje.M00034.getIdentificador(), new Mensaje(CodigoMensaje.M00034,
+				"No ha sido posible llevar a cabo la eliminacion de la informacion del deporte deseado. Por favor intente de nuevo y en caso de pérsisitir el problema, comuniquese con el administrador de la Unidad Deportiva El Bernabeu..."));
+		mensajes.put(CodigoMensaje.M00036.getIdentificador(), new Mensaje(CodigoMensaje.M00036,
+				"No ha sido posible llevar a cabo la consulta de la informacion de los deportes. Por favor intente de nuevo y en caso de pérsisitir el problema, comuniquese con el administrador de la Unidad Deportiva El Bernabeu..."));
+
+
 	}
 
 

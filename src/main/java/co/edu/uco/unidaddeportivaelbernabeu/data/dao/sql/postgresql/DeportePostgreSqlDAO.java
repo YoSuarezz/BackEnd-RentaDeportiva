@@ -32,12 +32,12 @@ public final class DeportePostgreSqlDAO extends SqlConnection implements Deporte
 
             sentenciaPreparada.executeUpdate();
         } catch (SQLException exception){
-            var mensajeUsuario = "No ha sido posible llevar a cabo el registro de la información del nuevo pais. Por favor intente de nuevo y en caso de pérsisitir el problema, comuniquese con el administrador de la Unidad Deportiva El Bernabeu...";
+            var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00032, entidad.getNombre());
             var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00023, entidad.getNombre());
 
             throw new DataUDElBernabeuException(mensajeTecnico, mensajeUsuario, exception);
         }catch (final Exception exception){
-            var mensajeUsuario = "No ha sido posible llevar a cabo el registro de la informacion del nuevo pais. Por favor intente de nuevo y en caso de pérsisitir el problema, comuniquese con el administrador de la Unidad Deportiva El Bernabeu...";
+            var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00032, entidad.getNombre());
             var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00024, entidad.getNombre());
 
             throw new DataUDElBernabeuException(mensajeTecnico, mensajeUsuario, exception);
@@ -59,12 +59,12 @@ public final class DeportePostgreSqlDAO extends SqlConnection implements Deporte
 
             sentenciaPreparada.executeUpdate();
         } catch (SQLException exception){
-            var mensajeUsuario = "No ha sido posible llevar a cabo la actualizacion de la informacion del pais deseado. Por favor intente de nuevo y en caso de pérsisitir el problema, comuniquese con el administrador de la Unidad Deportiva El Bernabeu...";
+            var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00033, entidad.getNombre());
             var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00025, entidad.getNombre());
 
             throw new DataUDElBernabeuException(mensajeTecnico, mensajeUsuario, exception);
         }catch (final Exception exception){
-            var mensajeUsuario = "No ha sido posible llevar a cabo el registro de la informacion del nuevo pais. Por favor intente de nuevo y en caso de pérsisitir el problema, comuniquese con el administrador de la Unidad Deportiva El Bernabeu...";
+            var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00033, entidad.getNombre());
             var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00026, entidad.getNombre());
 
             throw new DataUDElBernabeuException(mensajeTecnico, mensajeUsuario, exception);
@@ -84,12 +84,12 @@ public final class DeportePostgreSqlDAO extends SqlConnection implements Deporte
 
             sentenciaPreparada.executeUpdate();
         } catch (SQLException exception){
-            var mensajeUsuario = "No ha sido posible llevar a cabo la eliminacion de la informacion del pais deseado. Por favor intente de nuevo y en caso de pérsisitir el problema, comuniquese con el administrador de la Unidad Deportiva El Bernabeu...";
+            var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00034);
             var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00027);
 
             throw new DataUDElBernabeuException(mensajeTecnico, mensajeUsuario, exception);
         }catch (final Exception exception){
-            var mensajeUsuario = "No ha sido posible llevar a cabo la eliminacion de la informacion del nuevo pais. Por favor intente de nuevo y en caso de pérsisitir el problema, comuniquese con el administrador de la Unidad Deportiva El Bernabeu...";
+            var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00034);
             var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00028);
 
             throw new DataUDElBernabeuException(mensajeTecnico, mensajeUsuario, exception);
@@ -99,7 +99,7 @@ public final class DeportePostgreSqlDAO extends SqlConnection implements Deporte
     @Override
     public final List<DeporteEntity> consultar(final DeporteEntity entidad) {
 
-        final var listaPaises = new ArrayList<DeporteEntity>();
+        final var listaDeportes = new ArrayList<DeporteEntity>();
         final var sentenciaSql = new StringBuilder();
 
         sentenciaSql.append("SELECT id, nombre ");
@@ -111,13 +111,13 @@ public final class DeportePostgreSqlDAO extends SqlConnection implements Deporte
             try(final ResultSet resultados = sentenciaPreparada.executeQuery()){
 
                 while (resultados.next()){
-                    DeporteEntity paisTmp = DeporteEntity.build(resultados.getInt("id"), resultados.getString("nombre"));
-                    listaPaises.add(paisTmp);
+                    DeporteEntity deporteTmp = DeporteEntity.build(resultados.getInt("id"), resultados.getString("nombre"));
+                    listaDeportes.add(deporteTmp);
                 }
 
             }catch (SQLException exception){
-                var mensajeUsuario = "No ha sido posible llevar a cabo la eliminacion de la informacion de los paises. Por favor intente de nuevo y en caso de pérsisitir el problema, comuniquese con el administrador de la Unidad Deportiva El Bernabeu...";
-                var mensajeTecnico = "Se ha presentado un problema ejecutando la sentancia SQL de consulta de los paises en la base de datos Azure SQL";
+                var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00036);
+                var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00035);
 
                 throw new DataUDElBernabeuException(mensajeTecnico, mensajeUsuario, exception);
             }
@@ -125,20 +125,20 @@ public final class DeportePostgreSqlDAO extends SqlConnection implements Deporte
         }catch (final DataUDElBernabeuException exception){
             throw exception;
         } catch (SQLException exception){
-            var mensajeUsuario = "No ha sido posible llevar a cabo la eliminacion de la informacion de los paises. Por favor intente de nuevo y en caso de pérsisitir el problema, comuniquese con el administrador de la Unidad Deportiva El Bernabeu...";
-            var mensajeTecnico = "Se ha presentado un problema preparando la sentancia SQL de consulta de los paises en la base de datos Azure SQL";
+            var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00036);
+            var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00035);
 
             throw new DataUDElBernabeuException(mensajeTecnico, mensajeUsuario, exception);
         }
 
         catch (final Exception exception){
-            var mensajeUsuario = "No ha sido posible llevar a cabo la consulta de la informacion del nuevo pais. Por favor intente de nuevo y en caso de pérsisitir el problema, comuniquese con el administrador de la Unidad Deportiva El Bernabeu...";
-            var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00028);
+            var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00036);
+            var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00035);
 
             throw new DataUDElBernabeuException(mensajeTecnico, mensajeUsuario, exception);
         }
 
-        return listaPaises;
+        return listaDeportes;
     }
 
 }

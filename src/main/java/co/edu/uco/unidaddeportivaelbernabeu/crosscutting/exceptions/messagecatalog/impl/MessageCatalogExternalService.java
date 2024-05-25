@@ -31,6 +31,12 @@ public final class MessageCatalogExternalService implements MessageCatalog {
 				"Se ha presentado un problema tratando de realizar un delete de la informacion del deporte \"${1}\" en la tabla \"Deporte\" en la base de datos Postgre SQL..."));
 		mensajes.put(CodigoMensaje.M00028.getIdentificador(), new Mensaje(CodigoMensaje.M00028,
 				"Se ha presentado un problema INESPERADO tratando de realizar un delete de la informacion del deporte \"${1}\" en la tabla \"Deporte\" en la base de datos Postgre SQL..."));
+		mensajes.put(CodigoMensaje.M00029.getIdentificador(), new Mensaje(CodigoMensaje.M00029,
+				"Se ha presentado un problema ejecutando la sentancia SQL de consulta de las unidades deportivas en la base de datos Azure SQL"));
+		mensajes.put(CodigoMensaje.M00030.getIdentificador(), new Mensaje(CodigoMensaje.M00030,
+				"Se ha presentado un problema INESPERADO ejecutando la sentancia SQL de consulta de las unidades deportivas en la base de datos Azure SQL"));
+		mensajes.put(CodigoMensaje.M00035.getIdentificador(), new Mensaje(CodigoMensaje.M00035,
+				"Se ha presentado un problema ejecutando la sentancia SQL de consulta de los deportes en la base de datos Azure SQL"));
 	}
 
 	@Override
