@@ -30,7 +30,7 @@ public final class MessageCatalogBase implements MessageCatalog {
 				"El identificador del mensaje \"${1}\" que se intentó obtener, no está en el catálogo de mensajes externo..."));
 
 		mensajes.put(CodigoMensaje.M00007.getIdentificador(), new Mensaje(CodigoMensaje.M00007,
-				"Se ha presentado un probelma tratando de validar si la conexion SQL con la fuente de informacion deseada estaba cerrada..."));
+				"Se ha presentado un problrma tratando de validar si la conexion SQL con la fuente de informacion deseada estaba cerrada..."));
 		mensajes.put(CodigoMensaje.M00008.getIdentificador(), new Mensaje(CodigoMensaje.M00008,
 				"Se ha presentado un probelma INESPERADO tratando de validar si la conexion SQL con la fuente de informacion deseada estaba cerrada..."));
 		mensajes.put(CodigoMensaje.M00009.getIdentificador(), new Mensaje(CodigoMensaje.M00009,
@@ -71,6 +71,22 @@ public final class MessageCatalogBase implements MessageCatalog {
 				"No ha sido posible llevar a cabo la eliminacion de la informacion del deporte deseado. Por favor intente de nuevo y en caso de pérsisitir el problema, comuniquese con el administrador de la Unidad Deportiva El Bernabeu..."));
 		mensajes.put(CodigoMensaje.M00036.getIdentificador(), new Mensaje(CodigoMensaje.M00036,
 				"No ha sido posible llevar a cabo la consulta de la informacion de los deportes. Por favor intente de nuevo y en caso de pérsisitir el problema, comuniquese con el administrador de la Unidad Deportiva El Bernabeu..."));
+		mensajes.put(CodigoMensaje.M00040.getIdentificador(), new Mensaje(CodigoMensaje.M00040,
+				"No existe configurada una factoria de datos para una base de datos ORACLE"));
+		mensajes.put(CodigoMensaje.M00041.getIdentificador(), new Mensaje(CodigoMensaje.M00041,
+				"No existe configurada una factoria de datos para una base de datos MYSQL"));
+		mensajes.put(CodigoMensaje.M00042.getIdentificador(), new Mensaje(CodigoMensaje.M00042,
+				"No existe configurada una factoria de datos para una base de datos POSTGESQL"));
+		mensajes.put(CodigoMensaje.M00043.getIdentificador(), new Mensaje(CodigoMensaje.M00043,
+				"No existe configurada una factoria de datos para una base de datos SQL SERVER"));
+		mensajes.put(CodigoMensaje.M00044.getIdentificador(), new Mensaje(CodigoMensaje.M00044,
+				"Se ha presentado un problema tratando de obtener la conexión con la base de datos..."));
+		mensajes.put(CodigoMensaje.M00045.getIdentificador(), new Mensaje(CodigoMensaje.M00045,
+				"Se ha presentado un problema INESPERADO tratando de obtener la conexión con la base de datos..."));
+		mensajes.put(CodigoMensaje.M00046.getIdentificador(), new Mensaje(CodigoMensaje.M00046,
+				"Se ha presentado un problema tratando de consultar la informacion de los paises"));
+		mensajes.put(CodigoMensaje.M00047.getIdentificador(), new Mensaje(CodigoMensaje.M00047,
+				"Se ha presentado un problema INESPERADO tratando de consultar la informacion de los paises"));
 
 
 	}

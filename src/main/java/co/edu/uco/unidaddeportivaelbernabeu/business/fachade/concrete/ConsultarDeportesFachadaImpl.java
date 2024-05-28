@@ -7,6 +7,8 @@ import co.edu.uco.unidaddeportivaelbernabeu.business.usecase.ConsultarDeportes;
 import co.edu.uco.unidaddeportivaelbernabeu.business.usecase.concrete.ConsultarDeportesImpl;
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.UnidadDeportivaElBernabeuException;
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.custom.BusinessUDElBernabeuException;
+import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.messagecatalog.MessageCatalogStrategy;
+import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.messagecatalog.data.CodigoMensaje;
 import co.edu.uco.unidaddeportivaelbernabeu.data.dao.factory.DAOFactory;
 import co.edu.uco.unidaddeportivaelbernabeu.data.dao.factory.enums.Factory;
 import co.edu.uco.unidaddeportivaelbernabeu.dto.DeporteDTO;
@@ -33,14 +35,13 @@ public final class ConsultarDeportesFachadaImpl implements ConsultarDeportesFach
         }catch (UnidadDeportivaElBernabeuException exception){
             throw exception;
         }catch (Exception exception){
-            var mensajeUsuario = "Se ha presentado un problema tratando de consultar la informacion de los paises";
-            var mensajeTecnico = "Se ha presentado un problema INESPERADO tratando de consultar la informacion de los paises";
+            var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00046);
+            var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00047);
 
             throw new BusinessUDElBernabeuException(mensajeTecnico, mensajeUsuario);
         } finally {
             factory.cerrarConexion();
         }
     }
-
 
 }

@@ -30,12 +30,12 @@ public final class AzureSqlDAOFactory extends DAOFactory {
 			connection = DriverManager.getConnection(connectionUrl);
 		} catch (final SQLException excepcion) {
 			var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00002);
-			var mensajeTecnico = "Se ha presentado un problema tratando de obtener la conexión con la base de datos.";
+			var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00044);
 
 			throw new DataUDElBernabeuException(mensajeTecnico, mensajeUsuario, excepcion);
 		} catch (final Exception excepcion) {
 			var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00002);
-			var mensajeTecnico = "Se ha presentado un problema INESPERADO tratando de obtener la conexión con la base de datos.";
+			var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00045);
 
 			throw new DataUDElBernabeuException(mensajeTecnico, mensajeUsuario, excepcion);
 		}

@@ -33,17 +33,25 @@ public enum CodigoMensaje {
 	M00026(TipoMensaje.TECNICO, CategoriaMensaje.ERROR, "00026", false),
 	M00027(TipoMensaje.TECNICO, CategoriaMensaje.ERROR, "00027", false),
 	M00028(TipoMensaje.TECNICO, CategoriaMensaje.ERROR, "00028", false),
-	M00029(TipoMensaje.TECNICO, CategoriaMensaje.ERROR, "00029", true),
+	M00029(TipoMensaje.TECNICO, CategoriaMensaje.ERROR, "00029", false),
 	M00030(TipoMensaje.TECNICO, CategoriaMensaje.ERROR, "00030", true),
 	M00031(TipoMensaje.USUARIO, CategoriaMensaje.ERROR, "00031", false),
 	M00032(TipoMensaje.USUARIO, CategoriaMensaje.ERROR, "00032", true),
 	M00033(TipoMensaje.USUARIO, CategoriaMensaje.ERROR, "00033", true),
 	M00034(TipoMensaje.USUARIO, CategoriaMensaje.ERROR, "00034", true),
 	M00035(TipoMensaje.TECNICO, CategoriaMensaje.ERROR, "00035", false),
-	M00036(TipoMensaje.USUARIO, CategoriaMensaje.ERROR, "00036", false);
-
-
-
+	M00036(TipoMensaje.USUARIO, CategoriaMensaje.ERROR, "00036", false),
+	M00037(TipoMensaje.TECNICO, CategoriaMensaje.ERROR, "00037", false),
+	M00038(TipoMensaje.USUARIO, CategoriaMensaje.ERROR, "00038", false),
+	M00039(TipoMensaje.USUARIO, CategoriaMensaje.ERROR, "00039", false),
+	M00040(TipoMensaje.TECNICO, CategoriaMensaje.ERROR, "00040", true),
+	M00041(TipoMensaje.TECNICO, CategoriaMensaje.ERROR, "00041", true),
+	M00042(TipoMensaje.TECNICO, CategoriaMensaje.ERROR, "00042", true),
+	M00043(TipoMensaje.TECNICO, CategoriaMensaje.ERROR, "00043", true),
+	M00044(TipoMensaje.TECNICO, CategoriaMensaje.ERROR, "00044", true),
+	M00045(TipoMensaje.TECNICO, CategoriaMensaje.ERROR, "00045", true),
+	M00046(TipoMensaje.USUARIO, CategoriaMensaje.ERROR, "00046", true),
+	M00047(TipoMensaje.TECNICO, CategoriaMensaje.ERROR, "00047", true);
 
 
 	private TipoMensaje tipo;
