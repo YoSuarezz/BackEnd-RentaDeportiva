@@ -24,6 +24,7 @@ public class TipoEspacioDeportivoEntity {
         setNombre(nombre);
     }
 
+
     public TipoEspacioDeportivoEntity(final int id) {
         setId(id);
         setUnidadDeportiva(UnidadDeportivaEntity.build());
@@ -66,7 +67,7 @@ public class TipoEspacioDeportivoEntity {
     }
 
     public final void setEspacio(final String espacio) {
-        this.espacio = espacio;
+        this.espacio = TextHelper.applyTrim(espacio);
     }
 
     public final int getCantidad() {
@@ -82,7 +83,7 @@ public class TipoEspacioDeportivoEntity {
     }
 
     public final void setNombre(final String nombre) {
-        this.nombre = nombre;
+        this.nombre = TextHelper.applyTrim(nombre);
     }
 
 
@@ -96,7 +97,7 @@ public class TipoEspacioDeportivoEntity {
         return new TipoEspacioDeportivoEntity(id,unidadDeportiva,deporte,espacio,cantidad,nombre);
     }
 
-    protected static final TipoEspacioDeportivoEntity build(){
+    public static final TipoEspacioDeportivoEntity build(){
         return new TipoEspacioDeportivoEntity(NumericHelper.ZERO);
     }
 
