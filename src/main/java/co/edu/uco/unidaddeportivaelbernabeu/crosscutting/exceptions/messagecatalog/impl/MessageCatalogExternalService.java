@@ -37,6 +37,12 @@ public final class MessageCatalogExternalService implements MessageCatalog {
 				"Se ha presentado un problema INESPERADO ejecutando la sentancia SQL de consulta de las unidades deportivas en la base de datos Azure SQL"));
 		mensajes.put(CodigoMensaje.M00035.getIdentificador(), new Mensaje(CodigoMensaje.M00035,
 				"Se ha presentado un problema ejecutando la sentancia SQL de consulta de los deportes en la base de datos Azure SQL"));
+		mensajes.put(CodigoMensaje.M00037.getIdentificador(), new Mensaje(CodigoMensaje.M00037,
+				"No es posible crear el DAO deseado dado que la conexion SQL esta cerrada"));
+		mensajes.put(CodigoMensaje.M00038.getIdentificador(), new Mensaje(CodigoMensaje.M00038,
+				"No ha sido posible consultar la información de los deportes. Por favor, inténtelo de nuevo o comuníquese con el administrador de la Unidad Deportiva El Bernabeu..."));
+		mensajes.put(CodigoMensaje.M00039.getIdentificador(), new Mensaje(CodigoMensaje.M00039,
+				"No ha sido posible llevar a cabo la consulta de la informacion de los deportes. Por favor intente de nuevo y en caso de pérsisitir el problema, comuniquese con el administrador de la Unidad Deportiva El Bernabeu..."));
 	}
 
 	@Override

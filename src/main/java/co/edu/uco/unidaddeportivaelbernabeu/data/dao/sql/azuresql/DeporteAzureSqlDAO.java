@@ -13,6 +13,7 @@ import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.messagecatal
 import co.edu.uco.unidaddeportivaelbernabeu.data.dao.DeporteDAO;
 import co.edu.uco.unidaddeportivaelbernabeu.data.dao.sql.SqlConnection;
 import co.edu.uco.unidaddeportivaelbernabeu.entity.DeporteEntity;
+import org.springframework.context.support.MessageSourceAccessor;
 
 public final class DeporteAzureSqlDAO extends SqlConnection implements DeporteDAO {
 
@@ -21,44 +22,44 @@ public final class DeporteAzureSqlDAO extends SqlConnection implements DeporteDA
     }
 
     @Override
-    public List<DeporteEntity> consultar(DeporteEntity entidad) {
-        List<DeporteEntity> resultados = new ArrayList<>();
-        StringBuilder sql = new StringBuilder();
-        sql.append("SELECT id, nombre FROM Deporte WHERE 1=1 ");
+    public List<DeporteEntity> consultar(final DeporteEntity entidad) {
+        final List<DeporteEntity> listaDeportes = new ArrayList<>();
+        final StringBuilder sentenciaSql = new StringBuilder();
+        final List<Object> parametros = new ArrayList<>();
 
-        List<Object> parametros = new ArrayList<>();
+        sentenciaSql.append("SELECT Identificador, Nombre FROM Deporte WHERE 1 = 1");
 
-        if (entidad.getId() > 0) {
-            sql.append("AND Id = ? ");
+        if (entidad.getId() != 0) {
+            sentenciaSql.append(" AND Identificador = ?");
             parametros.add(entidad.getId());
         }
 
-        if (entidad.getNombre() != null && !entidad.getNombre().isEmpty()) {
-            sql.append("AND Nombre LIKE ? ");
+        if (!entidad.getNombre().isEmpty()) {
+            sentenciaSql.append(" AND Nombre LIKE ?");
             parametros.add("%" + entidad.getNombre() + "%");
         }
 
-        try (PreparedStatement preparedStatement = getConnection().prepareStatement(sql.toString())) {
-            for (int i = 0; i < parametros.size(); i++) {
-                preparedStatement.setObject(i + 1, parametros.get(i));
+        try (final PreparedStatement sentenciaPreparada = getConnection().prepareStatement(sentenciaSql.toString())) {
+            int index = 1;
+            for (Object parametro : parametros) {
+                sentenciaPreparada.setObject(index++, parametro);
             }
 
-            try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                while (resultSet.next()) {
-                    DeporteEntity deporte = new DeporteEntity(
-                            resultSet.getInt("Id"),
-                            resultSet.getString("Nombre")
-                    );
-                    resultados.add(deporte);
+            try (final ResultSet resultado = sentenciaPreparada.executeQuery()) {
+                while (resultado.next()) {
+                    listaDeportes.add(new DeporteEntity(resultado.getInt("Identificador"), resultado.getString("Nombre")));
                 }
             }
-        } catch (SQLException excepcion) {
-            var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00003);
-            var mensajeTecnico = "Se ha presentado un problema consultando los datos de Deporte en la base de datos.";
+        } catch (SQLException exception) {
+            var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00038);
+            var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00029);
+            throw new DataUDElBernabeuException(mensajeTecnico, mensajeUsuario, exception);
+        } catch (final Exception exception) {
+            var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00039);
+            var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00030);
 
-            throw new DataUDElBernabeuException(mensajeTecnico, mensajeUsuario, excepcion);
+            throw new DataUDElBernabeuException(mensajeTecnico, mensajeUsuario, exception);
         }
-
-        return resultados;
+        return listaDeportes;
     }
 }

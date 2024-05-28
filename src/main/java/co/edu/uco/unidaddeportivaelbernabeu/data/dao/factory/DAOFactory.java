@@ -7,6 +7,7 @@ import co.edu.uco.unidaddeportivaelbernabeu.data.dao.DeporteDAO;
 import co.edu.uco.unidaddeportivaelbernabeu.data.dao.UnidadDeportivaDAO;
 import co.edu.uco.unidaddeportivaelbernabeu.data.dao.factory.enums.Factory;
 import co.edu.uco.unidaddeportivaelbernabeu.data.dao.factory.azuresql.AzureSqlDAOFactory;
+import org.springframework.context.support.MessageSourceAccessor;
 
 public abstract class DAOFactory {
 
@@ -20,7 +21,7 @@ public abstract class DAOFactory {
 		switch (factory) {
 			case ORACLE: {
 				var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00002);
-				var mensajeTecnico = "No existe configurada una factoria de datos para una base de datos ORACLE";
+				var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00040);
 
 				throw new DataUDElBernabeuException(mensajeTecnico, mensajeUsuario);
 			}
@@ -28,7 +29,7 @@ public abstract class DAOFactory {
 		switch (factory) {
 			case MYSQL: {
 				var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00002);
-				var mensajeTecnico = "No existe configurada una factoria de datos para una base de datos MYSQL";
+				var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje((CodigoMensaje.M00041));
 
 				throw new DataUDElBernabeuException(mensajeTecnico, mensajeUsuario);
 			}
@@ -36,7 +37,15 @@ public abstract class DAOFactory {
 		switch (factory) {
 			case POSTGRESQL:  {
 				var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00002);
-				var mensajeTecnico = "No existe configurada una factoria de datos para una base de datos AZURESQL";
+				var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00042);
+
+				throw new DataUDElBernabeuException(mensajeTecnico, mensajeUsuario);
+			}
+		}
+		switch (factory){
+			case SQL_SERVER:  {
+				var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00002);
+				var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00043);
 
 				throw new DataUDElBernabeuException(mensajeTecnico, mensajeUsuario);
 			}
