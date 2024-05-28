@@ -8,12 +8,13 @@ public class DeporteEntity {
     private int id;
     private String nombre;
 
-    private DeporteEntity(final int id, final String nombre) {
+    public DeporteEntity(final int id, final String nombre) {
         setId(id);
         setNombre(TextHelper.EMPTY);
     }
 
-    private DeporteEntity(final int id) {
+    public DeporteEntity(final int id) {
+        setId(id);
         setNombre(TextHelper.EMPTY);
     }
 

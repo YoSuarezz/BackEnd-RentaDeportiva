@@ -5,16 +5,15 @@ import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.messagecatal
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.messagecatalog.data.CodigoMensaje;
 import co.edu.uco.unidaddeportivaelbernabeu.data.dao.DeporteDAO;
 import co.edu.uco.unidaddeportivaelbernabeu.data.dao.factory.enums.Factory;
-import co.edu.uco.unidaddeportivaelbernabeu.data.dao.factory.postgresql.PostgreSqlDAOFactory;
-import co.edu.uco.unidaddeportivaelbernabeu.entity.DeporteEntity;
+import co.edu.uco.unidaddeportivaelbernabeu.data.dao.factory.azuresql.AzureSqlDAOFactory;
 
 public abstract class DAOFactory {
 
 	public static final DAOFactory getFactory(final Factory factory) {
 
 		switch (factory) {
-			case POSTGRESQL: {
-				return new PostgreSqlDAOFactory();
+			case AZURE_SQL: {
+				return new AzureSqlDAOFactory();
 			}
 		}
 		switch (factory) {
@@ -34,7 +33,7 @@ public abstract class DAOFactory {
 			}
 		}
 		switch (factory) {
-			case AZURE_SQL:  {
+			case POSTGRESQL:  {
 				var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00002);
 				var mensajeTecnico = "No existe configurada una factoria de datos para una base de datos AZURESQL";
 

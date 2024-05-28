@@ -1,4 +1,4 @@
-package co.edu.uco.unidaddeportivaelbernabeu.data.dao.sql.postgresql;
+package co.edu.uco.unidaddeportivaelbernabeu.data.dao.sql.azuresql;
 
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.custom.DataUDElBernabeuException;
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.messagecatalog.MessageCatalogStrategy;
@@ -15,9 +15,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class UnidadDeportivaPostgreSqlDAO extends SqlConnection implements UnidadDeportivaDAO {
+public class UnidadDeportivaAzureSqlDAO extends SqlConnection implements UnidadDeportivaDAO {
 
-    protected UnidadDeportivaPostgreSqlDAO(Connection connection) {
+    protected UnidadDeportivaAzureSqlDAO(Connection connection) {
         super(connection);
     }
 

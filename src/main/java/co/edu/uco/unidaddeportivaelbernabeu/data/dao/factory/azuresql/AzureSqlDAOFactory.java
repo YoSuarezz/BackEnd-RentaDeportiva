@@ -1,4 +1,10 @@
-package co.edu.uco.unidaddeportivaelbernabeu.data.dao.factory.postgresql;
+package co.edu.uco.unidaddeportivaelbernabeu.data.dao.factory.azuresql;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.UUID;
 
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.custom.DataUDElBernabeuException;
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.messagecatalog.MessageCatalogStrategy;
@@ -7,26 +13,20 @@ import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.helpers.SQLHelper;
 import co.edu.uco.unidaddeportivaelbernabeu.data.dao.DeporteDAO;
 import co.edu.uco.unidaddeportivaelbernabeu.data.dao.factory.DAOFactory;
 import co.edu.uco.unidaddeportivaelbernabeu.data.dao.factory.enums.Factory;
-import co.edu.uco.unidaddeportivaelbernabeu.data.dao.sql.postgresql.DeportePostgreSqlDAO;
+import co.edu.uco.unidaddeportivaelbernabeu.data.dao.sql.azuresql.DeporteAzureSqlDAO;
 import co.edu.uco.unidaddeportivaelbernabeu.entity.DeporteEntity;
 
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.util.UUID;
-
-public final class PostgreSqlDAOFactory extends DAOFactory {
+public final class AzureSqlDAOFactory extends DAOFactory {
 
 	private Connection connection;
 
-	public PostgreSqlDAOFactory() {
+	public AzureSqlDAOFactory() {
 		obtenerConexion();
 	}
 
 	@Override
 	protected void obtenerConexion() {
-		final String connectionUrl = ""; //TODO: Ingresar string base de datos propia
+		final String connectionUrl = "jdbc:sqlserver://unidaddeportivaelbernabeu-server.database.windows.net:1433;database=UnidadDeportivaElBernabeu;user=Administrador@unidaddeportivaelbernabeu-server;password=ProyectoDoo*;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;";
 		try {
 			connection = DriverManager.getConnection(connectionUrl);
 		} catch (final SQLException excepcion) {
@@ -45,47 +45,51 @@ public final class PostgreSqlDAOFactory extends DAOFactory {
 	@Override
 	public void iniciarTransaccion() {
 		SQLHelper.initTransaction(connection);
-
 	}
 
 	@Override
 	public void confirmarTransaccion() {
 		SQLHelper.commit(connection);
-
 	}
 
 	@Override
 	public void cancelarTransaccion() {
 		SQLHelper.rollback(connection);
-
 	}
 
 	@Override
 	public void cerrarConexion() {
 		SQLHelper.close(connection);
-
 	}
 
 	@Override
 	public DeporteDAO getDeporteDAO() {
-		return new DeportePostgreSqlDAO(connection);
+		return new DeporteAzureSqlDAO(connection);
 	}
 
 	public static void main(String[] args) {
 		try {
-			DAOFactory factory = DAOFactory.getFactory(Factory.POSTGRESQL);
+			DAOFactory factory = DAOFactory.getFactory(Factory.AZURE_SQL);
 
 			System.out.println("Iniciando transacción...");
 			factory.iniciarTransaccion();
+			/*
+			System.out.println("Creando deporte");
+			factory.getDeporteDAO().crear(DeporteEntity.build(0, "Jordania-" + UUID.randomUUID().toString()));
 
-			System.out.println("Creando deporte aleatoriamente");
-			factory.getDeporteDAO().crear(DeporteEntity.build(0, "Futbol-" + UUID.randomUUID().toString()));
+			System.out.println("Actualizando deporte...");
+			factory.getDeporteDAO().actualizar(DeporteEntity.build(41,"España-" + UUID.randomUUID().toString()));
 
-			System.out.println("Consultamos deportes: ");
-			var resultados = factory.getDeporteDAO().consultar(DeporteEntity.build(0));
+			System.out.println("Eliminando deporte...");
+			factory.getDeporteDAO().eliminar(40);
 
-			for (DeporteEntity DeporteEntity : resultados) {
-				System.out.println("id: " + DeporteEntity.getId() + ", nombre: " + DeporteEntity.getNombre());
+
+			 */
+			System.out.println("Consultando deporte... ");
+			DeporteEntity criterios = new DeporteEntity(0);
+			List<DeporteEntity> deportesConsultados = factory.getDeporteDAO().consultar(criterios);
+			for (DeporteEntity deporte : deportesConsultados) {
+				System.out.println("ID: " + deporte.getId() + ", Nombre: " + deporte.getNombre());
 			}
 
 			System.out.println("Confirmando transacción...");
@@ -96,5 +100,4 @@ public final class PostgreSqlDAOFactory extends DAOFactory {
 			excepcion.printStackTrace();
 		}
 	}
-
 }
