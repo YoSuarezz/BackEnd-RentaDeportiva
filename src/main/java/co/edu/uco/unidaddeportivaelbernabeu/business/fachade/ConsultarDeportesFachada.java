@@ -5,5 +5,5 @@ import co.edu.uco.unidaddeportivaelbernabeu.dto.DeporteDTO;
 import java.util.List;
 
 public interface ConsultarDeportesFachada {
-    List<DeporteDTO> execute(DeporteDTO pais);
+    List<DeporteDTO> execute(DeporteDTO deporte);
 }

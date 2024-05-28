@@ -4,6 +4,7 @@ import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.custom.DataU
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.messagecatalog.MessageCatalogStrategy;
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.messagecatalog.data.CodigoMensaje;
 import co.edu.uco.unidaddeportivaelbernabeu.data.dao.DeporteDAO;
+import co.edu.uco.unidaddeportivaelbernabeu.data.dao.UnidadDeportivaDAO;
 import co.edu.uco.unidaddeportivaelbernabeu.data.dao.factory.enums.Factory;
 import co.edu.uco.unidaddeportivaelbernabeu.data.dao.factory.azuresql.AzureSqlDAOFactory;
 
@@ -55,4 +56,6 @@ public abstract class DAOFactory {
 	public abstract void cerrarConexion();
 
 	public abstract DeporteDAO getDeporteDAO();
+
+	public abstract UnidadDeportivaDAO getUnidadDeportivaDAO();
 }

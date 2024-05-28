@@ -10,10 +10,13 @@ import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.messagecatal
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.messagecatalog.data.CodigoMensaje;
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.helpers.SQLHelper;
 import co.edu.uco.unidaddeportivaelbernabeu.data.dao.DeporteDAO;
+import co.edu.uco.unidaddeportivaelbernabeu.data.dao.UnidadDeportivaDAO;
 import co.edu.uco.unidaddeportivaelbernabeu.data.dao.factory.DAOFactory;
 import co.edu.uco.unidaddeportivaelbernabeu.data.dao.factory.enums.Factory;
 import co.edu.uco.unidaddeportivaelbernabeu.data.dao.sql.azuresql.DeporteAzureSqlDAO;
+import co.edu.uco.unidaddeportivaelbernabeu.data.dao.sql.azuresql.UnidadDeportivaAzureSqlDAO;
 import co.edu.uco.unidaddeportivaelbernabeu.entity.DeporteEntity;
+import co.edu.uco.unidaddeportivaelbernabeu.entity.UnidadDeportivaEntity;
 
 public final class AzureSqlDAOFactory extends DAOFactory {
 
@@ -66,6 +69,11 @@ public final class AzureSqlDAOFactory extends DAOFactory {
 		return new DeporteAzureSqlDAO(connection);
 	}
 
+	@Override
+	public UnidadDeportivaDAO getUnidadDeportivaDAO() {
+		return new UnidadDeportivaAzureSqlDAO(connection);
+	}
+
 	public static void main(String[] args) {
 		try {
 			DAOFactory factory = DAOFactory.getFactory(Factory.AZURE_SQL);
@@ -73,16 +81,29 @@ public final class AzureSqlDAOFactory extends DAOFactory {
 			System.out.println("Iniciando transacción...");
 			factory.iniciarTransaccion();
 
-			System.out.println("Consultando deporte... ");
+			System.out.println("Consultando deportes... ");
 			DeporteDAO deporteDAO = factory.getDeporteDAO();
-
 			// Crear un objeto DeporteEntity con los criterios de búsqueda
 			DeporteEntity deporteCriterio = DeporteEntity.build().setId(0); // ejemplo búsqueda por nombre
 			List<DeporteEntity> resultados = deporteDAO.consultar(deporteCriterio);
-
 			for (DeporteEntity deporte : resultados) {
-				System.out.println("ID: " + deporte.getId() + ", Nombre: " + deporte.getNombre());
+				System.out.println("ID: " + deporte.getId() + " - Nombre: " + deporte.getNombre());
 			}
+
+			System.out.println("Consultando unidad deportiva... ");
+			UnidadDeportivaDAO unidadDeportivaDAO = factory.getUnidadDeportivaDAO();
+
+			// Crear un objeto UnidadDeportivaEntity con los criterios de búsqueda
+			UnidadDeportivaEntity unidadDeportivaCriterio = UnidadDeportivaEntity.build().setId(1); // ejemplo búsqueda por nombre
+
+			// Ejecutar la consulta
+			List<UnidadDeportivaEntity> resultadosUDB = unidadDeportivaDAO.consultar(unidadDeportivaCriterio);
+
+			// Imprimir los resultados
+			for (UnidadDeportivaEntity unidadDeportiva : resultadosUDB) {
+				System.out.println("ID: " + unidadDeportiva.getId() + " - Nombre: " + unidadDeportiva.getNombre() + ", Ciudad: " + unidadDeportiva.getCiudad() + ", Dirección: " + unidadDeportiva.getDireccion());
+			}
+
 
 			System.out.println("Confirmando transacción...");
 			factory.confirmarTransaccion();

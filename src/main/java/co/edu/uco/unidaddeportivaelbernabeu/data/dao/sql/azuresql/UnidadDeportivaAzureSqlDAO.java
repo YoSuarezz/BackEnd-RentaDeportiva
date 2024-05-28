@@ -17,51 +17,51 @@ import java.util.List;
 
 public class UnidadDeportivaAzureSqlDAO extends SqlConnection implements UnidadDeportivaDAO {
 
-    protected UnidadDeportivaAzureSqlDAO(Connection connection) {
+    public UnidadDeportivaAzureSqlDAO(Connection connection) {
         super(connection);
     }
 
-    public final List<UnidadDeportivaEntity> consultar(final UnidadDeportivaEntity entidad) {
+    @Override
+    public List<UnidadDeportivaEntity> consultar(UnidadDeportivaEntity entidad) {
+        List<UnidadDeportivaEntity> resultados = new ArrayList<>();
+        StringBuilder sql = new StringBuilder();
+        sql.append("SELECT id, nombre, ciudad, direccion FROM UnidadDeportiva WHERE 1=1 ");
 
-        final var listaUnidadesDeportivas = new ArrayList<UnidadDeportivaEntity>();
-        final var sentenciaSql = new StringBuilder();
+        List<Object> parametros = new ArrayList<>();
 
-        sentenciaSql.append("SELECT id, nombre ");
-        sentenciaSql.append("FROM UnidadDeportiva ");
-        sentenciaSql.append("ORDER BY nombre ASC ");
+        if (entidad.getId() > 0) {
+            sql.append("AND id = ? ");
+            parametros.add(entidad.getId());
+        }
 
-        try (final PreparedStatement sentenciaPreparada = getConnection().prepareStatement(sentenciaSql.toString())){
+        if (entidad.getNombre() != null && !entidad.getNombre().isEmpty()) {
+            sql.append("AND nombre LIKE ? ");
+            parametros.add("%" + entidad.getNombre() + "%");
+        }
 
-            try(final ResultSet resultados = sentenciaPreparada.executeQuery()){
-
-                while (resultados.next()){
-                    UnidadDeportivaEntity unidadDeportivaTmp = UnidadDeportivaEntity.build(resultados.getInt("id"), resultados.getString("nombre"), resultados.getString("ciudad"), resultados.getString("direccion") );
-                    listaUnidadesDeportivas.add(unidadDeportivaTmp);
-                }
-
-            }catch (SQLException exception){
-                var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00031);
-                var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00029);
-
-                throw new DataUDElBernabeuException(mensajeTecnico, mensajeUsuario, exception);
+        try (PreparedStatement preparedStatement = getConnection().prepareStatement(sql.toString())) {
+            for (int i = 0; i < parametros.size(); i++) {
+                preparedStatement.setObject(i + 1, parametros.get(i));
             }
 
-        }catch (final DataUDElBernabeuException exception){
-            throw exception;
-        } catch (SQLException exception){
-            var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00031);
-            var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00029);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    UnidadDeportivaEntity unidadDeportiva = new UnidadDeportivaEntity(
+                            resultSet.getInt("id"),
+                            resultSet.getString("nombre"),
+                            resultSet.getString("ciudad"),
+                            resultSet.getString("direccion")
+                    );
+                    resultados.add(unidadDeportiva);
+                }
+            }
+        } catch (SQLException excepcion) {
+            var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00003);
+            var mensajeTecnico = "Se ha presentado un problema consultando los datos de Unidad Deportiva en la base de datos.";
 
-            throw new DataUDElBernabeuException(mensajeTecnico, mensajeUsuario, exception);
+            throw new DataUDElBernabeuException(mensajeTecnico, mensajeUsuario, excepcion);
         }
 
-        catch (final Exception exception){
-            var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00031);
-            var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00030);
-
-            throw new DataUDElBernabeuException(mensajeTecnico, mensajeUsuario, exception);
-        }
-
-        return listaUnidadesDeportivas;
+        return resultados;
     }
 }

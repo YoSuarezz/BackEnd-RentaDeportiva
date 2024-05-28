@@ -17,14 +17,14 @@ public final class UnidadDeportivaEntity {
         setDireccion(TextHelper.EMPTY);
     }
 
-    private UnidadDeportivaEntity(int id, String nombre, String ciudad, String direccion) {
+    public UnidadDeportivaEntity(final int id, final String nombre, final String ciudad, final String direccion) {
         setId(id);
         setNombre(nombre);
         setCiudad(ciudad);
         setDireccion(direccion);
     }
 
-    public static final UnidadDeportivaEntity build(final int id){
+    public static final UnidadDeportivaEntity build(final int id) {
         return new UnidadDeportivaEntity(id);
     }
 
@@ -32,7 +32,7 @@ public final class UnidadDeportivaEntity {
         return new UnidadDeportivaEntity(id, nombre, ciudad, direccion);
     }
 
-    protected static final UnidadDeportivaEntity build() {
+    public static final UnidadDeportivaEntity build() {
         return new UnidadDeportivaEntity(NumericHelper.ZERO);
     }
 
@@ -40,32 +40,35 @@ public final class UnidadDeportivaEntity {
         return id;
     }
 
-    private final void setId(int id) {
+    public final UnidadDeportivaEntity setId(int id) {
         this.id = id;
+        return this;
     }
 
     public final String getNombre() {
         return nombre;
     }
 
-    private final void setNombre(String nombre) {
+    public final UnidadDeportivaEntity setNombre(String nombre) {
         this.nombre = TextHelper.applyTrim(nombre);
+        return this;
     }
 
     public final String getCiudad() {
         return ciudad;
     }
 
-    private final void setCiudad(String ciudad) {
+    public final UnidadDeportivaEntity setCiudad(String ciudad) {
         this.ciudad = TextHelper.applyTrim(ciudad);
+        return this;
     }
 
     public final String getDireccion() {
         return direccion;
     }
 
-    private final void setDireccion(String direccion) {
+    public final UnidadDeportivaEntity setDireccion(String direccion) {
         this.direccion = TextHelper.applyTrim(direccion);
+        return this;
     }
 }
-

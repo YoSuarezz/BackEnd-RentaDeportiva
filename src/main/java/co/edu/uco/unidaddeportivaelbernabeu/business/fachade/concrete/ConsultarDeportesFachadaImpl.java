@@ -1,6 +1,5 @@
 package co.edu.uco.unidaddeportivaelbernabeu.business.fachade.concrete;
 
-
 import co.edu.uco.unidaddeportivaelbernabeu.business.assembler.dto.concrete.DeporteDTODomainAssembler;
 import co.edu.uco.unidaddeportivaelbernabeu.business.fachade.ConsultarDeportesFachada;
 import co.edu.uco.unidaddeportivaelbernabeu.business.usecase.ConsultarDeportes;
@@ -18,7 +17,7 @@ public final class ConsultarDeportesFachadaImpl implements ConsultarDeportesFach
     private DAOFactory factory;
 
     public ConsultarDeportesFachadaImpl(){
-        factory = DAOFactory.getFactory(Factory.POSTGRESQL);
+        factory = DAOFactory.getFactory(Factory.AZURE_SQL);
     }
     @Override
     public final List<DeporteDTO> execute(final DeporteDTO deporte) {
@@ -41,6 +40,4 @@ public final class ConsultarDeportesFachadaImpl implements ConsultarDeportesFach
             factory.cerrarConexion();
         }
     }
-
-
 }

@@ -12,8 +12,8 @@ public final class DeporteDTO {
     }
 
     public DeporteDTO(final int id, final String nombre) {
-        this.id = id;
-        this.nombre = nombre;
+        setId(id);
+        setNombre(nombre);
     }
 
     public static final DeporteDTO build(){

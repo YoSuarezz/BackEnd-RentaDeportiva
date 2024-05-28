@@ -14,12 +14,13 @@ public class UnidadDeportivaDTODomainAssembler implements DTODomainAssembler<Uni
 
     private  static final DTODomainAssembler <UnidadDeportivaDomain, UnidadDeportivaDTO> instancia = new UnidadDeportivaDTODomainAssembler();
 
-    UnidadDeportivaDTODomainAssembler(){super();}
+    UnidadDeportivaDTODomainAssembler(){
+        super();
+    }
 
     public static final DTODomainAssembler <UnidadDeportivaDomain, UnidadDeportivaDTO> obtenerInstancia(){
         return instancia;
     }
-
 
     @Override
     public UnidadDeportivaDomain ensamblarDominio(UnidadDeportivaDTO dto) {

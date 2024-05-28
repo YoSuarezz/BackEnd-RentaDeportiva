@@ -54,8 +54,6 @@ public class UnidadDeportivaDomain {
         this.ciudad = TextHelper.applyTrim(ciudad);
     }
 
-
-
     public static final UnidadDeportivaDomain crear(){
         return new UnidadDeportivaDomain();
     }

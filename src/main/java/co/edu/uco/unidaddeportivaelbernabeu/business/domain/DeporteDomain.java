@@ -7,6 +7,15 @@ public class DeporteDomain {
     private int id;
     private String nombre;
 
+    private DeporteDomain(){
+        setNombre(TextHelper.EMPTY);
+    }
+
+    public DeporteDomain(final int id, final String nombre) {
+        setId(id);
+        setNombre(nombre);
+    }
+
     public final int getId() {
         return id;
     }
@@ -23,24 +32,11 @@ public class DeporteDomain {
         this.nombre = TextHelper.applyTrim(nombre);
     }
 
-    public DeporteDomain(final int id, final String nombre) {
-        setId(id);
-        setNombre(nombre);
-    }
-
     public static final DeporteDomain crear(final int id, final String nombre){
         return new DeporteDomain(id,nombre);
     }
 
-
     public static final DeporteDomain crear(){
         return new DeporteDomain();
     }
-
-    private DeporteDomain(){
-        setNombre(TextHelper.EMPTY);
-    }
-
-
-
 }
