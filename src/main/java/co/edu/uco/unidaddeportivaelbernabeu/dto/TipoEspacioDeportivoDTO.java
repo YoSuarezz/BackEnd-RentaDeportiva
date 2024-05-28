@@ -15,7 +15,7 @@ public final class TipoEspacioDeportivoDTO {
 
 
     public  TipoEspacioDeportivoDTO(final int id,final UnidadDeportivaDTO unidadDeportiva,final DeporteDTO deporte
-            ,final String espacio,final int cantidad,final String nombre) {
+            ,final String espacio,final String nombre) {
         setId(id);
         setUnidadDeportiva(unidadDeportiva);
         setDeporte(deporte);
@@ -34,12 +34,15 @@ public final class TipoEspacioDeportivoDTO {
         return new TipoEspacioDeportivoDTO();
     }
 
+
+
     public final int getId() {
         return id;
     }
 
-    public final void setId(final int id) {
+    public final TipoEspacioDeportivoDTO setId(final int id) {
         this.id = id;
+        return this;
     }
 
     public final UnidadDeportivaDTO getUnidadDeportiva() {
@@ -74,7 +77,7 @@ public final class TipoEspacioDeportivoDTO {
     }
 
     public final TipoEspacioDeportivoDTO setCantidad(int cantidad) {
-        this.cantidad = NumericHelper.ZERO;
+        this.cantidad = cantidad;
         return this;
     }
 
