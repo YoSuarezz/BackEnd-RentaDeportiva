@@ -12,11 +12,11 @@ public final class DeporteDTO {
     }
 
     public DeporteDTO(final int id, final String nombre) {
-        setId(id);
-        setNombre(nombre);
+        this.id = id;
+        this.nombre = nombre;
     }
 
-    public static final DeporteDTO build() {
+    public static final DeporteDTO build(){
         return new DeporteDTO();
     }
 

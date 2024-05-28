@@ -8,11 +8,11 @@
 		<version>3.2.5</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>co.edu.uco.rentadeportiva</groupId>
+	<groupId>co.edu.uco.unidaddeportivaelbernabeu</groupId>
 	<artifactId>UnidadDeportivaElBernabeu</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>RentaDeportiva</name>
-	<description>Aplicación que contiene todos los servicios de negocio expuestos para los clientes que consumen las APIs de Renta Deportiva</description>
+	<name>UDElBernabeu</name>
+	<description>Aplicación que contiene todos los servicios de negocio expuestos para los clientes que consumen las APIs de la Unidad Deportiva El Bernabeu</description>
 	<properties>
 		<java.version>21</java.version>
 	</properties>
@@ -32,14 +32,6 @@
 			<groupId>com.microsoft.sqlserver</groupId>
 			<artifactId>mssql-jdbc</artifactId>
 		</dependency>
-
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>RELEASE</version>
-			<scope>test</scope>
-		</dependency>
-
 	</dependencies>
 
 	<build>

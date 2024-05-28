@@ -19,13 +19,12 @@ public class SqlConnection {
         if (!SQLHelper.isOpen(connection)) {
             var mensajeUsuario= MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00002);
             var mensajeTecnico="No es posible crear el DAO deseado dado que la conexion SQL esta cerrada";
-
             throw new DataUDElBernabeuException(mensajeTecnico,mensajeUsuario);
         }
+        this.connection = connection;
     }
 
     protected final Connection getConnection() {
         return connection;
     }
 }
-

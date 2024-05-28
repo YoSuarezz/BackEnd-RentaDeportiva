@@ -21,44 +21,44 @@ public final class DeporteAzureSqlDAO extends SqlConnection implements DeporteDA
     }
 
     @Override
-    public List<DeporteEntity> consultar(final DeporteEntity entidad) {
-        final List<DeporteEntity> listaDeportes = new ArrayList<>();
-        final StringBuilder sentenciaSql = new StringBuilder();
-        final List<Object> parametros = new ArrayList<>();
+    public List<DeporteEntity> consultar(DeporteEntity entidad) {
+        List<DeporteEntity> resultados = new ArrayList<>();
+        StringBuilder sql = new StringBuilder();
+        sql.append("SELECT id, nombre FROM Deporte WHERE 1=1 ");
 
-        sentenciaSql.append("SELECT Identificador, Nombre FROM Deporte WHERE 1 = 1");
+        List<Object> parametros = new ArrayList<>();
 
-        if (entidad.getId() != 0) {
-            sentenciaSql.append(" AND Identificador = ?");
+        if (entidad.getId() > 0) {
+            sql.append("AND Id = ? ");
             parametros.add(entidad.getId());
         }
 
-        if (!entidad.getNombre().isEmpty()) {
-            sentenciaSql.append(" AND Nombre LIKE ?");
+        if (entidad.getNombre() != null && !entidad.getNombre().isEmpty()) {
+            sql.append("AND Nombre LIKE ? ");
             parametros.add("%" + entidad.getNombre() + "%");
         }
 
-        try (final PreparedStatement sentenciaPreparada = getConnection().prepareStatement(sentenciaSql.toString())) {
-            int index = 1;
-            for (Object parametro : parametros) {
-                sentenciaPreparada.setObject(index++, parametro);
+        try (PreparedStatement preparedStatement = getConnection().prepareStatement(sql.toString())) {
+            for (int i = 0; i < parametros.size(); i++) {
+                preparedStatement.setObject(i + 1, parametros.get(i));
             }
 
-            try (final ResultSet resultado = sentenciaPreparada.executeQuery()) {
-                while (resultado.next()) {
-                    listaDeportes.add(new DeporteEntity(resultado.getInt("Identificador"), resultado.getString("Nombre")));
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    DeporteEntity deporte = new DeporteEntity(
+                            resultSet.getInt("Id"),
+                            resultSet.getString("Nombre")
+                    );
+                    resultados.add(deporte);
                 }
             }
-        } catch (SQLException exception) {
-            var mensajeUsuario = "No ha sido posible consultar la información de los países. Por favor, inténtelo de nuevo o comuníquese con el administrador.";
-            var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00029);
-            throw new DataUDElBernabeuException(mensajeTecnico, mensajeUsuario, exception);
-        } catch (final Exception exception) {
-            var mensajeUsuario = "No ha sido posible llevar a cabo la eliminacion de la informacion del nuevo pais. Por favor intente de nuevo y en caso de pérsisitir el problema, comuniquese con el administrador de la Tienda Chepito...";
-            var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00030);
+        } catch (SQLException excepcion) {
+            var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00003);
+            var mensajeTecnico = "Se ha presentado un problema consultando los datos de Deporte en la base de datos.";
 
-            throw new DataUDElBernabeuException(mensajeTecnico, mensajeUsuario, exception);
+            throw new DataUDElBernabeuException(mensajeTecnico, mensajeUsuario, excepcion);
         }
-        return listaDeportes;
+
+        return resultados;
     }
 }

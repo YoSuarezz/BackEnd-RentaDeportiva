@@ -8,26 +8,36 @@ public class DeporteEntity {
     private int id;
     private String nombre;
 
-    public DeporteEntity(final int id, final String nombre) {
-        setId(id);
-        setNombre(TextHelper.EMPTY);
-    }
-
     public DeporteEntity(final int id) {
         setId(id);
         setNombre(TextHelper.EMPTY);
     }
 
-    public static final DeporteEntity build(final int id){
+    public DeporteEntity(final int id, final String nombre) {
+        setId(id);
+        setNombre(nombre);
+    }
+
+    public static final DeporteEntity build(final int id) {
         return new DeporteEntity(id);
     }
 
-    public static final DeporteEntity build(final int id, final String nombre){
-        return new DeporteEntity(id,nombre);
+    public static final DeporteEntity build() {
+        return new DeporteEntity(NumericHelper.ZERO);
     }
 
-    protected static final DeporteEntity build(){
-        return new DeporteEntity(NumericHelper.ZERO);
+    public static final DeporteEntity build(final int id, final String nombre) {
+        return new DeporteEntity(id, nombre);
+    }
+
+    public final DeporteEntity setId(final int id) {
+        this.id = id;
+        return this;
+    }
+
+    public final DeporteEntity setNombre(final String nombre) {
+        this.nombre = TextHelper.applyTrim(nombre);
+        return this;
     }
 
     public final int getId() {
@@ -36,13 +46,5 @@ public class DeporteEntity {
 
     public final String getNombre() {
         return nombre;
-    }
-
-    private final void setId(final int id) {
-        this.id = id;
-    }
-
-    private final void setNombre(final String nombre) {
-        this.nombre = TextHelper.applyTrim(nombre);
     }
 }

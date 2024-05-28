@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.UUID;
 
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.custom.DataUDElBernabeuException;
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.messagecatalog.MessageCatalogStrategy;
@@ -31,12 +30,12 @@ public final class AzureSqlDAOFactory extends DAOFactory {
 			connection = DriverManager.getConnection(connectionUrl);
 		} catch (final SQLException excepcion) {
 			var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00002);
-			var mensajeTecnico = "Se ha presentado un problema tratando de obtener la conexión con la base de datos wednesday en el servidor de bases de datos wednesday.database.windows.net. Por favor revise la traza de errores para identificar y solucionar el problema...";
+			var mensajeTecnico = "Se ha presentado un problema tratando de obtener la conexión con la base de datos.";
 
 			throw new DataUDElBernabeuException(mensajeTecnico, mensajeUsuario, excepcion);
 		} catch (final Exception excepcion) {
 			var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00002);
-			var mensajeTecnico = "Se ha presentado un problema INESPERADO tratando de obtener la conexión con la base de datos wednesday en el servidor de bases de datos wednesday.database.windows.net. Por favor revise la traza de errores para identificar y solucionar el problema...";
+			var mensajeTecnico = "Se ha presentado un problema INESPERADO tratando de obtener la conexión con la base de datos.";
 
 			throw new DataUDElBernabeuException(mensajeTecnico, mensajeUsuario, excepcion);
 		}
@@ -73,22 +72,15 @@ public final class AzureSqlDAOFactory extends DAOFactory {
 
 			System.out.println("Iniciando transacción...");
 			factory.iniciarTransaccion();
-			/*
-			System.out.println("Creando deporte");
-			factory.getDeporteDAO().crear(DeporteEntity.build(0, "Jordania-" + UUID.randomUUID().toString()));
 
-			System.out.println("Actualizando deporte...");
-			factory.getDeporteDAO().actualizar(DeporteEntity.build(41,"España-" + UUID.randomUUID().toString()));
-
-			System.out.println("Eliminando deporte...");
-			factory.getDeporteDAO().eliminar(40);
-
-
-			 */
 			System.out.println("Consultando deporte... ");
-			DeporteEntity criterios = new DeporteEntity(0);
-			List<DeporteEntity> deportesConsultados = factory.getDeporteDAO().consultar(criterios);
-			for (DeporteEntity deporte : deportesConsultados) {
+			DeporteDAO deporteDAO = factory.getDeporteDAO();
+
+			// Crear un objeto DeporteEntity con los criterios de búsqueda
+			DeporteEntity deporteCriterio = DeporteEntity.build().setId(0); // ejemplo búsqueda por nombre
+			List<DeporteEntity> resultados = deporteDAO.consultar(deporteCriterio);
+
+			for (DeporteEntity deporte : resultados) {
 				System.out.println("ID: " + deporte.getId() + ", Nombre: " + deporte.getNombre());
 			}
 
