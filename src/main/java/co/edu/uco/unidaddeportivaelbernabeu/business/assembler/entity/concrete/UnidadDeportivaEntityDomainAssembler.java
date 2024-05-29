@@ -24,21 +24,22 @@ public class UnidadDeportivaEntityDomainAssembler implements EntityDomainAssembl
     }
 
     @Override
-    public final UnidadDeportivaEntity ensamblarEntidad(final UnidadDeportivaDomain dominio) {
+    public UnidadDeportivaEntity ensamblarEntidad(final UnidadDeportivaDomain dominio) {
         var unidadDeportivaDomainTemp = ObjectHelper.getObjectHelper().getDefault(dominio, UnidadDeportivaDomain.crear());
-        return UnidadDeportivaEntity.build(unidadDeportivaDomainTemp.getId(), unidadDeportivaDomainTemp.getNombre()
-                , unidadDeportivaDomainTemp.getCiudad(), unidadDeportivaDomainTemp.getDireccion());
+        return UnidadDeportivaEntity.build(unidadDeportivaDomainTemp.getId(), unidadDeportivaDomainTemp.getNombre(), unidadDeportivaDomainTemp.getCiudad(), unidadDeportivaDomainTemp.getDireccion());
     }
+
 
     @Override
     public List<UnidadDeportivaDomain> ensamblarListaDominios(List<UnidadDeportivaEntity> listaEntidades) {
-        var listaEntidadesTmp = ObjectHelper.getObjectHelper()
-                .getDefault(listaEntidades, new ArrayList<UnidadDeportivaEntity>());
+        var listaEntidadesTmp = ObjectHelper.getObjectHelper().getDefault(listaEntidades, new ArrayList<UnidadDeportivaEntity>());
         var resultados = new ArrayList<UnidadDeportivaDomain>();
 
-        for (UnidadDeportivaEntity unidadDeportivaEntity : listaEntidadesTmp){
-            var unidadDeportivaDomainTmp = ensamblarDominio(unidadDeportivaEntity);
-            resultados.add(unidadDeportivaDomainTmp);
+        if (listaEntidadesTmp != null) { // Asegúrate de que no sea nulo
+            for (UnidadDeportivaEntity unidadDeportivaEntity : listaEntidadesTmp) {
+                var unidadDeportivaDomainTmp = ensamblarDominio(unidadDeportivaEntity);
+                resultados.add(unidadDeportivaDomainTmp);
+            }
         }
         return resultados;
     }

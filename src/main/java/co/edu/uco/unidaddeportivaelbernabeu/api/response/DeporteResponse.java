@@ -1,6 +1,5 @@
-package co.edu.uco.unidaddeportivaelbernabeu.api.response.deporte;
+package co.edu.uco.unidaddeportivaelbernabeu.api.response;
 
-import co.edu.uco.unidaddeportivaelbernabeu.api.response.Response;
 import co.edu.uco.unidaddeportivaelbernabeu.dto.DeporteDTO;
 
 import java.util.ArrayList;

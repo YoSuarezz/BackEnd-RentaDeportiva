@@ -25,27 +25,30 @@ public class UnidadDeportivaDTODomainAssembler implements DTODomainAssembler<Uni
     @Override
     public UnidadDeportivaDomain ensamblarDominio(UnidadDeportivaDTO dto) {
         var unidadDeportivaDtoTmp = ObjectHelper.getObjectHelper().getDefault(dto, new UnidadDeportivaDTO());
-        return UnidadDeportivaDomain.crear(unidadDeportivaDtoTmp.getId(), unidadDeportivaDtoTmp.getNombre(), unidadDeportivaDtoTmp.getCiudad()
-                , unidadDeportivaDtoTmp.getDireccion());
+        return UnidadDeportivaDomain.crear(unidadDeportivaDtoTmp.getId(), unidadDeportivaDtoTmp.getNombre(), unidadDeportivaDtoTmp.getCiudad(), unidadDeportivaDtoTmp.getDireccion());
     }
+
 
     @Override
     public UnidadDeportivaDTO ensamblarDTO(UnidadDeportivaDomain dominio) {
-        var unidadDeportivaDtoTmp = ObjectHelper.getObjectHelper().getDefault(dominio, new UnidadDeportivaDomain(dominio.getId(), dominio.getNombre(), dominio.getCiudad()
-                , dominio.getDireccion()));
-        return UnidadDeportivaDTO.build().setId(unidadDeportivaDtoTmp.getId()).setNombre(unidadDeportivaDtoTmp.getNombre());
-
-
+        var unidadDeportivaDtoTmp = ObjectHelper.getObjectHelper().getDefault(dominio, new UnidadDeportivaDomain(dominio.getId(), dominio.getNombre(), dominio.getCiudad(), dominio.getDireccion()));
+        return UnidadDeportivaDTO.build()
+                .setId(unidadDeportivaDtoTmp.getId())
+                .setNombre(unidadDeportivaDtoTmp.getNombre())
+                .setCiudad(unidadDeportivaDtoTmp.getCiudad())
+                .setDireccion(unidadDeportivaDtoTmp.getDireccion());
     }
+
 
     @Override
     public List<UnidadDeportivaDTO> ensamblarListaDTO(List<UnidadDeportivaDomain> listaDominios) {
-        var listaDominiosTmp = ObjectHelper.getObjectHelper()
-                .getDefault(listaDominios, new ArrayList<UnidadDeportivaDomain>());
+        var listaDominiosTmp = ObjectHelper.getObjectHelper().getDefault(listaDominios, new ArrayList<UnidadDeportivaDomain>());
         var resultados = new ArrayList<UnidadDeportivaDTO>();
 
-        for (UnidadDeportivaDomain unidadDeportivaDomain : listaDominiosTmp){
-            resultados.add(ensamblarDTO(unidadDeportivaDomain));
+        if (listaDominiosTmp != null) { // Asegúrate de que no sea nulo
+            for (UnidadDeportivaDomain unidadDeportivaDomain : listaDominiosTmp) {
+                resultados.add(ensamblarDTO(unidadDeportivaDomain));
+            }
         }
         return resultados;
     }

@@ -18,19 +18,19 @@ public final class MessageCatalogExternalService implements MessageCatalog {
 	public final void inicializar() {
 		mensajes.clear();
 		//mensajes.put(CodigoMensaje.M00007.getIdentificador(),
-				new Mensaje(CodigoMensaje.M00007, "La transacción se ha completado de forma satisfactoria...");
+		new Mensaje(CodigoMensaje.M00007, "La transacción se ha completado de forma satisfactoria...");
 		mensajes.put(CodigoMensaje.M00023.getIdentificador(), new Mensaje(CodigoMensaje.M00023,
-				"Se ha presentado un problema tratando de realizar un insert de la informacion del deporte \"${1}\" en la tabla \"Deporte\" en la base de datos Postgre SQL..."));
+				"Se ha presentado un problema tratando de realizar un insert de la informacion del deporte \"${1}\" en la tabla \"Deporte\" en la base de datos Azure SQL..."));
 		mensajes.put(CodigoMensaje.M00024.getIdentificador(), new Mensaje(CodigoMensaje.M00024,
-				"Se ha presentado un problema INESPERADO tratando de realizar un insert de la informacion del deporte \"${1}\" en la tabla \"Deporte\" en la base de datos Postgre SQL..."));
+				"Se ha presentado un problema INESPERADO tratando de realizar un insert de la informacion del deporte \"${1}\" en la tabla \"Deporte\" en la base de datos Azure SQL..."));
 		mensajes.put(CodigoMensaje.M00025.getIdentificador(), new Mensaje(CodigoMensaje.M00025,
-				"Se ha presentado un problema tratando de realizar un update de la informacion del deporte \"${1}\" en la tabla \"Deporte\" en la base de datos Postgre SQL..."));
+				"Se ha presentado un problema tratando de realizar un update de la informacion del deporte \"${1}\" en la tabla \"Deporte\" en la base de datos Azure SQL..."));
 		mensajes.put(CodigoMensaje.M00026.getIdentificador(), new Mensaje(CodigoMensaje.M00026,
-				"Se ha presentado un problema INESPERADO tratando de realizar un update de la informacion del deporte \"${1}\" en la tabla \"Deporte\" en la base de datos Postgre SQL..."));
+				"Se ha presentado un problema INESPERADO tratando de realizar un update de la informacion del deporte \"${1}\" en la tabla \"Deporte\" en la base de datos Azure SQL..."));
 		mensajes.put(CodigoMensaje.M00027.getIdentificador(), new Mensaje(CodigoMensaje.M00027,
-				"Se ha presentado un problema tratando de realizar un delete de la informacion del deporte \"${1}\" en la tabla \"Deporte\" en la base de datos Postgre SQL..."));
+				"Se ha presentado un problema tratando de realizar un delete de la informacion del deporte \"${1}\" en la tabla \"Deporte\" en la base de datos Azure SQL..."));
 		mensajes.put(CodigoMensaje.M00028.getIdentificador(), new Mensaje(CodigoMensaje.M00028,
-				"Se ha presentado un problema INESPERADO tratando de realizar un delete de la informacion del deporte \"${1}\" en la tabla \"Deporte\" en la base de datos Postgre SQL..."));
+				"Se ha presentado un problema INESPERADO tratando de realizar un delete de la informacion del deporte \"${1}\" en la tabla \"Deporte\" en la base de datos Azure SQL..."));
 		mensajes.put(CodigoMensaje.M00029.getIdentificador(), new Mensaje(CodigoMensaje.M00029,
 				"Se ha presentado un problema ejecutando la sentancia SQL de consulta de las unidades deportivas en la base de datos Azure SQL"));
 		mensajes.put(CodigoMensaje.M00030.getIdentificador(), new Mensaje(CodigoMensaje.M00030,
@@ -73,11 +73,14 @@ public final class MessageCatalogExternalService implements MessageCatalog {
 			throw new CrosscuttingUDElBernabeuException(mensajeTecnico, mensajeUsuario);
 		}
 
-		// TODO: Tarea: asegure que si tiene parámetros, el contenido
-		// del mensaje se retorne con los parámetros reemplazados
-		// {1}, {2}, {3}
+		Mensaje mensaje = mensajes.get(codigo.getIdentificador());
+		String contenido = mensaje.getContenido();
 
-		return mensajes.get(codigo.getIdentificador());
+		// Reemplazar los parámetros en el contenido del mensaje
+		for (int i = 0; i < parametros.length; i++) {
+			contenido = contenido.replace("${" + (i + 1) + "}", parametros[i]);
+		}
+
+		return new Mensaje(codigo, contenido);
 	}
-
 }

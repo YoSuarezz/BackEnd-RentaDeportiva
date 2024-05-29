@@ -83,8 +83,7 @@ public final class AzureSqlDAOFactory extends DAOFactory {
 
 			System.out.println("Consultando deportes... ");
 			DeporteDAO deporteDAO = factory.getDeporteDAO();
-			// Crear un objeto DeporteEntity con los criterios de búsqueda
-			DeporteEntity deporteCriterio = DeporteEntity.build().setId(0); // ejemplo búsqueda por nombre
+			DeporteEntity deporteCriterio = DeporteEntity.build().setId(0);
 			List<DeporteEntity> resultados = deporteDAO.consultar(deporteCriterio);
 			for (DeporteEntity deporte : resultados) {
 				System.out.println("ID: " + deporte.getId() + " - Nombre: " + deporte.getNombre());
@@ -92,18 +91,12 @@ public final class AzureSqlDAOFactory extends DAOFactory {
 
 			System.out.println("Consultando unidad deportiva... ");
 			UnidadDeportivaDAO unidadDeportivaDAO = factory.getUnidadDeportivaDAO();
-
-			// Crear un objeto UnidadDeportivaEntity con los criterios de búsqueda
-			UnidadDeportivaEntity unidadDeportivaCriterio = UnidadDeportivaEntity.build().setId(1); // ejemplo búsqueda por nombre
-
-			// Ejecutar la consulta
+			UnidadDeportivaEntity unidadDeportivaCriterio = UnidadDeportivaEntity.build().setId(0);
 			List<UnidadDeportivaEntity> resultadosUDB = unidadDeportivaDAO.consultar(unidadDeportivaCriterio);
 
-			// Imprimir los resultados
 			for (UnidadDeportivaEntity unidadDeportiva : resultadosUDB) {
 				System.out.println("ID: " + unidadDeportiva.getId() + " - Nombre: " + unidadDeportiva.getNombre() + ", Ciudad: " + unidadDeportiva.getCiudad() + ", Dirección: " + unidadDeportiva.getDireccion());
 			}
-
 
 			System.out.println("Confirmando transacción...");
 			factory.confirmarTransaccion();

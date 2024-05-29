@@ -1,6 +1,5 @@
-package co.edu.uco.unidaddeportivaelbernabeu.api.response.deporte;
+package co.edu.uco.unidaddeportivaelbernabeu.api.response;
 
-import co.edu.uco.unidaddeportivaelbernabeu.api.response.Response;
 import co.edu.uco.unidaddeportivaelbernabeu.dto.UnidadDeportivaDTO;
 
 import java.util.ArrayList;
@@ -17,7 +16,6 @@ public class UnidadDeportivaResponse extends Response<UnidadDeportivaDTO> {
     }
 
     public static final UnidadDeportivaResponse build(final List<UnidadDeportivaDTO> datos) {
-
         UnidadDeportivaResponse instance = new UnidadDeportivaResponse();
         instance.setMensajes(new ArrayList<>());
         instance.setDatos(datos);

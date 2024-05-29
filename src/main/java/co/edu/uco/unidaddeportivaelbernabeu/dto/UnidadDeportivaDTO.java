@@ -39,7 +39,7 @@ public final class UnidadDeportivaDTO {
         return nombre;
     }
 
-    public final UnidadDeportivaDTO setNombre(String nombre) {
+    public final UnidadDeportivaDTO setNombre(final String nombre) {
         this.nombre = TextHelper.applyTrim(nombre);
         return this;
     }
@@ -48,7 +48,7 @@ public final class UnidadDeportivaDTO {
         return ciudad;
     }
 
-    public final UnidadDeportivaDTO setCiudad(String ciudad) {
+    public final UnidadDeportivaDTO setCiudad(final String ciudad) {
         this.ciudad = TextHelper.applyTrim(ciudad);
         return this;
     }
@@ -57,7 +57,7 @@ public final class UnidadDeportivaDTO {
         return direccion;
     }
 
-    public UnidadDeportivaDTO setDireccion(String direccion) {
+    public final UnidadDeportivaDTO setDireccion(final String direccion) {
         this.direccion = TextHelper.applyTrim(direccion);
         return this;
     }

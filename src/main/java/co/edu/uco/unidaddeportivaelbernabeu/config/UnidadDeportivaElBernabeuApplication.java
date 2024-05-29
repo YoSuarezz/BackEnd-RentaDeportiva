@@ -11,5 +11,4 @@ public class UnidadDeportivaElBernabeuApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(UnidadDeportivaElBernabeuApplication.class, args);
 	}
-
 }
