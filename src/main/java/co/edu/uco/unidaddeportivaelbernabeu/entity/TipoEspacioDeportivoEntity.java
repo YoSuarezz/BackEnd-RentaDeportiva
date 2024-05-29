@@ -35,6 +35,11 @@ public class TipoEspacioDeportivoEntity {
 
     }
 
+    public TipoEspacioDeportivoEntity(int id, DeporteEntity deporte, String nombre) {
+        setId(id);
+        setDeporte(deporte);
+        setNombre(nombre);
+    }
 
     //Setters y getters
     public final int getId() {
@@ -99,6 +104,10 @@ public class TipoEspacioDeportivoEntity {
 
     public static final TipoEspacioDeportivoEntity build(){
         return new TipoEspacioDeportivoEntity(NumericHelper.ZERO);
+    }
+
+    public static final TipoEspacioDeportivoEntity build(final int id, String nombre, final DeporteEntity deporte){
+        return new TipoEspacioDeportivoEntity(id, deporte, nombre);
     }
 
 }
