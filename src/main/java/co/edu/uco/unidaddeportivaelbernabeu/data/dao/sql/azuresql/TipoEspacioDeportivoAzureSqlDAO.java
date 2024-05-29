@@ -42,7 +42,7 @@ public class TipoEspacioDeportivoAzureSqlDAO implements TipoEspacioDeportivoDAO 
             statement.executeUpdate();
         } catch (SQLException exception) {
             var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00003);
-            var mensajeTecnico = "Se ha presentado un problema consultando los datos de Unidad Deportiva en la base de datos.";
+            var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00061);
 
             throw new DataUDElBernabeuException(mensajeTecnico, mensajeUsuario, exception);
         }
@@ -63,7 +63,7 @@ public class TipoEspacioDeportivoAzureSqlDAO implements TipoEspacioDeportivoDAO 
             statement.executeUpdate();
         } catch (SQLException exception) {
             var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00003);
-            var mensajeTecnico = "Se ha presentado un problema actu los datos de Unidad Deportiva en la base de datos.";
+            var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00062);
 
             throw new DataUDElBernabeuException(mensajeTecnico, mensajeUsuario, exception);
         }
@@ -113,7 +113,7 @@ public class TipoEspacioDeportivoAzureSqlDAO implements TipoEspacioDeportivoDAO 
             return resultados;
         } catch (SQLException exception) {
             var mensajeUsuario = "";
-            var mensajeTecnico = "Se ha presentado un problema consultando los datos de Unidad Deportiva en la base de datos.";
+            var mensajeTecnico = "Se ha presentado un problema consultando los datos de los tipos de espacios deportivos.";
 
             throw new DataUDElBernabeuException(mensajeTecnico, mensajeUsuario, exception);
         }

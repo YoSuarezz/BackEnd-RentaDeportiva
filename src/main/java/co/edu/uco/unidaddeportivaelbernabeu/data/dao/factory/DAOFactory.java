@@ -8,7 +8,6 @@ import co.edu.uco.unidaddeportivaelbernabeu.data.dao.TipoEspacioDeportivoDAO;
 import co.edu.uco.unidaddeportivaelbernabeu.data.dao.UnidadDeportivaDAO;
 import co.edu.uco.unidaddeportivaelbernabeu.data.dao.factory.enums.Factory;
 import co.edu.uco.unidaddeportivaelbernabeu.data.dao.factory.azuresql.AzureSqlDAOFactory;
-import org.springframework.context.support.MessageSourceAccessor;
 
 public abstract class DAOFactory {
 

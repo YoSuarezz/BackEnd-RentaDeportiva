@@ -10,7 +10,6 @@ import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.messagecatal
 import co.edu.uco.unidaddeportivaelbernabeu.data.dao.factory.DAOFactory;
 import co.edu.uco.unidaddeportivaelbernabeu.data.dao.factory.enums.Factory;
 import co.edu.uco.unidaddeportivaelbernabeu.dto.TipoEspacioDeportivoDTO;
-import org.springframework.context.support.MessageSourceSupport;
 
 public class RegistrarTipoEspacioDeportivoFachadaImpl implements RegistrarTipoEspacioDeportivoFachada {
 

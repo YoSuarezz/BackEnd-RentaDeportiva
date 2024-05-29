@@ -44,8 +44,4 @@ public final class MessageCatalogStrategy {
 		return getMensaje(codigo, parametros).getContenido();
 	}
 
-	public static void main(String[] args) {
-		System.out.println(getContenidoMensaje(CodigoMensaje.M00008));
-	}
-
 }

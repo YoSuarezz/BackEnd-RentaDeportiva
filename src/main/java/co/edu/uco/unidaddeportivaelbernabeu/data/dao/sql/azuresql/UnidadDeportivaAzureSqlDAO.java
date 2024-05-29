@@ -57,7 +57,7 @@ public class UnidadDeportivaAzureSqlDAO extends SqlConnection implements UnidadD
             }
         } catch (SQLException excepcion) {
             var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00003);
-            var mensajeTecnico = "Se ha presentado un problema consultando los datos de Unidad Deportiva en la base de datos.";
+            var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00060);
 
             throw new DataUDElBernabeuException(mensajeTecnico, mensajeUsuario, excepcion);
         }

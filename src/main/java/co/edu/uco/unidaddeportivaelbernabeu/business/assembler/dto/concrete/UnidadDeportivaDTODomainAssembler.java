@@ -1,10 +1,8 @@
 package co.edu.uco.unidaddeportivaelbernabeu.business.assembler.dto.concrete;
 
 import co.edu.uco.unidaddeportivaelbernabeu.business.assembler.dto.DTODomainAssembler;
-import co.edu.uco.unidaddeportivaelbernabeu.business.domain.DeporteDomain;
 import co.edu.uco.unidaddeportivaelbernabeu.business.domain.UnidadDeportivaDomain;
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.helpers.ObjectHelper;
-import co.edu.uco.unidaddeportivaelbernabeu.dto.DeporteDTO;
 import co.edu.uco.unidaddeportivaelbernabeu.dto.UnidadDeportivaDTO;
 
 import java.util.ArrayList;

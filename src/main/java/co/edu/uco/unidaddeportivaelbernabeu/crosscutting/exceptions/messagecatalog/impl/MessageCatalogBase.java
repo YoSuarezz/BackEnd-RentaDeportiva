@@ -111,6 +111,13 @@ public final class MessageCatalogBase implements MessageCatalog {
 				"Se ha presentado un problema tratando de registrar el tipo de espacio deportivo"));
 		mensajes.put(CodigoMensaje.M00059.getIdentificador(), new Mensaje(CodigoMensaje.M00059,
 				"Se ha presentado un problema inesperado tratando de registrar la informacion del nuevo tipo de espacio deportivo en el metodo ejecutar de la clase RegistrarTipoEspacioDeportivoFachadaImpl. Por favor revise la traza completa del problema"));
+		mensajes.put(CodigoMensaje.M00060.getIdentificador(), new Mensaje(CodigoMensaje.M00060,
+				"Se ha presentado un problema consultando los datos de Unidad Deportiva en la base de datos."));
+		mensajes.put(CodigoMensaje.M00061.getIdentificador(), new Mensaje(CodigoMensaje.M00061,
+				"Se ha presentado un problema INESPERADO consultando los datos de Unidad Deportiva en la base de datos."));
+		mensajes.put(CodigoMensaje.M00062.getIdentificador(), new Mensaje(CodigoMensaje.M00062,
+				"Se ha presentado un problema actualizando los datos de Unidad Deportiva en la base de datos."));
+
 
 	}
 	@Override

@@ -3,7 +3,7 @@ package co.edu.uco.unidaddeportivaelbernabeu.crosscutting.helpers;
 public final class ObjectHelper {
 	private static final ObjectHelper instance = new ObjectHelper();
 
-	private ObjectHelper() {
+	public ObjectHelper() {
 		super();
 	}
 
