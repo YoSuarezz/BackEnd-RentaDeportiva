@@ -27,7 +27,7 @@ public final class DeporteAzureSqlDAO extends SqlConnection implements DeporteDA
         final StringBuilder sentenciaSql = new StringBuilder();
         final List<Object> parametros = new ArrayList<>();
 
-        sentenciaSql.append("SELECT Identificador, Nombre FROM Deporte WHERE 1 = 1");
+        sentenciaSql.append("SELECT Id, Nombre FROM Deporte WHERE 1 = 1");
 
         if (entidad.getId() != 0) {
             sentenciaSql.append(" AND Identificador = ?");
@@ -47,7 +47,7 @@ public final class DeporteAzureSqlDAO extends SqlConnection implements DeporteDA
 
             try (final ResultSet resultado = sentenciaPreparada.executeQuery()) {
                 while (resultado.next()) {
-                    listaDeportes.add(new DeporteEntity(resultado.getInt("Identificador"), resultado.getString("Nombre")));
+                    listaDeportes.add(new DeporteEntity(resultado.getInt("Id"), resultado.getString("Nombre")));
                 }
             }
         } catch (SQLException exception) {

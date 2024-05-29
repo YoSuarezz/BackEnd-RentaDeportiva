@@ -87,7 +87,22 @@ public final class MessageCatalogBase implements MessageCatalog {
 				"Se ha presentado un problema tratando de consultar la informacion de los paises"));
 		mensajes.put(CodigoMensaje.M00047.getIdentificador(), new Mensaje(CodigoMensaje.M00047,
 				"Se ha presentado un problema INESPERADO tratando de consultar la informacion de los paises"));
-
+		mensajes.put(CodigoMensaje.M00048.getIdentificador(), new Mensaje(CodigoMensaje.M00048,
+				"Se ha presentado un problema consultando los datos de Unidad Deportiva en la base de datos..."));
+		mensajes.put(CodigoMensaje.M00049.getIdentificador(), new Mensaje(CodigoMensaje.M00049,
+				"Se ha presentado un problema tratando de consultar la informacion de las unidades deportivas"));
+		mensajes.put(CodigoMensaje.M00050.getIdentificador(), new Mensaje(CodigoMensaje.M00050,
+				"Se ha presentado un problema INESPERADO tratando de consultar la informacion de las unidades deportivas"));
+		mensajes.put(CodigoMensaje.M00051.getIdentificador(), new Mensaje(CodigoMensaje.M00051,
+				"Se ha presentado un problema tratando de consultar la informacion de los deportes"));
+		mensajes.put(CodigoMensaje.M00052.getIdentificador(), new Mensaje(CodigoMensaje.M00052,
+				"Se ha presentado un problema INESPERADO tratando de consultar la informacion de los deportes"));
+		mensajes.put(CodigoMensaje.M00053.getIdentificador(), new Mensaje(CodigoMensaje.M00053,
+				"Unidades deportivas consultadas exitosamente"));
+		mensajes.put(CodigoMensaje.M00054.getIdentificador(), new Mensaje(CodigoMensaje.M00054,
+				"Se ha presentado un problema inesperado"));
+		mensajes.put(CodigoMensaje.M00055.getIdentificador(), new Mensaje(CodigoMensaje.M00055,
+				"Deportes consultados exitosamente"));
 
 	}
 
