@@ -45,7 +45,7 @@ public class UnidadDeportivaDTODomainAssembler implements DTODomainAssembler<Uni
         var listaDominiosTmp = ObjectHelper.getObjectHelper().getDefault(listaDominios, new ArrayList<UnidadDeportivaDomain>());
         var resultados = new ArrayList<UnidadDeportivaDTO>();
 
-        if (listaDominiosTmp != null) { // Asegúrate de que no sea nulo
+        if (listaDominiosTmp != null) {
             for (UnidadDeportivaDomain unidadDeportivaDomain : listaDominiosTmp) {
                 resultados.add(ensamblarDTO(unidadDeportivaDomain));
             }

@@ -30,7 +30,7 @@ public class TipoEspacioDeportivoController {
         try {
             var facade = new RegistrarTipoEspacioDeportivoFachadaImpl();
             facade.ejecutar(tipoEspacioDeportivo);
-            tipoEspacioDeportivoResponse.getMensajes().add("Bien");
+            tipoEspacioDeportivoResponse.getMensajes().add(MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00056));
 
         } catch (final UnidadDeportivaElBernabeuException excepcion) {
             httpStatusCode = HttpStatus.BAD_REQUEST;
@@ -39,7 +39,7 @@ public class TipoEspacioDeportivoController {
         } catch (final Exception excepcion) {
             httpStatusCode = HttpStatus.INTERNAL_SERVER_ERROR;
 
-            var mensajeUsuario = "";
+            var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00054);
             tipoEspacioDeportivoResponse.getMensajes().add(mensajeUsuario);
 
             excepcion.printStackTrace();
@@ -60,7 +60,7 @@ public class TipoEspacioDeportivoController {
             var facade = new ConsultarTipoEspacioDeportivoFachadaImpl();
 
             tipoEspacioDeportivoResponse.setDatos(facade.execute(tipoEspacioDeportivoDTO));
-            tipoEspacioDeportivoResponse.getMensajes().add("Tipos de espacios deportivos consultados exitosamente");
+            tipoEspacioDeportivoResponse.getMensajes().add(MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00057));
 
         } catch (final UnidadDeportivaElBernabeuException excepcion) {
             httpStatusCode = HttpStatus.BAD_REQUEST;

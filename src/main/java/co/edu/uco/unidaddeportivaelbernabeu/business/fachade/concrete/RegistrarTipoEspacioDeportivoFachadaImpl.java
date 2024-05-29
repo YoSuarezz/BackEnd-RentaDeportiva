@@ -5,9 +5,12 @@ import co.edu.uco.unidaddeportivaelbernabeu.business.fachade.RegistrarTipoEspaci
 import co.edu.uco.unidaddeportivaelbernabeu.business.usecase.concrete.RegistrarTipoEspacioDeportivoImpl;
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.UnidadDeportivaElBernabeuException;
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.custom.BusinessUDElBernabeuException;
+import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.messagecatalog.MessageCatalogStrategy;
+import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.messagecatalog.data.CodigoMensaje;
 import co.edu.uco.unidaddeportivaelbernabeu.data.dao.factory.DAOFactory;
 import co.edu.uco.unidaddeportivaelbernabeu.data.dao.factory.enums.Factory;
 import co.edu.uco.unidaddeportivaelbernabeu.dto.TipoEspacioDeportivoDTO;
+import org.springframework.context.support.MessageSourceSupport;
 
 public class RegistrarTipoEspacioDeportivoFachadaImpl implements RegistrarTipoEspacioDeportivoFachada {
 
@@ -32,8 +35,8 @@ public class RegistrarTipoEspacioDeportivoFachadaImpl implements RegistrarTipoEs
         } catch (final Exception exception) {
             daoFactory.cancelarTransaccion();
 
-            var mensajeUsuario = "";
-            var mensajeTecnico = "";
+            var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00058);
+            var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00059);
 
             throw new BusinessUDElBernabeuException(mensajeTecnico, mensajeUsuario, exception);
 
