@@ -3,6 +3,8 @@ package co.edu.uco.unidaddeportivaelbernabeu.api.controller;
 import co.edu.uco.unidaddeportivaelbernabeu.api.response.DeporteResponse;
 import co.edu.uco.unidaddeportivaelbernabeu.business.fachade.concrete.ConsultarDeportesFachadaImpl;
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.UnidadDeportivaElBernabeuException;
+import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.messagecatalog.MessageCatalogStrategy;
+import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.messagecatalog.data.CodigoMensaje;
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.helpers.NumericHelper;
 import co.edu.uco.unidaddeportivaelbernabeu.dto.DeporteDTO;
 import org.springframework.http.HttpStatus;
@@ -29,14 +31,14 @@ public class DeporteController {
             final var paisDtoFilter = DeporteDTO.build().setId(NumericHelper.convertToInt(id)).setNombre(nombre);
             final ConsultarDeportesFachadaImpl fachada = new ConsultarDeportesFachadaImpl();
             deporteResponse.setDatos(fachada.execute(paisDtoFilter));
-            deporteResponse.getMensajes().add("Deportes consultados exitosamente");
+            deporteResponse.getMensajes().add(MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00055));
         } catch (final UnidadDeportivaElBernabeuException exception){
             exception.printStackTrace();
             deporteResponse.getMensajes().add(exception.getMensajeUsuario());
             httpStatusResponse = HttpStatus.BAD_REQUEST;
         } catch (final Exception exception){
             exception.printStackTrace();
-            deporteResponse.getMensajes().add("se ha presentado un problema inesperado");
+            deporteResponse.getMensajes().add(MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00054));
             httpStatusResponse = HttpStatus.INTERNAL_SERVER_ERROR;
         }
         return new ResponseEntity<>(deporteResponse, httpStatusResponse);

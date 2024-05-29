@@ -84,9 +84,9 @@ public final class MessageCatalogBase implements MessageCatalog {
 		mensajes.put(CodigoMensaje.M00045.getIdentificador(), new Mensaje(CodigoMensaje.M00045,
 				"Se ha presentado un problema INESPERADO tratando de obtener la conexión con la base de datos..."));
 		mensajes.put(CodigoMensaje.M00046.getIdentificador(), new Mensaje(CodigoMensaje.M00046,
-				"Se ha presentado un problema tratando de consultar la informacion de los deportes"));
+				"Se ha presentado un problema tratando de consultar la informacion de los paises"));
 		mensajes.put(CodigoMensaje.M00047.getIdentificador(), new Mensaje(CodigoMensaje.M00047,
-				"Se ha presentado un problema INESPERADO tratando de consultar la informacion de los deportes"));
+				"Se ha presentado un problema INESPERADO tratando de consultar la informacion de los paises"));
 
 
 	}
@@ -118,13 +118,11 @@ public final class MessageCatalogBase implements MessageCatalog {
 			throw new CrosscuttingUDElBernabeuException(mensajeTecnico, mensajeUsuario);
 		}
 
-		Mensaje mensaje = mensajes.get(codigo.getIdentificador());
-		String contenido = mensaje.getContenido();
+		// TODO: Tarea: asegure que si tiene parámetros, el contenido
+		// del mensaje se retorne con los parámetros reemplazados
+		// {1}, {2}, {3}
 
-		// Reemplazar los parámetros en el contenido del mensaje
-		for (int i = 0; i < parametros.length; i++) {
-			contenido = contenido.replace("${" + (i + 1) + "}", parametros[i]);
-		}
-		return new Mensaje(codigo, contenido);
+		return mensajes.get(codigo.getIdentificador());
 	}
+
 }

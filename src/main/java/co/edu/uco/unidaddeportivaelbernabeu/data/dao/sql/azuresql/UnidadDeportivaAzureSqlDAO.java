@@ -1,12 +1,5 @@
 package co.edu.uco.unidaddeportivaelbernabeu.data.dao.sql.azuresql;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.custom.DataUDElBernabeuException;
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.messagecatalog.MessageCatalogStrategy;
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.messagecatalog.data.CodigoMensaje;
@@ -14,66 +7,61 @@ import co.edu.uco.unidaddeportivaelbernabeu.data.dao.UnidadDeportivaDAO;
 import co.edu.uco.unidaddeportivaelbernabeu.data.dao.sql.SqlConnection;
 import co.edu.uco.unidaddeportivaelbernabeu.entity.UnidadDeportivaEntity;
 
-public final class UnidadDeportivaAzureSqlDAO extends SqlConnection implements UnidadDeportivaDAO {
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
-    public UnidadDeportivaAzureSqlDAO(final Connection connection) {
+
+public class UnidadDeportivaAzureSqlDAO extends SqlConnection implements UnidadDeportivaDAO {
+
+    public UnidadDeportivaAzureSqlDAO(Connection connection) {
         super(connection);
     }
 
     @Override
-    public List<UnidadDeportivaEntity> consultar(UnidadDeportivaEntity entity) {
-        var resultados = new ArrayList<UnidadDeportivaEntity>();
+    public List<UnidadDeportivaEntity> consultar(UnidadDeportivaEntity entidad) {
+        List<UnidadDeportivaEntity> resultados = new ArrayList<>();
+        StringBuilder sql = new StringBuilder();
+        sql.append("SELECT id, nombre, ciudad, direccion FROM UnidadDeportiva WHERE 1=1 ");
 
-        var sql = new StringBuilder();
-        sql.append("SELECT id, nombre, ciudad, direccion ");
-        sql.append("FROM UnidadDeportiva ");
-        sql.append("WHERE 1=1 ");
+        List<Object> parametros = new ArrayList<>();
 
-        if (entity.getId() > 0) {
+        if (entidad.getId() > 0) {
             sql.append("AND id = ? ");
+            parametros.add(entidad.getId());
         }
-        if (!entity.getNombre().isEmpty()) {
+
+        if (entidad.getNombre() != null && !entidad.getNombre().isEmpty()) {
             sql.append("AND nombre LIKE ? ");
-        }
-        if (!entity.getCiudad().isEmpty()) {
-            sql.append("AND ciudad LIKE ? ");
-        }
-        if (!entity.getDireccion().isEmpty()) {
-            sql.append("AND direccion LIKE ? ");
+            parametros.add("%" + entidad.getNombre() + "%");
         }
 
         try (PreparedStatement preparedStatement = getConnection().prepareStatement(sql.toString())) {
-            int parameterIndex = 1;
-
-            if (entity.getId() > 0) {
-                preparedStatement.setInt(parameterIndex++, entity.getId());
-            }
-            if (!entity.getNombre().isEmpty()) {
-                preparedStatement.setString(parameterIndex++, "%" + entity.getNombre() + "%");
-            }
-            if (!entity.getCiudad().isEmpty()) {
-                preparedStatement.setString(parameterIndex++, "%" + entity.getCiudad() + "%");
-            }
-            if (!entity.getDireccion().isEmpty()) {
-                preparedStatement.setString(parameterIndex++, "%" + entity.getDireccion() + "%");
+            for (int i = 0; i < parametros.size(); i++) {
+                preparedStatement.setObject(i + 1, parametros.get(i));
             }
 
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            while (resultSet.next()) {
-                var unidadDeportivaEntity = UnidadDeportivaEntity.build(
-                        resultSet.getInt("id"),
-                        resultSet.getString("nombre"),
-                        resultSet.getString("ciudad"),
-                        resultSet.getString("direccion")
-                );
-                resultados.add(unidadDeportivaEntity);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    UnidadDeportivaEntity unidadDeportiva = new UnidadDeportivaEntity(
+                            resultSet.getInt("id"),
+                            resultSet.getString("nombre"),
+                            resultSet.getString("ciudad"),
+                            resultSet.getString("direccion")
+                    );
+                    resultados.add(unidadDeportiva);
+                }
             }
-        } catch (SQLException exception) {
-            var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00001);
-            var mensajeTecnico = "Se ha presentado un problema ejecutando la consulta de Unidades Deportivas en la base de datos.";
-            throw new DataUDElBernabeuException(mensajeTecnico, mensajeUsuario, exception);
+        } catch (SQLException excepcion) {
+            var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00003);
+            var mensajeTecnico = "Se ha presentado un problema consultando los datos de Unidad Deportiva en la base de datos.";
+
+            throw new DataUDElBernabeuException(mensajeTecnico, mensajeUsuario, excepcion);
         }
+
         return resultados;
     }
 }
