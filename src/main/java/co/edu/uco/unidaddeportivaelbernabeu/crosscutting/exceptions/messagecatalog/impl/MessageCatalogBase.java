@@ -103,10 +103,7 @@ public final class MessageCatalogBase implements MessageCatalog {
 				"Se ha presentado un problema inesperado"));
 		mensajes.put(CodigoMensaje.M00055.getIdentificador(), new Mensaje(CodigoMensaje.M00055,
 				"Deportes consultados exitosamente"));
-
 	}
-
-
 	@Override
 	public final String obtenerContenidoMensaje(final CodigoMensaje codigo, final String... parametros) {
 		return obtenerMensaje(codigo, parametros).getContenido();
@@ -141,6 +138,8 @@ public final class MessageCatalogBase implements MessageCatalog {
 			contenido = contenido.replace("${" + (i + 1) + "}", parametros[i]);
 		}
 
-		return new Mensaje(codigo, contenido);
+
+		return mensajes.get(codigo.getIdentificador());
 	}
+
 }

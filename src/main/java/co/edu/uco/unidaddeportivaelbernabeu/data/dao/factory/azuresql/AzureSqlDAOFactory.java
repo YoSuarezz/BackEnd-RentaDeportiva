@@ -10,12 +10,15 @@ import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.messagecatal
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.messagecatalog.data.CodigoMensaje;
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.helpers.SQLHelper;
 import co.edu.uco.unidaddeportivaelbernabeu.data.dao.DeporteDAO;
+import co.edu.uco.unidaddeportivaelbernabeu.data.dao.TipoEspacioDeportivoDAO;
 import co.edu.uco.unidaddeportivaelbernabeu.data.dao.UnidadDeportivaDAO;
 import co.edu.uco.unidaddeportivaelbernabeu.data.dao.factory.DAOFactory;
 import co.edu.uco.unidaddeportivaelbernabeu.data.dao.factory.enums.Factory;
 import co.edu.uco.unidaddeportivaelbernabeu.data.dao.sql.azuresql.DeporteAzureSqlDAO;
+import co.edu.uco.unidaddeportivaelbernabeu.data.dao.sql.azuresql.TipoEspacioDeportivoAzureSqlDAO;
 import co.edu.uco.unidaddeportivaelbernabeu.data.dao.sql.azuresql.UnidadDeportivaAzureSqlDAO;
 import co.edu.uco.unidaddeportivaelbernabeu.entity.DeporteEntity;
+import co.edu.uco.unidaddeportivaelbernabeu.entity.TipoEspacioDeportivoEntity;
 import co.edu.uco.unidaddeportivaelbernabeu.entity.UnidadDeportivaEntity;
 
 public final class AzureSqlDAOFactory extends DAOFactory {
@@ -74,36 +77,24 @@ public final class AzureSqlDAOFactory extends DAOFactory {
 		return new UnidadDeportivaAzureSqlDAO(connection);
 	}
 
-	public static void main(String[] args) {
-		try {
-			DAOFactory factory = DAOFactory.getFactory(Factory.AZURE_SQL);
-
-			System.out.println("Iniciando transacción...");
-			factory.iniciarTransaccion();
-
-			System.out.println("Consultando deportes... ");
-			DeporteDAO deporteDAO = factory.getDeporteDAO();
-			DeporteEntity deporteCriterio = DeporteEntity.build().setId(0);
-			List<DeporteEntity> resultados = deporteDAO.consultar(deporteCriterio);
-			for (DeporteEntity deporte : resultados) {
-				System.out.println("ID: " + deporte.getId() + " - Nombre: " + deporte.getNombre());
-			}
-
-			System.out.println("Consultando unidad deportiva... ");
-			UnidadDeportivaDAO unidadDeportivaDAO = factory.getUnidadDeportivaDAO();
-			UnidadDeportivaEntity unidadDeportivaCriterio = UnidadDeportivaEntity.build().setId(0);
-			List<UnidadDeportivaEntity> resultadosUDB = unidadDeportivaDAO.consultar(unidadDeportivaCriterio);
-
-			for (UnidadDeportivaEntity unidadDeportiva : resultadosUDB) {
-				System.out.println("ID: " + unidadDeportiva.getId() + " - Nombre: " + unidadDeportiva.getNombre() + ", Ciudad: " + unidadDeportiva.getCiudad() + ", Dirección: " + unidadDeportiva.getDireccion());
-			}
-
-			System.out.println("Confirmando transacción...");
-			factory.confirmarTransaccion();
-			System.out.println("Cerrando conexión...");
-			factory.cerrarConexion();
-		} catch (final Exception excepcion) {
-			excepcion.printStackTrace();
-		}
+	@Override
+	public TipoEspacioDeportivoDAO getTipoEspacioDeportivoDAO() {
+		return new TipoEspacioDeportivoAzureSqlDAO(connection);
 	}
+
+	public static void main(String[] args) {
+        DAOFactory factory = null;
+        try {
+            factory = DAOFactory.getFactory(Factory.AZURE_SQL);
+
+            System.out.println("Iniciando transacción...");
+            factory.iniciarTransaccion();
+            System.out.println("Confirmando transacción...");
+            factory.confirmarTransaccion();
+            System.out.println("Cerrando conexión...");
+            factory.cerrarConexion();
+        } catch (final Exception excepcion) {
+            excepcion.printStackTrace();
+        }
+    }
 }
