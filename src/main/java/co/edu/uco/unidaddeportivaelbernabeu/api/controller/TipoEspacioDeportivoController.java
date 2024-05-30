@@ -25,7 +25,7 @@ public class TipoEspacioDeportivoController {
     public ResponseEntity<TipoEspacioDeportivoResponse> crear(@RequestBody TipoEspacioDeportivoDTO tipoEspacioDeportivo) {
 
         var httpStatusCode = HttpStatus.ACCEPTED;
-        var tipoEspacioDeportivoResponse = new TipoEspacioDeportivoResponse();
+        var tipoEspacioDeportivoResponse = TipoEspacioDeportivoResponse.build();
 
         try {
             var facade = new RegistrarTipoEspacioDeportivoFachadaImpl();
