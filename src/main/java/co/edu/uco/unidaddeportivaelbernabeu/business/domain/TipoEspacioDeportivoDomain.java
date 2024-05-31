@@ -1,5 +1,7 @@
 package co.edu.uco.unidaddeportivaelbernabeu.business.domain;
 
+import co.edu.uco.unidaddeportivaelbernabeu.business.domain.espaciosdeportivos.DeporteDomain;
+import co.edu.uco.unidaddeportivaelbernabeu.business.domain.espaciosdeportivos.UnidadDeportivaDomain;
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.helpers.NumericHelper;
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.helpers.ObjectHelper;
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.helpers.TextHelper;

@@ -1,13 +1,15 @@
 package co.edu.uco.unidaddeportivaelbernabeu.business.assembler.entity.concrete;
 
 import co.edu.uco.unidaddeportivaelbernabeu.business.assembler.entity.EntityDomainAssembler;
-import co.edu.uco.unidaddeportivaelbernabeu.business.domain.DeporteDomain;
+import co.edu.uco.unidaddeportivaelbernabeu.business.assembler.entity.concrete.espaciosdeportivos.DeporteEntityDomainAssembler;
+import co.edu.uco.unidaddeportivaelbernabeu.business.assembler.entity.concrete.espaciosdeportivos.UnidadDeportivaEntityDomainAssembler;
+import co.edu.uco.unidaddeportivaelbernabeu.business.domain.espaciosdeportivos.DeporteDomain;
 import co.edu.uco.unidaddeportivaelbernabeu.business.domain.TipoEspacioDeportivoDomain;
-import co.edu.uco.unidaddeportivaelbernabeu.business.domain.UnidadDeportivaDomain;
+import co.edu.uco.unidaddeportivaelbernabeu.business.domain.espaciosdeportivos.UnidadDeportivaDomain;
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.helpers.ObjectHelper;
-import co.edu.uco.unidaddeportivaelbernabeu.entity.DeporteEntity;
+import co.edu.uco.unidaddeportivaelbernabeu.entity.espaciosdeportivos.DeporteEntity;
 import co.edu.uco.unidaddeportivaelbernabeu.entity.TipoEspacioDeportivoEntity;
-import co.edu.uco.unidaddeportivaelbernabeu.entity.UnidadDeportivaEntity;
+import co.edu.uco.unidaddeportivaelbernabeu.entity.espaciosdeportivos.UnidadDeportivaEntity;
 
 import java.util.ArrayList;
 import java.util.List;

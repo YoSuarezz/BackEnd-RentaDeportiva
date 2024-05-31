@@ -8,13 +8,13 @@ import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.custom.DataU
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.messagecatalog.MessageCatalogStrategy;
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.messagecatalog.data.CodigoMensaje;
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.helpers.SQLHelper;
-import co.edu.uco.unidaddeportivaelbernabeu.data.dao.DeporteDAO;
-import co.edu.uco.unidaddeportivaelbernabeu.data.dao.TipoEspacioDeportivoDAO;
-import co.edu.uco.unidaddeportivaelbernabeu.data.dao.UnidadDeportivaDAO;
+import co.edu.uco.unidaddeportivaelbernabeu.data.dao.espaciosdeportivos.DeporteDAO;
+import co.edu.uco.unidaddeportivaelbernabeu.data.dao.espaciosdeportivos.TipoEspacioDeportivoDAO;
+import co.edu.uco.unidaddeportivaelbernabeu.data.dao.espaciosdeportivos.UnidadDeportivaDAO;
 import co.edu.uco.unidaddeportivaelbernabeu.data.dao.factory.DAOFactory;
-import co.edu.uco.unidaddeportivaelbernabeu.data.dao.sql.azuresql.DeporteAzureSqlDAO;
-import co.edu.uco.unidaddeportivaelbernabeu.data.dao.sql.azuresql.TipoEspacioDeportivoAzureSqlDAO;
-import co.edu.uco.unidaddeportivaelbernabeu.data.dao.sql.azuresql.UnidadDeportivaAzureSqlDAO;
+import co.edu.uco.unidaddeportivaelbernabeu.data.dao.sql.azuresql.espaciosdeportivos.DeporteAzureSqlDAO;
+import co.edu.uco.unidaddeportivaelbernabeu.data.dao.sql.azuresql.espaciosdeportivos.TipoEspacioDeportivoAzureSqlDAO;
+import co.edu.uco.unidaddeportivaelbernabeu.data.dao.sql.azuresql.espaciosdeportivos.UnidadDeportivaAzureSqlDAO;
 
 public final class AzureSqlDAOFactory extends DAOFactory {
 

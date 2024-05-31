@@ -1,9 +1,7 @@
 package co.edu.uco.unidaddeportivaelbernabeu.business.fachade.concrete;
 
 import co.edu.uco.unidaddeportivaelbernabeu.business.assembler.dto.concrete.TipoEspacioDeportivoDTODomainAssembler;
-
-import co.edu.uco.unidaddeportivaelbernabeu.business.fachade.ConsultarTipoEspacioDeportivoFachada;
-import co.edu.uco.unidaddeportivaelbernabeu.business.usecase.ConsultarTipoEspacioDeportivo;
+import co.edu.uco.unidaddeportivaelbernabeu.business.fachade.FacadeWithReturn;
 import co.edu.uco.unidaddeportivaelbernabeu.business.usecase.concrete.ConsultarTipoEspacioDeportivoImpl;
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.UnidadDeportivaElBernabeuException;
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.custom.BusinessUDElBernabeuException;
@@ -15,7 +13,7 @@ import co.edu.uco.unidaddeportivaelbernabeu.dto.TipoEspacioDeportivoDTO;
 
 import java.util.List;
 
-public class ConsultarTipoEspacioDeportivoFachadaImpl implements ConsultarTipoEspacioDeportivoFachada {
+public class ConsultarTipoEspacioDeportivoFachadaImpl implements FacadeWithReturn<TipoEspacioDeportivoDTO, List<TipoEspacioDeportivoDTO>> {
 
     private final DAOFactory factory;
 
@@ -25,19 +23,19 @@ public class ConsultarTipoEspacioDeportivoFachadaImpl implements ConsultarTipoEs
     }
 
     @Override
-    public List<TipoEspacioDeportivoDTO> execute(TipoEspacioDeportivoDTO tipoEspacioDeportivo) {
+    public List<TipoEspacioDeportivoDTO> ejecutar(final TipoEspacioDeportivoDTO dto) {
+        factory.iniciarTransaccion();
         try {
-            var tipoEspacioDeportivoDomain = TipoEspacioDeportivoDTODomainAssembler.obtenerInstancia().ensamblarDominio(tipoEspacioDeportivo);
-
-            final ConsultarTipoEspacioDeportivo useCase = new ConsultarTipoEspacioDeportivoImpl(factory);
-            var resultados = useCase.ejecutar(tipoEspacioDeportivoDomain);
-            return TipoEspacioDeportivoDTODomainAssembler.obtenerInstancia()
-                    .ensamblarListaDTO(resultados);
-
+            var useCase = new ConsultarTipoEspacioDeportivoImpl(factory);
+            var tipoEspacioDeportivoDomain = TipoEspacioDeportivoDTODomainAssembler.obtenerInstancia().ensamblarDominio(dto);
+            var resultadosDomain = useCase.ejecutar(tipoEspacioDeportivoDomain);
+            return TipoEspacioDeportivoDTODomainAssembler.obtenerInstancia().ensamblarListaDTO(resultadosDomain);
 
         }catch (UnidadDeportivaElBernabeuException exception){
+            factory.cancelarTransaccion();
             throw exception;
         }catch (Exception exception){
+            factory.cancelarTransaccion();
             var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00046);
             var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00047);
 

@@ -3,7 +3,7 @@ package co.edu.uco.unidaddeportivaelbernabeu.api.controller;
 
 import co.edu.uco.unidaddeportivaelbernabeu.api.response.TipoEspacioDeportivoResponse;
 import co.edu.uco.unidaddeportivaelbernabeu.business.fachade.concrete.ConsultarTipoEspacioDeportivoFachadaImpl;
-import co.edu.uco.unidaddeportivaelbernabeu.business.fachade.concrete.RegistrarTipoEspacioDeportivoFachadaImpl;
+import co.edu.uco.unidaddeportivaelbernabeu.business.fachade.concrete.espaciosdeportivos.RegistrarTipoEspacioDeportivoFachadaImpl;
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.UnidadDeportivaElBernabeuException;
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.messagecatalog.MessageCatalogStrategy;
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.messagecatalog.data.CodigoMensaje;
@@ -59,7 +59,7 @@ public class TipoEspacioDeportivoController {
             var tipoEspacioDeportivoDTO = TipoEspacioDeportivoDTO.build();
             var facade = new ConsultarTipoEspacioDeportivoFachadaImpl();
 
-            tipoEspacioDeportivoResponse.setDatos(facade.execute(tipoEspacioDeportivoDTO));
+            tipoEspacioDeportivoResponse.setDatos(facade.ejecutar(tipoEspacioDeportivoDTO));
             tipoEspacioDeportivoResponse.getMensajes().add(MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00057));
 
         } catch (final UnidadDeportivaElBernabeuException excepcion) {

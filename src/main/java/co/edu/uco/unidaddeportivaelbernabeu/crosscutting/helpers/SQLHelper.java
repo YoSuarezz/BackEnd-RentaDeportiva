@@ -138,18 +138,11 @@ public final class SQLHelper {
             connection.setAutoCommit(false);
         }catch (final CrosscuttingUDElBernabeuException exception){
             throw exception;
-        } catch (final SQLException exception) {
-            var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00002);
-            var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00022);
-
-            throw new CrosscuttingUDElBernabeuException(mensajeTecnico, mensajeUsuario, exception);
-        }catch (final Exception exception) {
+        } catch (final Exception exception) {
             var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00002);
             var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00022);
 
             throw new CrosscuttingUDElBernabeuException(mensajeTecnico, mensajeUsuario, exception);
         }
     }
-
-
 }

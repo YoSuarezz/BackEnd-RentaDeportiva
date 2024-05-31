@@ -47,20 +47,10 @@ public final class MessageCatalogBase implements MessageCatalog {
 				"Se ha presentado un problema tratando de confirmar una transaccion SQL con la fuente de informacion deseada..."));
 		mensajes.put(CodigoMensaje.M00015.getIdentificador(), new Mensaje(CodigoMensaje.M00015,
 				"Se ha presentado un problema INESPERADO tratando de confirmar una transaccion SQL con la fuente de informacion deseada..."));
-		mensajes.put(CodigoMensaje.M00016.getIdentificador(), new Mensaje(CodigoMensaje.M00016,
-				"Se ha intentado confirmar una transaccion cuando el autocommit de la conexion con la base de datos estaba activado..."));
 		mensajes.put(CodigoMensaje.M00017.getIdentificador(), new Mensaje(CodigoMensaje.M00017,
 				"Se ha presentado un problema tratando de confirmar una transaccion SQL con la fuente de informacion deseada..."));
 		mensajes.put(CodigoMensaje.M00018.getIdentificador(), new Mensaje(CodigoMensaje.M00018,
 				"Se ha presentado un problema INESPERADO tratando de confirmar una transaccion SQL con la fuente de informacion deseada..."));
-		mensajes.put(CodigoMensaje.M00019.getIdentificador(), new Mensaje(CodigoMensaje.M00019,
-				"Se ha intentado confirmar una transaccion cuando el autocommit de la conexion con la base de datos estaba activado..."));
-		mensajes.put(CodigoMensaje.M00020.getIdentificador(), new Mensaje(CodigoMensaje.M00020,
-				"Se ha presentado un problema tratando de confirmar una transaccion SQL con la fuente de informacion deseada..."));
-		mensajes.put(CodigoMensaje.M00021.getIdentificador(), new Mensaje(CodigoMensaje.M00021,
-				"Se ha presentado un problema INESPERADO tratando de confirmar una transaccion SQL con la fuente de informacion deseada..."));
-		mensajes.put(CodigoMensaje.M00022.getIdentificador(), new Mensaje(CodigoMensaje.M00022,
-				"Se ha presentado un problema tratando de confirmar una transaccion SQL con la fuente de informacion deseada..."));
 		mensajes.put(CodigoMensaje.M00031.getIdentificador(), new Mensaje(CodigoMensaje.M00031,
 				"No ha sido posible llevar a cabo la consulta de la informacion de la unidad deportiva. Por favor intente de nuevo y en caso de pérsisitir el problema, comuniquese con el administrador de la Unidad Deportiva El Bernabeu..."));
 		mensajes.put(CodigoMensaje.M00032.getIdentificador(), new Mensaje(CodigoMensaje.M00032,

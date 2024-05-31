@@ -3,6 +3,8 @@ package co.edu.uco.unidaddeportivaelbernabeu.entity;
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.helpers.NumericHelper;
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.helpers.ObjectHelper;
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.helpers.TextHelper;
+import co.edu.uco.unidaddeportivaelbernabeu.entity.espaciosdeportivos.DeporteEntity;
+import co.edu.uco.unidaddeportivaelbernabeu.entity.espaciosdeportivos.UnidadDeportivaEntity;
 
 public class TipoEspacioDeportivoEntity {
 

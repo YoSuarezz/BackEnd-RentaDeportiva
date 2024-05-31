@@ -10,7 +10,7 @@ public class UnidadDeportivaElBernabeuException extends RuntimeException {
 	protected String mensajeUsuario;
 	protected Lugar lugar;
 
-	public UnidadDeportivaElBernabeuException(String mensajeTecnico, String mensajeUsuario, Lugar lugar, Throwable excepcionRaiz) {
+	public UnidadDeportivaElBernabeuException(final String mensajeTecnico, final String mensajeUsuario, final Lugar lugar,final Throwable excepcionRaiz) {
 		super(mensajeTecnico, excepcionRaiz);
 		setMensajeUsuario(mensajeUsuario);
 		setLugar(lugar);
