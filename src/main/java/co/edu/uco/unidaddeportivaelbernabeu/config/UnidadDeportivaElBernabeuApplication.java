@@ -9,7 +9,10 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @SpringBootApplication
-@ComponentScan(basePackages = "co.edu.uco.unidaddeportivaelbernabeu.api.controller")
+@ComponentScan(basePackages = {
+		"co.edu.uco.unidaddeportivaelbernabeu.api.controller",
+		"co.edu.uco.unidaddeportivaelbernabeu.service"
+})
 public class UnidadDeportivaElBernabeuApplication {
 
 	public static void main(String[] args) {
