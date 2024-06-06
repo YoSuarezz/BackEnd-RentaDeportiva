@@ -16,7 +16,7 @@ public class TipoEspacioDeportivoEntity {
     private String nombre;
 
     //Constructores
-    public   TipoEspacioDeportivoEntity(final int id,final UnidadDeportivaEntity unidadDeportiva
+    public TipoEspacioDeportivoEntity(final int id,final UnidadDeportivaEntity unidadDeportiva
             ,final DeporteEntity deporte,final String espacio,final int cantidad,final String nombre) {
         setId(id);
         setUnidadDeportiva(unidadDeportiva);

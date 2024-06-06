@@ -14,8 +14,7 @@ import co.edu.uco.unidaddeportivaelbernabeu.dto.espaciosdeportivos.UnidadDeporti
 import java.util.ArrayList;
 import java.util.List;
 
-public class TipoEspacioDeportivoDTODomainAssembler implements DTODomainAssembler <TipoEspacioDeportivoDomain, TipoEspacioDeportivoDTO>
-{
+public class TipoEspacioDeportivoDTODomainAssembler implements DTODomainAssembler <TipoEspacioDeportivoDomain, TipoEspacioDeportivoDTO> {
 
     private static final DTODomainAssembler<TipoEspacioDeportivoDomain, TipoEspacioDeportivoDTO> instancia = new TipoEspacioDeportivoDTODomainAssembler();
 
@@ -37,18 +36,26 @@ public class TipoEspacioDeportivoDTODomainAssembler implements DTODomainAssemble
         var unidadDeportivaDomain = unidadDeportivaAssembler.ensamblarDominio(tipoespacioDtoTmp.getUnidadDeportiva());
         var deporteDomain = deporteAssembler.ensamblarDominio(tipoespacioDtoTmp.getDeporte());
 
-        return TipoEspacioDeportivoDomain.crear(tipoespacioDtoTmp.getId(), unidadDeportivaDomain, deporteDomain, tipoespacioDtoTmp.getEspacio()
-                , tipoespacioDtoTmp.getCantidad(), tipoespacioDtoTmp.getNombre());
+        return TipoEspacioDeportivoDomain.crear(tipoespacioDtoTmp.getId(),
+                unidadDeportivaDomain,
+                deporteDomain,
+                tipoespacioDtoTmp.getEspacio(),
+                tipoespacioDtoTmp.getCantidad(),
+                tipoespacioDtoTmp.getNombre());
     }
 
     @Override
     public TipoEspacioDeportivoDTO ensamblarDTO(TipoEspacioDeportivoDomain dominio) {
-        var tipoespacioDomainTmp = ObjectHelper.getObjectHelper().getDefault(dominio, TipoEspacioDeportivoDomain.crear());
-        var unidadDeportivaDTO = unidadDeportivaAssembler.ensamblarDTO(tipoespacioDomainTmp.getUnidadDeportiva());
-        var deporteDTO = deporteAssembler.ensamblarDTO(tipoespacioDomainTmp.getDeporte());
-        return TipoEspacioDeportivoDTO.build().setId(tipoespacioDomainTmp.getId()).setUnidadDeportiva(unidadDeportivaDTO)
-                .setDeporte(deporteDTO).setEspacio(tipoespacioDomainTmp.getEspacio()).setCantidad(tipoespacioDomainTmp.getCantidad())
-                .setNombre(tipoespacioDomainTmp.getNombre());
+        var tipoEspacioDomainTmp = ObjectHelper.getObjectHelper().getDefault(dominio, TipoEspacioDeportivoDomain.crear());
+        var unidadDeportivaDTO = unidadDeportivaAssembler.ensamblarDTO(tipoEspacioDomainTmp.getUnidadDeportiva());
+        var deporteDTO = deporteAssembler.ensamblarDTO(tipoEspacioDomainTmp.getDeporte());
+
+        return TipoEspacioDeportivoDTO.build().setId(tipoEspacioDomainTmp.getId())
+                .setUnidadDeportiva(unidadDeportivaDTO)
+                .setDeporte(deporteDTO)
+                .setEspacio(tipoEspacioDomainTmp.getEspacio())
+                .setCantidad(tipoEspacioDomainTmp.getCantidad())
+                .setNombre(tipoEspacioDomainTmp.getNombre());
     }
 
     @Override

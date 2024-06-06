@@ -44,6 +44,8 @@ public class TipoEspacioDeportivoDomain {
         return new TipoEspacioDeportivoDomain();
     }
 
+
+
     public int getId() {
         return id;
     }
@@ -51,8 +53,6 @@ public class TipoEspacioDeportivoDomain {
     public void setId(int id) {
         this.id = id;
     }
-
-
 
 
     public void setUnidadDeportiva(UnidadDeportivaDomain unidadDeportiva) {

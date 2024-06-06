@@ -22,7 +22,7 @@ public class TipoEspacioDeportivoEntityDomainAssembler implements EntityDomainAs
 
     private static final EntityDomainAssembler<DeporteDomain, DeporteEntity> deporteAssembler = new DeporteEntityDomainAssembler();
 
-    private TipoEspacioDeportivoEntityDomainAssembler(){
+    public TipoEspacioDeportivoEntityDomainAssembler(){
         super();
     }
 
