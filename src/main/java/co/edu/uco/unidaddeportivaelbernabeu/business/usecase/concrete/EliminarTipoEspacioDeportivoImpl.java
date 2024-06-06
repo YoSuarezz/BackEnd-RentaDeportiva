@@ -30,8 +30,11 @@ public class EliminarTipoEspacioDeportivoImpl implements UseCaseWithoutReturn<In
     }
 
     private void validarDatos(Integer id) {
-        if (id == null || id <= 0) {
-            throw new BusinessUDElBernabeuException("El ID del tipo de espacio deportivo es obligatorio y debe ser un valor positivo mayor que cero.");
+        if (id == null ) {
+            throw new BusinessUDElBernabeuException("El ID del tipo de espacio deportivo es obligatorio");
+        }
+        if (id <= 0) {
+            throw new BusinessUDElBernabeuException("El ID del tipo de espacio deportivo debe ser un valor positivo mayor que cero.");
         }
     }
 }
