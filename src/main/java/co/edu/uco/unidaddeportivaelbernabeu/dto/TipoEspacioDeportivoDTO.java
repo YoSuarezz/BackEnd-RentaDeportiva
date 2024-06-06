@@ -16,7 +16,7 @@ public final class TipoEspacioDeportivoDTO {
     private String nombre;
 
 
-    public  TipoEspacioDeportivoDTO(final int id,final UnidadDeportivaDTO unidadDeportiva,final DeporteDTO deporte
+    public TipoEspacioDeportivoDTO(final int id,final UnidadDeportivaDTO unidadDeportiva,final DeporteDTO deporte
             ,final String espacio,final String nombre) {
         setId(id);
         setUnidadDeportiva(unidadDeportiva);
@@ -26,7 +26,7 @@ public final class TipoEspacioDeportivoDTO {
         setNombre(nombre);
     }
 
-    public  TipoEspacioDeportivoDTO() {
+    public TipoEspacioDeportivoDTO() {
         setEspacio(TextHelper.EMPTY);
         setCantidad(NumericHelper.ZERO);
         setNombre(TextHelper.EMPTY);

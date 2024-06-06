@@ -1,8 +1,8 @@
-package co.edu.uco.unidaddeportivaelbernabeu.business.fachade.concrete.espaciosdeportivos;
+package co.edu.uco.unidaddeportivaelbernabeu.business.fachade.concrete;
 
 import co.edu.uco.unidaddeportivaelbernabeu.business.assembler.dto.concrete.TipoEspacioDeportivoDTODomainAssembler;
 import co.edu.uco.unidaddeportivaelbernabeu.business.fachade.FacadeWithoutReturn;
-import co.edu.uco.unidaddeportivaelbernabeu.business.usecase.concrete.espaciosdeportivos.RegistrarTipoEspacioDeportivoImpl;
+import co.edu.uco.unidaddeportivaelbernabeu.business.usecase.concrete.RegistrarTipoEspacioDeportivoImpl;
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.UnidadDeportivaElBernabeuException;
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.custom.BusinessUDElBernabeuException;
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.messagecatalog.MessageCatalogStrategy;
@@ -18,6 +18,7 @@ public class RegistrarTipoEspacioDeportivoFachadaImpl implements FacadeWithoutRe
     public RegistrarTipoEspacioDeportivoFachadaImpl(){
         factory = DAOFactory.getFactory(Factory.AZURE_SQL);
     }
+
     @Override
     public void ejecutar(TipoEspacioDeportivoDTO tipoEspacioDeportivo) {
         factory.iniciarTransaccion();

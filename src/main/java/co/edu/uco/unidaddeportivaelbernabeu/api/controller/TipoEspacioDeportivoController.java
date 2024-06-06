@@ -3,8 +3,10 @@ package co.edu.uco.unidaddeportivaelbernabeu.api.controller;
 
 import co.edu.uco.unidaddeportivaelbernabeu.api.response.TipoEspacioDeportivoResponse;
 import co.edu.uco.unidaddeportivaelbernabeu.business.fachade.concrete.ConsultarTipoEspacioDeportivoFachadaImpl;
-import co.edu.uco.unidaddeportivaelbernabeu.business.fachade.concrete.espaciosdeportivos.RegistrarTipoEspacioDeportivoFachadaImpl;
+import co.edu.uco.unidaddeportivaelbernabeu.business.fachade.concrete.EliminarTipoEspacioDeportivoFachadaImpl;
+import co.edu.uco.unidaddeportivaelbernabeu.business.fachade.concrete.RegistrarTipoEspacioDeportivoFachadaImpl;
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.UnidadDeportivaElBernabeuException;
+import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.custom.BusinessUDElBernabeuException;
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.messagecatalog.MessageCatalogStrategy;
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.messagecatalog.data.CodigoMensaje;
 import co.edu.uco.unidaddeportivaelbernabeu.dto.TipoEspacioDeportivoDTO;
@@ -46,7 +48,6 @@ public class TipoEspacioDeportivoController {
         }
 
         return new ResponseEntity<>(tipoEspacioDeportivoResponse, httpStatusCode);
-
     }
 
     @GetMapping
@@ -79,9 +80,18 @@ public class TipoEspacioDeportivoController {
 
 
     }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> eliminar(@PathVariable int id) {
+        try {
+            EliminarTipoEspacioDeportivoFachadaImpl eliminarFachada = new EliminarTipoEspacioDeportivoFachadaImpl();
+            eliminarFachada.ejecutar(id);
+            return ResponseEntity.ok("Tipo de espacio deportivo eliminado correctamente.");
+        } catch (BusinessUDElBernabeuException e) {
+            // Captura la excepción cuando no se encuentra el tipo de espacio deportivo
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        } catch (Exception e) {
+            // Captura cualquier otra excepción no esperada
+            return ResponseEntity.internalServerError().body("Error interno del servidor: " + e.getMessage());
+        }
+    }
 }
-
-
-
-
-
