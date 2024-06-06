@@ -85,13 +85,33 @@ public class TipoEspacioDeportivoAzureSqlDAO implements TipoEspacioDeportivoDAO 
     @Override
     public List<TipoEspacioDeportivoEntity> consultar(TipoEspacioDeportivoEntity entidad) {
         List<TipoEspacioDeportivoEntity> resultados = new ArrayList<>();
-        String sql = "SELECT Id, UnidadDeportiva, Deporte, Espacio, Cantidad, Nombre FROM TipoEspacioDeportivo";
+        StringBuilder sql = new StringBuilder("SELECT Id, UnidadDeportiva, Deporte, Espacio, Cantidad, Nombre FROM TipoEspacioDeportivo");
+
+        boolean whereClauseAdded = false;
+        List<Object> parametros = new ArrayList<>();
+
+        // Filtrado por ID si está presente
         if (entidad.getId() > 0) {
-            sql += " WHERE Id = ?";
+            sql.append(" WHERE Id = ?");
+            parametros.add(entidad.getId());
+            whereClauseAdded = true;
         }
-        try (PreparedStatement statement = connection.prepareStatement(sql)) {
-            if (entidad.getId() > 0) {
-                statement.setInt(1, entidad.getId());
+
+        // Filtrado por nombre para evitar duplicados por nombre
+        if (entidad.getNombre() != null && !entidad.getNombre().isEmpty()) {
+            if (whereClauseAdded) {
+                sql.append(" AND");
+            } else {
+                sql.append(" WHERE");
+            }
+            sql.append(" Nombre = ?");
+            parametros.add(entidad.getNombre().trim());
+        }
+
+        try (PreparedStatement statement = connection.prepareStatement(sql.toString())) {
+            int index = 1;
+            for (Object param : parametros) {
+                statement.setObject(index++, param);
             }
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
@@ -116,13 +136,12 @@ public class TipoEspacioDeportivoAzureSqlDAO implements TipoEspacioDeportivoDAO 
                 resultados.add(tipoEspacioDeportivo);
             }
         } catch (SQLException exception) {
-            var mensajeUsuario = "Error al consultar tipos de espacio deportivo por ID";
+            var mensajeUsuario = "Error al consultar tipos de espacio deportivo por nombre";
             var mensajeTecnico = "Se ha presentado un problema consultando los datos de los tipos de espacios deportivos.";
             throw new DataUDElBernabeuException(mensajeTecnico, mensajeUsuario, exception);
         }
         return resultados;
     }
-
 
     private UnidadDeportivaEntity obtenerUnidadDeportiva(int unidadDeportivaId) {
         UnidadDeportivaDAO unidadDeportivaDAO = DAOFactory.getFactory(Factory.AZURE_SQL).getUnidadDeportivaDAO();
