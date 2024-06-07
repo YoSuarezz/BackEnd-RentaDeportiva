@@ -31,6 +31,10 @@ public class CrearTarifaEstandarImpl implements UseCaseWithoutReturn<TarifaEstan
             throw new BusinessUDElBernabeuException(mensajeUsuario);
         }
 
+        if (!existeTipoEspacioDeportivo(tarifaEstandarEntity.getTipoEspacioDeportivo().getId())) {
+            throw new BusinessUDElBernabeuException("El tipo de espacio deportivo seleccionado no existe.");
+        }
+
         factory.getTarifaEstandarDAO().crear(tarifaEstandarEntity);
     }
 
@@ -59,6 +63,14 @@ public class CrearTarifaEstandarImpl implements UseCaseWithoutReturn<TarifaEstan
             var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00090);
             throw new BusinessUDElBernabeuException(mensajeUsuario);
         }
+    }
+
+    private boolean existeTipoEspacioDeportivo(int tipoEspacioDeportivoId) {
+        var tipoEspacioDeportivoDAO = factory.getTipoEspacioDeportivoDAO();
+        var criterio = TipoEspacioDeportivoEntity.build(tipoEspacioDeportivoId);
+        List<TipoEspacioDeportivoEntity> tiposEspacio = tipoEspacioDeportivoDAO.consultar(criterio);
+
+        return !tiposEspacio.isEmpty();
     }
 
     private boolean existeTarifaParaDeporte(int tipoEspacioDeportivoId) {

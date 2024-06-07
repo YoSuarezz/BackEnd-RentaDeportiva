@@ -18,7 +18,7 @@ public class TipoEspacioDeportivoEntityDomainAssembler implements EntityDomainAs
 
     private static final EntityDomainAssembler<TipoEspacioDeportivoDomain, TipoEspacioDeportivoEntity> instancia = new TipoEspacioDeportivoEntityDomainAssembler();
 
-    private static final EntityDomainAssembler<UnidadDeportivaDomain, UnidadDeportivaEntity> unidadDeportivaAssembler = new UnidadDeportivaEntityDomainAssembler().obtenerInstancia();
+    private static final EntityDomainAssembler<UnidadDeportivaDomain, UnidadDeportivaEntity> unidadDeportivaAssembler = UnidadDeportivaEntityDomainAssembler.obtenerInstancia();
 
     private static final EntityDomainAssembler<DeporteDomain, DeporteEntity> deporteAssembler = new DeporteEntityDomainAssembler();
 

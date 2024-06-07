@@ -8,7 +8,6 @@ import co.edu.uco.unidaddeportivaelbernabeu.dto.TipoEspacioDeportivoDTO;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 public class TarifaEstandarDTO {
 

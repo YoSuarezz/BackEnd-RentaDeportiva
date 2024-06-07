@@ -7,7 +7,6 @@ import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.messagecatal
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import static java.util.Objects.isNull;
 
 public final class SQLHelper {
 
@@ -15,7 +14,7 @@ public final class SQLHelper {
         super();
     }
 
-    public static final boolean IsNull(final Connection connection){
+    public static final boolean isNull(final Connection connection){
         return ObjectHelper.getObjectHelper().isNull(connection);
     }
 
@@ -60,7 +59,6 @@ public final class SQLHelper {
         }
     }
 
-
     public static final void commit(final Connection connection){
         try {
             if (!isOpen(connection)) {
@@ -92,7 +90,6 @@ public final class SQLHelper {
             throw new CrosscuttingUDElBernabeuException(mensajeTecnico, mensajeUsuario, exception);
         }
     }
-
 
     public static final void rollback(final Connection connection){
         try {

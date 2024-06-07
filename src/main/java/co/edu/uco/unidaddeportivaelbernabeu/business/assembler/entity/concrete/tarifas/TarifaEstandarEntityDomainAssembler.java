@@ -2,7 +2,6 @@ package co.edu.uco.unidaddeportivaelbernabeu.business.assembler.entity.concrete.
 
 import co.edu.uco.unidaddeportivaelbernabeu.business.assembler.entity.EntityDomainAssembler;
 import co.edu.uco.unidaddeportivaelbernabeu.business.assembler.entity.concrete.TipoEspacioDeportivoEntityDomainAssembler;
-import co.edu.uco.unidaddeportivaelbernabeu.business.assembler.entity.concrete.espaciosdeportivos.UnidadDeportivaEntityDomainAssembler;
 import co.edu.uco.unidaddeportivaelbernabeu.business.domain.TipoEspacioDeportivoDomain;
 import co.edu.uco.unidaddeportivaelbernabeu.business.domain.tarifas.TarifaEstandarDomain;
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.helpers.ObjectHelper;
@@ -16,7 +15,7 @@ public class TarifaEstandarEntityDomainAssembler implements EntityDomainAssemble
 
     private static final EntityDomainAssembler<TarifaEstandarDomain, TarifaEstandarEntity> instancia = new TarifaEstandarEntityDomainAssembler();
 
-    private static final EntityDomainAssembler<TipoEspacioDeportivoDomain, TipoEspacioDeportivoEntity> tipoEspacioDeportivoAssembler = new TipoEspacioDeportivoEntityDomainAssembler().obtenerInstancia();
+    private static final EntityDomainAssembler<TipoEspacioDeportivoDomain, TipoEspacioDeportivoEntity> tipoEspacioDeportivoAssembler = TipoEspacioDeportivoEntityDomainAssembler.obtenerInstancia();
 
     private TarifaEstandarEntityDomainAssembler(){
         super();
@@ -53,14 +52,14 @@ public class TarifaEstandarEntityDomainAssembler implements EntityDomainAssemble
 
     @Override
     public List<TarifaEstandarDomain> ensamblarListaDominios(List<TarifaEstandarEntity> listaEntidades) {
-       var listaEntidadesTmp = ObjectHelper.getObjectHelper()
-               .getDefault(listaEntidades, new ArrayList<TarifaEstandarEntity>());
-       var resultados = new ArrayList<TarifaEstandarDomain>();
+        var listaEntidadesTmp = ObjectHelper.getObjectHelper()
+                .getDefault(listaEntidades, new ArrayList<TarifaEstandarEntity>());
+        var resultados = new ArrayList<TarifaEstandarDomain>();
 
-       for (TarifaEstandarEntity tarifaEstandarEntity : listaEntidadesTmp) {
-           var tipoEspacioDeportivoTmp = ensamblarDominio(tarifaEstandarEntity);
-           resultados.add(tipoEspacioDeportivoTmp);
-       }
-       return resultados;
+        for (TarifaEstandarEntity tarifaEstandarEntity : listaEntidadesTmp) {
+            var tipoEspacioDeportivoTmp = ensamblarDominio(tarifaEstandarEntity);
+            resultados.add(tipoEspacioDeportivoTmp);
+        }
+        return resultados;
     }
 }

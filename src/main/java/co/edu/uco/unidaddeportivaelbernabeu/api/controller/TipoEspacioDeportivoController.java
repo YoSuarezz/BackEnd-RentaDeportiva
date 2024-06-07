@@ -101,7 +101,7 @@ public class TipoEspacioDeportivoController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> eliminar(@PathVariable int id) {
+    public ResponseEntity<String> eliminar(@PathVariable int id) {
         try {
             EliminarTipoEspacioDeportivoFachadaImpl eliminarFachada = new EliminarTipoEspacioDeportivoFachadaImpl();
             eliminarFachada.ejecutar(id);
