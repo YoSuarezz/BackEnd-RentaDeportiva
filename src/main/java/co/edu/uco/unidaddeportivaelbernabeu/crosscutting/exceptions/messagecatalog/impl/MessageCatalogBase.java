@@ -170,6 +170,16 @@ public final class MessageCatalogBase implements MessageCatalog {
 				"Tipo de espacio deportivo eliminado correctamente."));
 		mensajes.put(CodigoMensaje.M00098.getIdentificador(), new Mensaje(CodigoMensaje.M00098,
 				"Se creó correctamente la tarifa estándar para el espacio deportivo."));
+		mensajes.put(CodigoMensaje.M00099.getIdentificador(), new Mensaje(CodigoMensaje.M00099,
+				"Se ha presentado un problema INESPERADO tratando de ingresar los datos de la tarifa estándar a la base de datos."));
+		mensajes.put(CodigoMensaje.M00100.getIdentificador(), new Mensaje(CodigoMensaje.M00100,
+				"Se ha presentado un problema INESPERADO tratando de consultar las tarifas estándar en la base de datos."));
+		mensajes.put(CodigoMensaje.M00101.getIdentificador(), new Mensaje(CodigoMensaje.M00101,
+				"El tipo de espacio deportivo seleccionado no existe."));
+		mensajes.put(CodigoMensaje.M00102.getIdentificador(), new Mensaje(CodigoMensaje.M00102,
+				"se ha presentado un problema tratando de eliminar el tipo de espacio de deportivo"));
+		mensajes.put(CodigoMensaje.M00103.getIdentificador(), new Mensaje(CodigoMensaje.M00103,
+				"Se ha presentado un problema inesperado tratando de eliminar el tipo de espacio de deportivo"));
 
 
 

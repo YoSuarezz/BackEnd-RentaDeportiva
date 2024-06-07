@@ -1,6 +1,8 @@
 package co.edu.uco.unidaddeportivaelbernabeu.data.dao.sql.azuresql.tarifas;
 
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.custom.DataUDElBernabeuException;
+import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.messagecatalog.MessageCatalogStrategy;
+import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.messagecatalog.data.CodigoMensaje;
 import co.edu.uco.unidaddeportivaelbernabeu.data.dao.tarifas.TarifaEstandarDAO;
 import co.edu.uco.unidaddeportivaelbernabeu.entity.TipoEspacioDeportivoEntity;
 import co.edu.uco.unidaddeportivaelbernabeu.entity.tarifas.TarifaEstandarEntity;
@@ -30,8 +32,8 @@ public class TarifaEstandarAzureSqlDAO implements TarifaEstandarDAO {
 
             statement.executeUpdate();
         } catch (SQLException exception) {
-            var mensajeUsuario = "Se ha presentado un problema intentando hacer la operación deseada.";
-            var mensajeTecnico = "Se ha presentado un problema INESPERADO tratando de ingresar los datos de la tarifa estándar a la base de datos.";
+            var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00002);
+            var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00099);
 
             throw new DataUDElBernabeuException(mensajeTecnico, mensajeUsuario, exception);
         }
@@ -58,8 +60,8 @@ public class TarifaEstandarAzureSqlDAO implements TarifaEstandarDAO {
                 return tarifas;
             }
         } catch (SQLException exception) {
-            var mensajeUsuario = "Se ha presentado un problema intentando hacer la operación deseada.";
-            var mensajeTecnico = "Se ha presentado un problema INESPERADO tratando de consultar las tarifas estándar en la base de datos.";
+            var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00002);
+            var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00100);
 
             throw new DataUDElBernabeuException(mensajeTecnico, mensajeUsuario, exception);
         }

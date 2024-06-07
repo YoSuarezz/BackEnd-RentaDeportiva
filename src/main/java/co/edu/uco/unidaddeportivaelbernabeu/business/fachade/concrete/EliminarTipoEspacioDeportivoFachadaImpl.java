@@ -32,8 +32,8 @@ public class EliminarTipoEspacioDeportivoFachadaImpl implements FacadeWithoutRet
         } catch (final Exception exception) {
             factory.cancelarTransaccion();
 
-            var mensajeUsuario = "se ha presentado un problema tratando de eliminar el tipo de espacio de deportivo";
-            var mensajeTecnico = "Se ha presentado un problema inesperado tratando de eliminar el tipo de espacio de deportivo";
+            var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00102);
+            var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00103);
 
             throw new BusinessUDElBernabeuException(mensajeTecnico, mensajeUsuario, exception);
 

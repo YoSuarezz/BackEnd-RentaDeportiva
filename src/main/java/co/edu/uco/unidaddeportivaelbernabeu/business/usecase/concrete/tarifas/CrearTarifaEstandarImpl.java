@@ -32,7 +32,8 @@ public class CrearTarifaEstandarImpl implements UseCaseWithoutReturn<TarifaEstan
         }
 
         if (!existeTipoEspacioDeportivo(tarifaEstandarEntity.getTipoEspacioDeportivo().getId())) {
-            throw new BusinessUDElBernabeuException("El tipo de espacio deportivo seleccionado no existe.");
+            var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00101);
+            throw new BusinessUDElBernabeuException(mensajeUsuario);
         }
 
         factory.getTarifaEstandarDAO().crear(tarifaEstandarEntity);
