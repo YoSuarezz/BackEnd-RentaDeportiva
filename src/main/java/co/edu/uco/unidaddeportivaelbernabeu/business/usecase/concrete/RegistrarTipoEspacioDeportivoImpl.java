@@ -7,6 +7,7 @@ import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.custom.Busin
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.messagecatalog.MessageCatalogStrategy;
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.messagecatalog.data.CodigoMensaje;
 import co.edu.uco.unidaddeportivaelbernabeu.data.dao.factory.DAOFactory;
+import co.edu.uco.unidaddeportivaelbernabeu.entity.espaciosdeportivos.DeporteEntity;
 import co.edu.uco.unidaddeportivaelbernabeu.entity.TipoEspacioDeportivoEntity;
 
 public class RegistrarTipoEspacioDeportivoImpl implements UseCaseWithoutReturn<TipoEspacioDeportivoDomain> {
@@ -25,6 +26,11 @@ public class RegistrarTipoEspacioDeportivoImpl implements UseCaseWithoutReturn<T
 
         if (existeEspacioDeportivo(tipoEspacioDeportivoEntity)) {
             var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00070);
+            throw new BusinessUDElBernabeuException(mensajeUsuario);
+        }
+
+        if (!existeDeporte(tipoEspacioDeportivoEntity.getDeporte().getId())) {
+            var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00105);
             throw new BusinessUDElBernabeuException(mensajeUsuario);
         }
 
@@ -56,6 +62,13 @@ public class RegistrarTipoEspacioDeportivoImpl implements UseCaseWithoutReturn<T
 
     private boolean existeEspacioDeportivo(TipoEspacioDeportivoEntity tipoEspacioDeportivoEntity) {
         var resultado = factory.getTipoEspacioDeportivoDAO().consultar(tipoEspacioDeportivoEntity);
+        return !resultado.isEmpty();
+    }
+
+    private boolean existeDeporte(int deporteId) {
+        var deporteDAO = factory.getDeporteDAO();
+        var deporte = DeporteEntity.build(deporteId);
+        var resultado = deporteDAO.consultar(deporte);
         return !resultado.isEmpty();
     }
 }

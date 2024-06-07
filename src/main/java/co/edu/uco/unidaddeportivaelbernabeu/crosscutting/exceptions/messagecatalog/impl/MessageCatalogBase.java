@@ -182,11 +182,8 @@ public final class MessageCatalogBase implements MessageCatalog {
 				"Se ha presentado un problema inesperado tratando de eliminar el tipo de espacio de deportivo"));
 		mensajes.put(CodigoMensaje.M00104.getIdentificador(), new Mensaje(CodigoMensaje.M00104,
 				"El nombre de la tarifa estandar no puede exceder los 35 caracteres, por favor intente nuevamente con un nombre valido"));
-
-
-
-
-
+		mensajes.put(CodigoMensaje.M00105.getIdentificador(), new Mensaje(CodigoMensaje.M00105,
+				"No existe el deporte con el cual se esperaba crear el tipo de espacio deportivo"));
 	}
 	@Override
 	public final String obtenerContenidoMensaje(final CodigoMensaje codigo, final String... parametros) {
