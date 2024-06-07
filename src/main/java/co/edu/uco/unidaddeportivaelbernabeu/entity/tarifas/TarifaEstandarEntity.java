@@ -40,6 +40,10 @@ public class TarifaEstandarEntity {
         setNombre(nombre);
     }
 
+    public static final TarifaEstandarEntity build(final int id) {
+        return new TarifaEstandarEntity(id);
+    }
+
     public int getId() {
         return id;
     }

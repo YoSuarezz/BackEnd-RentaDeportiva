@@ -66,4 +66,55 @@ public class TarifaEstandarAzureSqlDAO implements TarifaEstandarDAO {
             throw new DataUDElBernabeuException(mensajeTecnico, mensajeUsuario, exception);
         }
     }
+
+    @Override
+    public void actualizar(TarifaEstandarEntity entidad) {
+        final String sql = "UPDATE TarifaEstandar SET tipoEspacioDeportivoId = ?, precioPorHora = ?, nombre = ?, fechaHoraInicio = ?, fechaHoraFin = ? WHERE id = ?";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, entidad.getTipoEspacioDeportivo().getId());
+            statement.setInt(2, entidad.getPrecioPorHora());
+            statement.setString(3, entidad.getNombre());
+            statement.setTimestamp(4, Timestamp.valueOf(entidad.getFechaHoraInicio().withSecond(0).withNano(0)));
+            statement.setTimestamp(5, Timestamp.valueOf(entidad.getFechaHoraFin().withSecond(0).withNano(0)));
+            statement.setInt(6, entidad.getId());
+
+            int rowsAffected = statement.executeUpdate();
+            if (rowsAffected == 0) {
+                throw new DataUDElBernabeuException("No se encontró la tarifa estándar con el ID especificado.");
+            }
+        } catch (SQLException exception) {
+            var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00002);
+            var mensajeTecnico = "Se ha presentado un problema INESPERADO tratando de actualizar las tarifas estándar en la base de datos.";
+
+            throw new DataUDElBernabeuException(mensajeTecnico, mensajeUsuario, exception);
+        }
+    }
+    @Override
+    public List<TarifaEstandarEntity> consultar(TarifaEstandarEntity entidad) {
+        final String sql = "SELECT id, tipoEspacioDeportivoId, nombre, precioPorHora, fechaHoraInicio, fechaHoraFin FROM TarifaEstandar WHERE id = ?";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, entidad.getId());
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                List<TarifaEstandarEntity> tarifas = new ArrayList<>();
+                while (resultSet.next()) {
+                    tarifas.add(TarifaEstandarEntity.build(
+                            resultSet.getInt("id"),
+                            TipoEspacioDeportivoEntity.build(resultSet.getInt("tipoEspacioDeportivoId")),
+                            resultSet.getString("nombre"),
+                            resultSet.getInt("precioPorHora"),
+                            resultSet.getTimestamp("fechaHoraInicio").toLocalDateTime(),
+                            resultSet.getTimestamp("fechaHoraFin").toLocalDateTime()
+                    ));
+                }
+                return tarifas;
+            }
+        } catch (SQLException exception) {
+            var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00002);
+            var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00100);
+
+            throw new DataUDElBernabeuException(mensajeTecnico, mensajeUsuario, exception);
+        }
+    }
 }
+
