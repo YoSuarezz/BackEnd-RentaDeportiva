@@ -3,16 +3,16 @@ package co.edu.uco.unidaddeportivaelbernabeu.dto;
 public class UsuarioIngresoDTO {
 
     private String usuario;
-    private String contrasena;
+    private String contraseña;
 
     // Constructor vacío
     public UsuarioIngresoDTO() {
     }
 
     // Constructor con todos los parámetros
-    public UsuarioIngresoDTO(String usuario, String contrasena) {
+    public UsuarioIngresoDTO(String usuario, String contraseña) {
         this.usuario = usuario;
-        this.contrasena = contrasena;
+        this.contraseña = contraseña;
     }
 
     // Getters y Setters
@@ -24,19 +24,19 @@ public class UsuarioIngresoDTO {
         this.usuario = usuario;
     }
 
-    public String getContrasena() {
-        return contrasena;
+    public String getContraseña() {
+        return contraseña;
     }
 
-    public void setContrasena(String contrasena) {
-        this.contrasena = contrasena;
+    public void setContraseña(String contraseña) {
+        this.contraseña = contraseña;
     }
 
     @Override
     public String toString() {
         return "UsuarioIngresoDTO{" +
                 "usuario='" + usuario + '\'' +
-                ", contrasena='[PROTECTED]'" +
+                ", contraseña='[PROTECTED]'" +
                 '}';
     }
 }
