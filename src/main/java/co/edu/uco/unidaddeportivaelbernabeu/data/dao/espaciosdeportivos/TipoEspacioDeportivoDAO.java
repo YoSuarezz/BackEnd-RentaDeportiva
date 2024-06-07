@@ -7,7 +7,5 @@ import co.edu.uco.unidaddeportivaelbernabeu.data.dao.general.EliminarDAO;
 import co.edu.uco.unidaddeportivaelbernabeu.entity.TipoEspacioDeportivoEntity;
 
 public interface TipoEspacioDeportivoDAO extends CrearDAO<TipoEspacioDeportivoEntity>, ActualizarDAO<TipoEspacioDeportivoEntity>,
-        EliminarDAO, ConsultarDAO<TipoEspacioDeportivoEntity> {
-
-
+        EliminarDAO, ConsultarDAO<TipoEspacioDeportivoEntity>{
 }

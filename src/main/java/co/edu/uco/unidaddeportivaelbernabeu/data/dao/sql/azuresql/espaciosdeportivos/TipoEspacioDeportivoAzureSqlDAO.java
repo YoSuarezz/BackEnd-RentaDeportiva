@@ -3,6 +3,7 @@ package co.edu.uco.unidaddeportivaelbernabeu.data.dao.sql.azuresql.espaciosdepor
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.custom.DataUDElBernabeuException;
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.messagecatalog.MessageCatalogStrategy;
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.messagecatalog.data.CodigoMensaje;
+import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.helpers.NumericHelper;
 import co.edu.uco.unidaddeportivaelbernabeu.data.dao.espaciosdeportivos.DeporteDAO;
 import co.edu.uco.unidaddeportivaelbernabeu.data.dao.espaciosdeportivos.TipoEspacioDeportivoDAO;
 import co.edu.uco.unidaddeportivaelbernabeu.data.dao.espaciosdeportivos.UnidadDeportivaDAO;
@@ -136,7 +137,7 @@ public class TipoEspacioDeportivoAzureSqlDAO implements TipoEspacioDeportivoDAO 
                 resultados.add(tipoEspacioDeportivo);
             }
         } catch (SQLException exception) {
-            var mensajeUsuario = "Error al consultar tipos de espacio deportivo por nombre";
+            var mensajeUsuario = "Error al consultar tipos de espacio deportivo";
             var mensajeTecnico = "Se ha presentado un problema consultando los datos de los tipos de espacios deportivos.";
             throw new DataUDElBernabeuException(mensajeTecnico, mensajeUsuario, exception);
         }
@@ -148,7 +149,7 @@ public class TipoEspacioDeportivoAzureSqlDAO implements TipoEspacioDeportivoDAO 
         UnidadDeportivaEntity criterio = UnidadDeportivaEntity.build(unidadDeportivaId);
         List<UnidadDeportivaEntity> unidadesDeportivas = unidadDeportivaDAO.consultar(criterio);
         if (!unidadesDeportivas.isEmpty()) {
-            return unidadesDeportivas.get(0);
+            return unidadesDeportivas.get(NumericHelper.ZERO);
         }
         return null;
     }
@@ -158,7 +159,7 @@ public class TipoEspacioDeportivoAzureSqlDAO implements TipoEspacioDeportivoDAO 
         DeporteEntity criterio = DeporteEntity.build(deporteId);
         List<DeporteEntity> deportes = deporteDAO.consultar(criterio);
         if (!deportes.isEmpty()) {
-            return deportes.get(0);
+            return deportes.get(NumericHelper.ZERO);
         }
         return null;
     }

@@ -1,10 +1,10 @@
 package co.edu.uco.unidaddeportivaelbernabeu.api.controller;
 
-
 import co.edu.uco.unidaddeportivaelbernabeu.api.response.TipoEspacioDeportivoResponse;
 import co.edu.uco.unidaddeportivaelbernabeu.business.fachade.concrete.ConsultarTipoEspacioDeportivoFachadaImpl;
 import co.edu.uco.unidaddeportivaelbernabeu.business.fachade.concrete.EliminarTipoEspacioDeportivoFachadaImpl;
 import co.edu.uco.unidaddeportivaelbernabeu.business.fachade.concrete.RegistrarTipoEspacioDeportivoFachadaImpl;
+import co.edu.uco.unidaddeportivaelbernabeu.business.fachade.concrete.ActualizarTipoEspacioDeportivoFachadaImpl;
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.UnidadDeportivaElBernabeuException;
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.custom.BusinessUDElBernabeuException;
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.messagecatalog.MessageCatalogStrategy;
@@ -25,7 +25,6 @@ public class TipoEspacioDeportivoController {
 
     @PostMapping
     public ResponseEntity<TipoEspacioDeportivoResponse> crear(@RequestBody TipoEspacioDeportivoDTO tipoEspacioDeportivo) {
-
         var httpStatusCode = HttpStatus.ACCEPTED;
         var tipoEspacioDeportivoResponse = TipoEspacioDeportivoResponse.build();
 
@@ -33,17 +32,37 @@ public class TipoEspacioDeportivoController {
             var facade = new RegistrarTipoEspacioDeportivoFachadaImpl();
             facade.ejecutar(tipoEspacioDeportivo);
             tipoEspacioDeportivoResponse.getMensajes().add(MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00056));
-
         } catch (final UnidadDeportivaElBernabeuException excepcion) {
             httpStatusCode = HttpStatus.BAD_REQUEST;
             tipoEspacioDeportivoResponse.getMensajes().add(excepcion.getMensajeUsuario());
             excepcion.printStackTrace();
         } catch (final Exception excepcion) {
             httpStatusCode = HttpStatus.INTERNAL_SERVER_ERROR;
-
             var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00054);
             tipoEspacioDeportivoResponse.getMensajes().add(mensajeUsuario);
+            excepcion.printStackTrace();
+        }
 
+        return new ResponseEntity<>(tipoEspacioDeportivoResponse, httpStatusCode);
+    }
+
+    @PutMapping
+    public ResponseEntity<TipoEspacioDeportivoResponse> actualizar(@RequestBody TipoEspacioDeportivoDTO tipoEspacioDeportivo) {
+        var httpStatusCode = HttpStatus.ACCEPTED;
+        var tipoEspacioDeportivoResponse = TipoEspacioDeportivoResponse.build();
+
+        try {
+            var facade = new ActualizarTipoEspacioDeportivoFachadaImpl();
+            facade.ejecutar(tipoEspacioDeportivo);
+            tipoEspacioDeportivoResponse.getMensajes().add("Tipo de espacio deportivo actualizado correctamente.");
+        } catch (final UnidadDeportivaElBernabeuException excepcion) {
+            httpStatusCode = HttpStatus.BAD_REQUEST;
+            tipoEspacioDeportivoResponse.getMensajes().add(excepcion.getMensajeUsuario());
+            excepcion.printStackTrace();
+        } catch (final Exception excepcion) {
+            httpStatusCode = HttpStatus.INTERNAL_SERVER_ERROR;
+            var mensajeUsuario = "Se ha presentado un error inesperado.";
+            tipoEspacioDeportivoResponse.getMensajes().add(mensajeUsuario);
             excepcion.printStackTrace();
         }
 
@@ -51,35 +70,36 @@ public class TipoEspacioDeportivoController {
     }
 
     @GetMapping
-    public ResponseEntity<TipoEspacioDeportivoResponse> consultar() {
-
+    public ResponseEntity<TipoEspacioDeportivoResponse> consultar(@RequestParam(required = false) Integer id) {
         var httpStatusCode = HttpStatus.ACCEPTED;
         var tipoEspacioDeportivoResponse = new TipoEspacioDeportivoResponse();
 
         try {
-            var tipoEspacioDeportivoDTO = TipoEspacioDeportivoDTO.build();
-            var facade = new ConsultarTipoEspacioDeportivoFachadaImpl();
+            TipoEspacioDeportivoDTO tipoEspacioDeportivoDTO;
 
+            if (id != null) {
+                tipoEspacioDeportivoDTO = TipoEspacioDeportivoDTO.build().setId(id);
+            } else {
+                tipoEspacioDeportivoDTO = TipoEspacioDeportivoDTO.build();
+            }
+
+            var facade = new ConsultarTipoEspacioDeportivoFachadaImpl();
             tipoEspacioDeportivoResponse.setDatos(facade.ejecutar(tipoEspacioDeportivoDTO));
             tipoEspacioDeportivoResponse.getMensajes().add(MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00057));
-
         } catch (final UnidadDeportivaElBernabeuException excepcion) {
             httpStatusCode = HttpStatus.BAD_REQUEST;
             tipoEspacioDeportivoResponse.getMensajes().add(excepcion.getMensajeUsuario());
             excepcion.printStackTrace();
         } catch (final Exception excepcion) {
             httpStatusCode = HttpStatus.INTERNAL_SERVER_ERROR;
-
             var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00025);
             tipoEspacioDeportivoResponse.getMensajes().add(mensajeUsuario);
-
             excepcion.printStackTrace();
         }
 
         return new ResponseEntity<>(tipoEspacioDeportivoResponse, httpStatusCode);
-
-
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<?> eliminar(@PathVariable int id) {
         try {
@@ -87,10 +107,8 @@ public class TipoEspacioDeportivoController {
             eliminarFachada.ejecutar(id);
             return ResponseEntity.ok("Tipo de espacio deportivo eliminado correctamente.");
         } catch (BusinessUDElBernabeuException e) {
-            // Captura la excepción cuando no se encuentra el tipo de espacio deportivo
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         } catch (Exception e) {
-            // Captura cualquier otra excepción no esperada
             return ResponseEntity.internalServerError().body("Error interno del servidor: " + e.getMessage());
         }
     }

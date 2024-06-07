@@ -17,7 +17,6 @@ public class ConsultarTipoEspacioDeportivoFachadaImpl implements FacadeWithRetur
 
     private final DAOFactory factory;
 
-
     public ConsultarTipoEspacioDeportivoFachadaImpl() {
         factory = DAOFactory.getFactory(Factory.AZURE_SQL);
     }
@@ -31,16 +30,16 @@ public class ConsultarTipoEspacioDeportivoFachadaImpl implements FacadeWithRetur
             var resultadosDomain = useCase.ejecutar(tipoEspacioDeportivoDomain);
             return TipoEspacioDeportivoDTODomainAssembler.obtenerInstancia().ensamblarListaDTO(resultadosDomain);
 
-        }catch (UnidadDeportivaElBernabeuException exception){
+        } catch (UnidadDeportivaElBernabeuException exception) {
             factory.cancelarTransaccion();
             throw exception;
-        }catch (Exception exception){
+        } catch (Exception exception) {
             factory.cancelarTransaccion();
             var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00046);
             var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00047);
 
             throw new BusinessUDElBernabeuException(mensajeTecnico, mensajeUsuario);
-        }finally {
+        } finally {
             factory.cerrarConexion();
         }
     }
