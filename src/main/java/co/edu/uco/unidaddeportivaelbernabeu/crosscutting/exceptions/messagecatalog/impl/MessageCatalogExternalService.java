@@ -43,6 +43,17 @@ public final class MessageCatalogExternalService implements MessageCatalog {
 				"No ha sido posible consultar la información de los deportes. Por favor, inténtelo de nuevo o comuníquese con el administrador de la Unidad Deportiva El Bernabeu..."));
 		mensajes.put(CodigoMensaje.M00039.getIdentificador(), new Mensaje(CodigoMensaje.M00039,
 				"No ha sido posible llevar a cabo la consulta de la informacion de los deportes. Por favor intente de nuevo y en caso de pérsisitir el problema, comuniquese con el administrador de la Unidad Deportiva El Bernabeu..."));
+		mensajes.put(CodigoMensaje.M00063.getIdentificador(), new Mensaje(CodigoMensaje.M00063,
+				"Se ha presnetado un problema intentando hacer la operacion deseada"));
+		mensajes.put(CodigoMensaje.M00064.getIdentificador(), new Mensaje(CodigoMensaje.M00064,
+				"Se ha presentado un problema INESPERADO trantando de ingresar los datos de la tarifa estandar a la base de datos"));
+		mensajes.put(CodigoMensaje.M00065.getIdentificador(), new Mensaje(CodigoMensaje.M00065,
+				"Se ha presentado un problema eliminando los datos de Unidad Deportiva en la base de datos."));
+		mensajes.put(CodigoMensaje.M00066.getIdentificador(), new Mensaje(CodigoMensaje.M00066,
+				"Se ha presentado un problema al consultar los tipos de espacio deportivo"));
+		mensajes.put(CodigoMensaje.M00067.getIdentificador(), new Mensaje(CodigoMensaje.M00067,
+				"Se ha presentado un problema consultando los datos de los tipos de espacios deportivos en la base de datos."));
+
 	}
 
 	@Override

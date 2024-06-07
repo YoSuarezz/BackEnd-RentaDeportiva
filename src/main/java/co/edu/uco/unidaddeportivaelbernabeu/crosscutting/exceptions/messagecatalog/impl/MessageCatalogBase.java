@@ -1,5 +1,6 @@
 package co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.messagecatalog.impl;
 
+import co.edu.uco.unidaddeportivaelbernabeu.business.usecase.concrete.EliminarTipoEspacioDeportivoImpl;
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.custom.CrosscuttingUDElBernabeuException;
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.messagecatalog.MessageCatalog;
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.messagecatalog.data.CodigoMensaje;
@@ -107,6 +108,38 @@ public final class MessageCatalogBase implements MessageCatalog {
 				"Se ha presentado un problema INESPERADO consultando los datos de Unidad Deportiva en la base de datos."));
 		mensajes.put(CodigoMensaje.M00062.getIdentificador(), new Mensaje(CodigoMensaje.M00062,
 				"Se ha presentado un problema actualizando los datos de Unidad Deportiva en la base de datos."));
+		mensajes.put(CodigoMensaje.M00068.getIdentificador(), new Mensaje(CodigoMensaje.M00068,
+				"La fecha proporcioanda esta vacia o es nula"));
+		mensajes.put(CodigoMensaje.M00069.getIdentificador(), new Mensaje(CodigoMensaje.M00069,
+				"La fecha de inicio no puede ser posterior a la fecha de fin."));
+		mensajes.put(CodigoMensaje.M00070.getIdentificador(), new Mensaje(CodigoMensaje.M00070,
+				"Ya existe un tipo de espacio deportivo con el mismo nombre."));
+		mensajes.put(CodigoMensaje.M00071.getIdentificador(), new Mensaje(CodigoMensaje.M00071,
+				"El nombre del tipo de espacio deportivo es obligatorio, por favor ingrese un nombre valido"));
+		mensajes.put(CodigoMensaje.M00072.getIdentificador(), new Mensaje(CodigoMensaje.M00072,
+				"El nombre del tipo de espacio no puede exceder los 20 caracteres, por favor intente nuevamente con un nombre valido"));
+		mensajes.put(CodigoMensaje.M00073.getIdentificador(), new Mensaje(CodigoMensaje.M00073,
+				"El nombre del tipo de espacio no puede tener letras y espacios, por favor intente nuevamente con un nombre valido"));
+		mensajes.put(CodigoMensaje.M00074.getIdentificador(), new Mensaje(CodigoMensaje.M00074,
+				"La cantidad de espacios debe ser un numero que este entre 1 y 49"));
+		mensajes.put(CodigoMensaje.M00075.getIdentificador(), new Mensaje(CodigoMensaje.M00075,
+				"No existe el tipo de espacio deportivo con el ID seleccionado"));
+		mensajes.put(CodigoMensaje.M00076.getIdentificador(), new Mensaje(CodigoMensaje.M00076,
+				"El ID del tipo de espacio deportivo es obligatorio"));
+		mensajes.put(CodigoMensaje.M00077.getIdentificador(), new Mensaje(CodigoMensaje.M00077,
+				"El ID del tipo de espacio deportivo debe ser un valor positivo mayor que cero."));
+		mensajes.put(CodigoMensaje.M00078.getIdentificador(), new Mensaje(CodigoMensaje.M00078,
+				"No existe el tipo de espacio deportivo que se desea editar, por favor intente con uno nuevo que si exista en la base de datos"));
+		mensajes.put(CodigoMensaje.M00079.getIdentificador(), new Mensaje(CodigoMensaje.M00079,
+				"No es posible establecer el nombre debido a que ya hay otro tipo de espacio deportivo con el mismo nombre"));
+		mensajes.put(CodigoMensaje.M00080.getIdentificador(), new Mensaje(CodigoMensaje.M00080,
+				"El nombre del tipo de espacio deportivo es obligatorio, por favor ingrese un nombre valido"));
+		mensajes.put(CodigoMensaje.M00081.getIdentificador(), new Mensaje(CodigoMensaje.M00081,
+				"El nombre del tipo de espacio deportivo no puede exceder los 20 caracteres, por favor intente nuevamente con un nombre valido"));
+		mensajes.put(CodigoMensaje.M00082.getIdentificador(), new Mensaje(CodigoMensaje.M00082,
+				"El nombre del tipo de espacio no puede tener letras y espacios, por favor intente nuevamente con un nombre valido"));
+
+
 
 
 	}

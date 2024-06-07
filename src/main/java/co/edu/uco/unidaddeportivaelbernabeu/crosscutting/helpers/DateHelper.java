@@ -2,6 +2,8 @@ package co.edu.uco.unidaddeportivaelbernabeu.crosscutting.helpers;
 
 
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.custom.BusinessUDElBernabeuException;
+import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.messagecatalog.MessageCatalogStrategy;
+import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.messagecatalog.data.CodigoMensaje;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -19,8 +21,8 @@ public class DateHelper {
      */
     public static LocalDateTime parseFromString(String dateStr) {
         if (dateStr == null || dateStr.trim().isEmpty()) {
-            var mensajeUsuario = "La fecha proporcioanda esta vacia o es nula";
-            var mensajeTecnico = "La fecha proporcioanda esta vacia o es nula";
+            var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00068);
+            var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00068);
             throw new BusinessUDElBernabeuException(mensajeUsuario,mensajeTecnico);
         }
         return LocalDateTime.parse(dateStr, FORMATTER);
@@ -34,7 +36,8 @@ public class DateHelper {
      */
     public static void validateDates(LocalDateTime startDate, LocalDateTime endDate) {
         if (startDate != null && endDate != null && startDate.isAfter(endDate)) {
-            throw new IllegalArgumentException("La fecha de inicio no puede ser posterior a la fecha de fin.");
+            var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00069);
+            throw new BusinessUDElBernabeuException(mensajeUsuario);
         }
     }
 
