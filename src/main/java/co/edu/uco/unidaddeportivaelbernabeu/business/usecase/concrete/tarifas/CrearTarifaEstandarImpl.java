@@ -64,6 +64,11 @@ public class CrearTarifaEstandarImpl implements UseCaseWithoutReturn<TarifaEstan
             var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00090);
             throw new BusinessUDElBernabeuException(mensajeUsuario);
         }
+        if (tarifaEstandar.getNombre().length() > 50) {
+            var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00104);
+            throw new BusinessUDElBernabeuException(mensajeUsuario);
+        }
+
     }
 
     private boolean existeTipoEspacioDeportivo(int tipoEspacioDeportivoId) {

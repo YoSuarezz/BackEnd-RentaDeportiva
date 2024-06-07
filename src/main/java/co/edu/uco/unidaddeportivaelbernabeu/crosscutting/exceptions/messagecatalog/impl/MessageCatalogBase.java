@@ -180,6 +180,8 @@ public final class MessageCatalogBase implements MessageCatalog {
 				"se ha presentado un problema tratando de eliminar el tipo de espacio de deportivo"));
 		mensajes.put(CodigoMensaje.M00103.getIdentificador(), new Mensaje(CodigoMensaje.M00103,
 				"Se ha presentado un problema inesperado tratando de eliminar el tipo de espacio de deportivo"));
+		mensajes.put(CodigoMensaje.M00104.getIdentificador(), new Mensaje(CodigoMensaje.M00104,
+				"El nombre de la tarifa estandar no puede exceder los 35 caracteres, por favor intente nuevamente con un nombre valido"));
 
 
 
