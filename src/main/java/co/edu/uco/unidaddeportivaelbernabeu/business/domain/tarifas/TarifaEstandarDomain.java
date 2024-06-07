@@ -1,6 +1,7 @@
 package co.edu.uco.unidaddeportivaelbernabeu.business.domain.tarifas;
 
 import co.edu.uco.unidaddeportivaelbernabeu.business.domain.TipoEspacioDeportivoDomain;
+import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.custom.BusinessUDElBernabeuException;
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.helpers.NumericHelper;
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.helpers.ObjectHelper;
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.helpers.TextHelper;
@@ -30,8 +31,8 @@ public class TarifaEstandarDomain {
         setTipoEspacioDeportivo(TipoEspacioDeportivoDomain.crear());
         setPrecioPorHora(NumericHelper.ZERO);
         setNombre(TextHelper.EMPTY);
-        setFechaHoraInicio(LocalDateTime.now());
-        setFechaHoraFin(LocalDateTime.now());
+        setFechaHoraInicio(null);
+        setFechaHoraFin(null);
     }
 
     public static final TarifaEstandarDomain crear (final int id, final TipoEspacioDeportivoDomain tipoEspacioDeportivo,
@@ -82,6 +83,10 @@ public class TarifaEstandarDomain {
     }
 
     public void setFechaHoraInicio(LocalDateTime fechaHoraInicio) {
+        if (fechaHoraFin != null && fechaHoraInicio != null && fechaHoraInicio.isAfter(fechaHoraFin)) {
+            var mensajeTecnico = "La fecha de inicio no puede ser posterior a la fecha de fin.";
+            throw new BusinessUDElBernabeuException(mensajeTecnico);
+        }
         this.fechaHoraInicio = fechaHoraInicio;
     }
 
@@ -90,6 +95,10 @@ public class TarifaEstandarDomain {
     }
 
     public void setFechaHoraFin(LocalDateTime fechaHoraFin) {
+        if (fechaHoraInicio != null && fechaHoraFin != null && fechaHoraFin.isBefore(fechaHoraInicio)) {
+            var mensajeTecnico = "La fecha fin no puede ser anterior a la fecha de inicio";
+            throw new BusinessUDElBernabeuException(mensajeTecnico);
+        }
         this.fechaHoraFin = fechaHoraFin;
     }
 }

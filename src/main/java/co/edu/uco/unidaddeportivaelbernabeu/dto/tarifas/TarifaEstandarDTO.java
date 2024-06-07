@@ -1,9 +1,12 @@
 package co.edu.uco.unidaddeportivaelbernabeu.dto.tarifas;
 
+import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.helpers.DateHelper;
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.helpers.NumericHelper;
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.helpers.ObjectHelper;
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.helpers.TextHelper;
 import co.edu.uco.unidaddeportivaelbernabeu.dto.TipoEspacioDeportivoDTO;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -13,10 +16,10 @@ public class TarifaEstandarDTO {
     private TipoEspacioDeportivoDTO tipoEspacioDeportivo;
     private int precioPorHora;
     private String nombre;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime fechaHoraInicio;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime fechaHoraFin;
-
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     public TarifaEstandarDTO(int id, TipoEspacioDeportivoDTO tipoEspacioDeportivo, int precioPorHora, String nombre, LocalDateTime fechaHoraInicio, LocalDateTime fechaHoraFin) {
         setId(id);
@@ -29,8 +32,8 @@ public class TarifaEstandarDTO {
 
     public TarifaEstandarDTO(){
         setNombre(TextHelper.applyTrim(nombre));
-        setFechaHoraInicio(LocalDateTime.now());
-        setFechaHoraFin(LocalDateTime.now());
+        setFechaHoraInicio(fechaHoraInicio);
+        setFechaHoraFin(fechaHoraFin);
         setPrecioPorHora(NumericHelper.ZERO);
     }
 
@@ -80,8 +83,10 @@ public class TarifaEstandarDTO {
 
     public TarifaEstandarDTO setFechaHoraInicio(LocalDateTime fechaHoraInicio) {
         this.fechaHoraInicio = fechaHoraInicio;
+        DateHelper.validateDates(this.fechaHoraInicio, this.fechaHoraFin);
         return this;
     }
+
 
     public LocalDateTime getFechaHoraFin() {
         return fechaHoraFin;
@@ -89,14 +94,8 @@ public class TarifaEstandarDTO {
 
     public TarifaEstandarDTO setFechaHoraFin(LocalDateTime fechaHoraFin) {
         this.fechaHoraFin = fechaHoraFin;
+        DateHelper.validateDates(this.fechaHoraInicio, this.fechaHoraFin);
         return this;
     }
 
-    public String getFormattedFechaHoraInicio() {
-        return FORMATTER.format(fechaHoraInicio);
-    }
-
-    public String getFormattedFechaHoraFin() {
-        return FORMATTER.format(fechaHoraFin);
-    }
 }

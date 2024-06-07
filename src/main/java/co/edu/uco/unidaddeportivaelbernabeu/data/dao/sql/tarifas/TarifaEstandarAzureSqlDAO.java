@@ -3,6 +3,7 @@ package co.edu.uco.unidaddeportivaelbernabeu.data.dao.sql.tarifas;
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.custom.DataUDElBernabeuException;
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.messagecatalog.MessageCatalogStrategy;
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.messagecatalog.data.CodigoMensaje;
+import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.helpers.DateHelper;
 import co.edu.uco.unidaddeportivaelbernabeu.data.dao.espaciosdeportivos.TipoEspacioDeportivoDAO;
 import co.edu.uco.unidaddeportivaelbernabeu.data.dao.factory.DAOFactory;
 import co.edu.uco.unidaddeportivaelbernabeu.data.dao.factory.enums.Factory;
@@ -26,14 +27,16 @@ public class TarifaEstandarAzureSqlDAO implements TarifaEstandarDAO {
 
     @Override
     public void crear(TarifaEstandarEntity entidad) {
-        final String sql = "INSERT INTO TarifaEstandar (tipoEspacioDeportivo, precioPorHora, nombre, fechaHoraInicio, fechaHoraFin) " +
+        DateHelper.validateDates(entidad.getFechaHoraInicio(), entidad.getFechaHoraFin());
+
+        final String sql = "INSERT INTO TarifaEstandar (tipoEspacioDeportivoId, precioPorHora, nombre, fechaHoraInicio, fechaHoraFin) " +
                 "VALUES (?, ?, ?, ?, ?)";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, entidad.getTipoEspacioDeportivo().getId());
             statement.setInt(2, entidad.getPrecioPorHora());
             statement.setString(3, entidad.getNombre());
-            statement.setTimestamp(4, Timestamp.valueOf(entidad.getFechaHoraInicio().withSecond(0).withNano(0)));
-            statement.setTimestamp(5, Timestamp.valueOf(entidad.getFechaHoraFin().withSecond(0).withNano(0)));
+            statement.setTimestamp(4, Timestamp.valueOf(entidad.getFechaHoraInicio()));
+            statement.setTimestamp(5, Timestamp.valueOf(entidad.getFechaHoraFin()));
 
             statement.executeUpdate();
         } catch (SQLException exception) {

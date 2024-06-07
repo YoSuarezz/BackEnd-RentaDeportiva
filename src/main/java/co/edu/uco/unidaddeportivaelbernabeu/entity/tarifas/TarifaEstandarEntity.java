@@ -1,12 +1,12 @@
 package co.edu.uco.unidaddeportivaelbernabeu.entity.tarifas;
 
+import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.helpers.DateHelper;
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.helpers.NumericHelper;
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.helpers.ObjectHelper;
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.helpers.TextHelper;
 import co.edu.uco.unidaddeportivaelbernabeu.entity.TipoEspacioDeportivoEntity;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 public class TarifaEstandarEntity {
 
@@ -16,8 +16,6 @@ public class TarifaEstandarEntity {
     private String nombre;
     private LocalDateTime fechaHoraInicio;
     private LocalDateTime fechaHoraFin;
-
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     public TarifaEstandarEntity(int id, TipoEspacioDeportivoEntity tipoEspacioDeportivo, String nombre,
                                 int precioPorHora, LocalDateTime fechaHoraInicio, LocalDateTime fechaHoraFin) {
@@ -32,10 +30,8 @@ public class TarifaEstandarEntity {
     public TarifaEstandarEntity(int id) {
         setId(id);
         setTipoEspacioDeportivo(TipoEspacioDeportivoEntity.build());
-        setNombre("");
-        setFechaHoraInicio(LocalDateTime.now());
-        setFechaHoraFin(LocalDateTime.now());
-        setPrecioPorHora(0);
+        setNombre(TextHelper.EMPTY);
+        setPrecioPorHora(NumericHelper.ZERO);
     }
 
     public TarifaEstandarEntity(int id, TipoEspacioDeportivoEntity tipoEspacioDeportivo, String nombre) {
@@ -61,7 +57,7 @@ public class TarifaEstandarEntity {
         return this;
     }
 
-    public final int getPrecioPorHora() {
+    public int getPrecioPorHora() {
         return precioPorHora;
     }
 
@@ -69,7 +65,7 @@ public class TarifaEstandarEntity {
         this.precioPorHora = precioPorHora;
     }
 
-    public final String getNombre() {
+    public String getNombre() {
         return nombre;
     }
 
@@ -83,6 +79,7 @@ public class TarifaEstandarEntity {
 
     public void setFechaHoraInicio(LocalDateTime fechaHoraInicio) {
         this.fechaHoraInicio = fechaHoraInicio;
+        DateHelper.validateDates(this.fechaHoraInicio, this.fechaHoraFin);
     }
 
     public LocalDateTime getFechaHoraFin() {
@@ -91,14 +88,7 @@ public class TarifaEstandarEntity {
 
     public void setFechaHoraFin(LocalDateTime fechaHoraFin) {
         this.fechaHoraFin = fechaHoraFin;
-    }
-
-    public String getFormattedFechaHoraInicio() {
-        return FORMATTER.format(fechaHoraInicio);
-    }
-
-    public String getFormattedFechaHoraFin() {
-        return FORMATTER.format(fechaHoraFin);
+        DateHelper.validateDates(this.fechaHoraInicio, this.fechaHoraFin);
     }
 
     public static final TarifaEstandarEntity build(final int id, final TipoEspacioDeportivoEntity tipoEspacioDeportivo,
