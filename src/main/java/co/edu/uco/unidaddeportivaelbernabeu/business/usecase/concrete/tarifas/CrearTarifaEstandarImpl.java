@@ -4,6 +4,8 @@ import co.edu.uco.unidaddeportivaelbernabeu.business.assembler.entity.concrete.t
 import co.edu.uco.unidaddeportivaelbernabeu.business.domain.tarifas.TarifaEstandarDomain;
 import co.edu.uco.unidaddeportivaelbernabeu.business.usecase.UseCaseWithoutReturn;
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.custom.BusinessUDElBernabeuException;
+import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.messagecatalog.MessageCatalogStrategy;
+import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.messagecatalog.data.CodigoMensaje;
 import co.edu.uco.unidaddeportivaelbernabeu.data.dao.factory.DAOFactory;
 import co.edu.uco.unidaddeportivaelbernabeu.entity.TipoEspacioDeportivoEntity;
 import co.edu.uco.unidaddeportivaelbernabeu.entity.tarifas.TarifaEstandarEntity;
@@ -25,7 +27,8 @@ public class CrearTarifaEstandarImpl implements UseCaseWithoutReturn<TarifaEstan
         var tarifaEstandarEntity = TarifaEstandarEntityDomainAssembler.obtenerInstancia().ensamblarEntidad(tarifaEstandar);
 
         if (existeTarifaParaDeporte(tarifaEstandarEntity.getTipoEspacioDeportivo().getId())) {
-            throw new BusinessUDElBernabeuException("Ya existe una tarifa estándar para este deporte.");
+            var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00084);
+            throw new BusinessUDElBernabeuException(mensajeUsuario);
         }
 
         factory.getTarifaEstandarDAO().crear(tarifaEstandarEntity);
@@ -33,22 +36,28 @@ public class CrearTarifaEstandarImpl implements UseCaseWithoutReturn<TarifaEstan
 
     private void validarTarifa(TarifaEstandarDomain tarifaEstandar) {
         if (tarifaEstandar.getId() < 0) {
-            throw new BusinessUDElBernabeuException("El ID debe ser positivo.");
+            var mensajeUsurio = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00085);
+            throw new BusinessUDElBernabeuException(mensajeUsurio);
         }
         if (tarifaEstandar.getPrecioPorHora() <= 0) {
-            throw new BusinessUDElBernabeuException("El precio por hora debe ser positivo.");
+            var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00086);
+            throw new BusinessUDElBernabeuException(mensajeUsuario);
         }
         if (tarifaEstandar.getNombre() == null || tarifaEstandar.getNombre().trim().isEmpty()) {
-            throw new BusinessUDElBernabeuException("El nombre no puede ser nulo o vacío.");
+            var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00087);
+            throw new BusinessUDElBernabeuException(mensajeUsuario);
         }
         if (tarifaEstandar.getFechaHoraInicio() == null) {
-            throw new BusinessUDElBernabeuException("La fecha y hora de inicio no pueden ser nulas.");
+            var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje((CodigoMensaje.M00088));
+            throw new BusinessUDElBernabeuException(mensajeUsuario);
         }
         if (tarifaEstandar.getFechaHoraFin() == null) {
-            throw new BusinessUDElBernabeuException("La fecha y hora de fin no pueden ser nulas.");
+            var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00089);
+            throw new BusinessUDElBernabeuException(mensajeUsuario);
         }
         if (tarifaEstandar.getFechaHoraInicio().isAfter(tarifaEstandar.getFechaHoraFin())) {
-            throw new BusinessUDElBernabeuException("La fecha de inicio no puede ser posterior a la fecha de fin.");
+            var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00090);
+            throw new BusinessUDElBernabeuException(mensajeUsuario);
         }
     }
 

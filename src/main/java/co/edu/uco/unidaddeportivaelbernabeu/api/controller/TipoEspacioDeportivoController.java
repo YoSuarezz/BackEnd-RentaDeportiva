@@ -54,14 +54,14 @@ public class TipoEspacioDeportivoController {
         try {
             var facade = new ActualizarTipoEspacioDeportivoFachadaImpl();
             facade.ejecutar(tipoEspacioDeportivo);
-            tipoEspacioDeportivoResponse.getMensajes().add("Tipo de espacio deportivo actualizado correctamente.");
+            tipoEspacioDeportivoResponse.getMensajes().add(MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00096));
         } catch (final UnidadDeportivaElBernabeuException excepcion) {
             httpStatusCode = HttpStatus.BAD_REQUEST;
             tipoEspacioDeportivoResponse.getMensajes().add(excepcion.getMensajeUsuario());
             excepcion.printStackTrace();
         } catch (final Exception excepcion) {
             httpStatusCode = HttpStatus.INTERNAL_SERVER_ERROR;
-            var mensajeUsuario = "Se ha presentado un error inesperado.";
+            var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00054);
             tipoEspacioDeportivoResponse.getMensajes().add(mensajeUsuario);
             excepcion.printStackTrace();
         }
@@ -92,7 +92,7 @@ public class TipoEspacioDeportivoController {
             excepcion.printStackTrace();
         } catch (final Exception excepcion) {
             httpStatusCode = HttpStatus.INTERNAL_SERVER_ERROR;
-            var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00025);
+            var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00054);
             tipoEspacioDeportivoResponse.getMensajes().add(mensajeUsuario);
             excepcion.printStackTrace();
         }
@@ -105,11 +105,11 @@ public class TipoEspacioDeportivoController {
         try {
             EliminarTipoEspacioDeportivoFachadaImpl eliminarFachada = new EliminarTipoEspacioDeportivoFachadaImpl();
             eliminarFachada.ejecutar(id);
-            return ResponseEntity.ok("Tipo de espacio deportivo eliminado correctamente.");
+            return ResponseEntity.ok(MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00097));
         } catch (BusinessUDElBernabeuException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-        } catch (Exception e) {
-            return ResponseEntity.internalServerError().body("Error interno del servidor: " + e.getMessage());
+        } catch (final Exception exception) {
+            return ResponseEntity.internalServerError().body(MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00054));
         }
     }
 }

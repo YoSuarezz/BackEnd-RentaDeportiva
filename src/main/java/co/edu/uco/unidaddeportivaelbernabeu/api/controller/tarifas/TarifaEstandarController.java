@@ -29,7 +29,7 @@ public class TarifaEstandarController {
         try {
             var facade = new CrearTarifaEstandarFachadaImpl();
             facade.ejecutar(tarifaEstandar);
-            tarifaEstandarResponse.getMensajes().add("Se creó correctamente la tarifa estándar para el espacio deportivo.");
+            tarifaEstandarResponse.getMensajes().add(MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00098));
 
         } catch (final UnidadDeportivaElBernabeuException excepcion) {
             httpStatusCode = HttpStatus.BAD_REQUEST;

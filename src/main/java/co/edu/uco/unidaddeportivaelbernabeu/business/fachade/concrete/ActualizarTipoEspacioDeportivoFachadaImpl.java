@@ -5,6 +5,8 @@ import co.edu.uco.unidaddeportivaelbernabeu.business.fachade.FacadeWithoutReturn
 import co.edu.uco.unidaddeportivaelbernabeu.business.usecase.concrete.ActualizarTipoEspacioDeportivoImpl;
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.UnidadDeportivaElBernabeuException;
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.custom.BusinessUDElBernabeuException;
+import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.messagecatalog.MessageCatalogStrategy;
+import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.messagecatalog.data.CodigoMensaje;
 import co.edu.uco.unidaddeportivaelbernabeu.data.dao.factory.DAOFactory;
 import co.edu.uco.unidaddeportivaelbernabeu.data.dao.factory.enums.Factory;
 import co.edu.uco.unidaddeportivaelbernabeu.dto.TipoEspacioDeportivoDTO;
@@ -33,8 +35,8 @@ public class ActualizarTipoEspacioDeportivoFachadaImpl implements FacadeWithoutR
         } catch (final Exception exception) {
             factory.cancelarTransaccion();
 
-            var mensajeUsuario = "Se ha presentado un error tratando de editar el tipo de espacio deportivo.";
-            var mensajeTecnico = "Se ha presentado un problema inesperado tratando de editar la información del tipo de espacio deportivo en el método ejecutar de la clase ActualizarTipoEspacioDeportivoFachadaImpl. Por favor revise la traza completa del problema.";
+            var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00091);
+            var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00092);
 
             throw new BusinessUDElBernabeuException(mensajeUsuario, mensajeTecnico, exception);
         } finally {

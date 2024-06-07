@@ -58,9 +58,8 @@ public class ActualizarTipoEspacioDeportivoImpl implements UseCaseWithoutReturn<
         }
 
         if (tipoEspacioDeportivo.getCantidad() < 0 || tipoEspacioDeportivo.getCantidad() > 49) {
-            var mensajeUsuario = "La cantidad de espacios debe ser un numero que este entre 1 y 49";
-            var mensajeTecnico ="La cantidad de espacios debe ser un numero que este entre 1 y 49 ";
-            throw new BusinessUDElBernabeuException(mensajeUsuario,mensajeTecnico);
+            var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00083);
+            throw new BusinessUDElBernabeuException(mensajeUsuario);
         }
 
     }

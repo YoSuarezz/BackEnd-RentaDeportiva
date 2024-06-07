@@ -77,7 +77,7 @@ public final class MessageCatalogBase implements MessageCatalog {
 		mensajes.put(CodigoMensaje.M00046.getIdentificador(), new Mensaje(CodigoMensaje.M00046,
 				"Se ha presentado un problema tratando de consultar la informacion de los tipos de espacios deportivos"));
 		mensajes.put(CodigoMensaje.M00047.getIdentificador(), new Mensaje(CodigoMensaje.M00047,
-				"Se ha presentado un problema INESPERADO tratando de consultar la informacion de los tipos de espacios deportivos"));
+				"Se ha presentado un problema inesperado tratando de consultar la informacion de los tipos de espacios deportivos en el metodo ejecutar de la clase ConsultarTipoEspacioDeportivoFachadaImpl. Por favor revise la traza completa del problema"));
 		mensajes.put(CodigoMensaje.M00048.getIdentificador(), new Mensaje(CodigoMensaje.M00048,
 				"Se ha presentado un problema consultando los datos de Unidad Deportiva en la base de datos..."));
 		mensajes.put(CodigoMensaje.M00049.getIdentificador(), new Mensaje(CodigoMensaje.M00049,
@@ -138,6 +138,39 @@ public final class MessageCatalogBase implements MessageCatalog {
 				"El nombre del tipo de espacio deportivo no puede exceder los 20 caracteres, por favor intente nuevamente con un nombre valido"));
 		mensajes.put(CodigoMensaje.M00082.getIdentificador(), new Mensaje(CodigoMensaje.M00082,
 				"El nombre del tipo de espacio no puede tener letras y espacios, por favor intente nuevamente con un nombre valido"));
+		mensajes.put(CodigoMensaje.M00083.getIdentificador(), new Mensaje(CodigoMensaje.M00083,
+				"La cantidad de espacios debe ser un numero que este entre 1 y 49"));
+		mensajes.put(CodigoMensaje.M00084.getIdentificador(), new Mensaje(CodigoMensaje.M00084,
+				"Ya existe una tarifa estándar para este deporte."));
+		mensajes.put(CodigoMensaje.M00085.getIdentificador(), new Mensaje(CodigoMensaje.M00085,
+				"El ID debe ser positivo."));
+		mensajes.put(CodigoMensaje.M00086.getIdentificador(), new Mensaje(CodigoMensaje.M00086,
+				"El precio por hora debe ser positivo."));
+		mensajes.put(CodigoMensaje.M00087.getIdentificador(), new Mensaje(CodigoMensaje.M00087,
+				"El nombre no puede ser nulo o vacío."));
+		mensajes.put(CodigoMensaje.M00088.getIdentificador(), new Mensaje(CodigoMensaje.M00088,
+				"La fecha y hora de inicio no pueden ser nulas o vacias."));
+		mensajes.put(CodigoMensaje.M00089.getIdentificador(), new Mensaje(CodigoMensaje.M00089,
+				"La fecha y hora de fin no pueden ser nulas o vacias."));
+		mensajes.put(CodigoMensaje.M00090.getIdentificador(), new Mensaje(CodigoMensaje.M00090,
+				"La fecha de inicio no puede ser posterior a la fecha de fin."));
+		mensajes.put(CodigoMensaje.M00091.getIdentificador(), new Mensaje(CodigoMensaje.M00091,
+				"Se ha presentado un problema tratando de editar el tipo de espacio deportivo."));
+		mensajes.put(CodigoMensaje.M00092.getIdentificador(), new Mensaje(CodigoMensaje.M00092,
+				"Se ha presentado un problema inesperado tratando de editar la información del tipo de espacio deportivo en el método ejecutar de la clase ActualizarTipoEspacioDeportivoFachadaImpl. Por favor revise la traza completa del problema."));
+		mensajes.put(CodigoMensaje.M00093.getIdentificador(), new Mensaje(CodigoMensaje.M00093,
+				"Se ha presentado un problema tratando de crear la tarifa Estandar"));
+		mensajes.put(CodigoMensaje.M00094.getIdentificador(), new Mensaje(CodigoMensaje.M00094,
+				"Se ha presentado un problema INESPERADO tratando de crear la informacion de la nueva tarifa estandar en el metodo ejecutar de la clase CrearTarifaEstandarFachadaImpl. Por favor revise la traza completa del problema"));
+		mensajes.put(CodigoMensaje.M00095.getIdentificador(), new Mensaje(CodigoMensaje.M00095,
+				"La fecha fin no puede ser anterior a la fecha de inicio"));
+		mensajes.put(CodigoMensaje.M00096.getIdentificador(), new Mensaje(CodigoMensaje.M00096,
+				"Tipo de espacio deportivo actualizado correctamente."));
+		mensajes.put(CodigoMensaje.M00097.getIdentificador(), new Mensaje(CodigoMensaje.M00097,
+				"Tipo de espacio deportivo eliminado correctamente."));
+		mensajes.put(CodigoMensaje.M00098.getIdentificador(), new Mensaje(CodigoMensaje.M00098,
+				"Se creó correctamente la tarifa estándar para el espacio deportivo."));
+
 
 
 

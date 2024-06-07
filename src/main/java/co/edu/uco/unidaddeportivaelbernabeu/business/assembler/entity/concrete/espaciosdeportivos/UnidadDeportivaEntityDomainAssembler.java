@@ -35,7 +35,7 @@ public class UnidadDeportivaEntityDomainAssembler implements EntityDomainAssembl
         var listaEntidadesTmp = ObjectHelper.getObjectHelper().getDefault(listaEntidades, new ArrayList<UnidadDeportivaEntity>());
         var resultados = new ArrayList<UnidadDeportivaDomain>();
 
-        if (listaEntidadesTmp != null) { // Asegúrate de que no sea nulo
+        if (listaEntidadesTmp != null) {
             for (UnidadDeportivaEntity unidadDeportivaEntity : listaEntidadesTmp) {
                 var unidadDeportivaDomainTmp = ensamblarDominio(unidadDeportivaEntity);
                 resultados.add(unidadDeportivaDomainTmp);
