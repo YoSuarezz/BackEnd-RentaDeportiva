@@ -90,24 +90,22 @@ public class TarifaEstandarAzureSqlDAO implements TarifaEstandarDAO {
         }
     }
     @Override
-    public List<TarifaEstandarEntity> consultar(TarifaEstandarEntity entidad) {
-        final String sql = "SELECT id, tipoEspacioDeportivoId, nombre, precioPorHora, fechaHoraInicio, fechaHoraFin FROM TarifaEstandar WHERE id = ?";
-        try (PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setInt(1, entidad.getId());
+    public List<TarifaEstandarEntity> consultar(TarifaEstandarEntity criterio) {
+        List<TarifaEstandarEntity> resultados = new ArrayList<>();
+        String sql = "SELECT id, tipoEspacioDeportivoId, nombre, precioPorHora, fechaHoraInicio, fechaHoraFin FROM TarifaEstandar";
+        try (PreparedStatement statement = connection.prepareStatement(sql);
+             ResultSet resultSet = statement.executeQuery()) {
 
-            try (ResultSet resultSet = statement.executeQuery()) {
-                List<TarifaEstandarEntity> tarifas = new ArrayList<>();
-                while (resultSet.next()) {
-                    tarifas.add(TarifaEstandarEntity.build(
-                            resultSet.getInt("id"),
-                            TipoEspacioDeportivoEntity.build(resultSet.getInt("tipoEspacioDeportivoId")),
-                            resultSet.getString("nombre"),
-                            resultSet.getInt("precioPorHora"),
-                            resultSet.getTimestamp("fechaHoraInicio").toLocalDateTime(),
-                            resultSet.getTimestamp("fechaHoraFin").toLocalDateTime()
-                    ));
-                }
-                return tarifas;
+            while (resultSet.next()) {
+                TarifaEstandarEntity tarifa = new TarifaEstandarEntity(
+                        resultSet.getInt("id"),
+                        TipoEspacioDeportivoEntity.build(resultSet.getInt("tipoEspacioDeportivoId")),
+                        resultSet.getString("nombre"),
+                        resultSet.getInt("precioPorHora"),
+                        resultSet.getTimestamp("fechaHoraInicio").toLocalDateTime(),
+                        resultSet.getTimestamp("fechaHoraFin").toLocalDateTime()
+                );
+                resultados.add(tarifa);
             }
         } catch (SQLException exception) {
             var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00002);
@@ -115,6 +113,7 @@ public class TarifaEstandarAzureSqlDAO implements TarifaEstandarDAO {
 
             throw new DataUDElBernabeuException(mensajeTecnico, mensajeUsuario, exception);
         }
+        return resultados;
     }
 }
 
