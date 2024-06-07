@@ -1,7 +1,7 @@
 package co.edu.uco.unidaddeportivaelbernabeu.api.controller.tarifas;
 
 import co.edu.uco.unidaddeportivaelbernabeu.api.response.tarifas.TarifaEstandarResponse;
-import co.edu.uco.unidaddeportivaelbernabeu.business.fachade.concrete.tarifa.CrearTarifaEstandarFachadaImpl;
+import co.edu.uco.unidaddeportivaelbernabeu.business.fachade.concrete.tarifas.CrearTarifaEstandarFachadaImpl;
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.UnidadDeportivaElBernabeuException;
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.custom.BusinessUDElBernabeuException;
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.messagecatalog.MessageCatalogStrategy;
@@ -16,24 +16,20 @@ import org.springframework.web.bind.annotation.*;
 public class TarifaEstandarController {
 
     @GetMapping("/dummy")
-    public TarifaEstandarDTO getDummy(){
+    public TarifaEstandarDTO getDummy() {
         return TarifaEstandarDTO.build();
     }
 
     @PostMapping
-    public ResponseEntity<TarifaEstandarResponse> crear(@RequestBody TarifaEstandarDTO tarifaEstandar){
+    public ResponseEntity<TarifaEstandarResponse> crear(@RequestBody TarifaEstandarDTO tarifaEstandar) {
 
         var httpStatusCode = HttpStatus.ACCEPTED;
         var tarifaEstandarResponse = TarifaEstandarResponse.build();
 
         try {
-            if (tarifaEstandar.getFechaHoraInicio() == null || tarifaEstandar.getFechaHoraFin() == null) {
-                throw new BusinessUDElBernabeuException("Las fechas no pueden ser nulas");
-            }
-
             var facade = new CrearTarifaEstandarFachadaImpl();
             facade.ejecutar(tarifaEstandar);
-            tarifaEstandarResponse.getMensajes().add("Se creo correctamente la tarifa estandar para el espacio deportivo");
+            tarifaEstandarResponse.getMensajes().add("Se creó correctamente la tarifa estándar para el espacio deportivo.");
 
         } catch (final UnidadDeportivaElBernabeuException excepcion) {
             httpStatusCode = HttpStatus.BAD_REQUEST;
@@ -47,8 +43,6 @@ public class TarifaEstandarController {
 
             excepcion.printStackTrace();
         }
-
         return new ResponseEntity<>(tarifaEstandarResponse, httpStatusCode);
     }
-
 }

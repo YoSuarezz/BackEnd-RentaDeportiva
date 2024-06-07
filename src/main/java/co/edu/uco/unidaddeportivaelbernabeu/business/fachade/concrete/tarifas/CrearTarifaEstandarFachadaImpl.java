@@ -1,4 +1,4 @@
-package co.edu.uco.unidaddeportivaelbernabeu.business.fachade.concrete.tarifa;
+package co.edu.uco.unidaddeportivaelbernabeu.business.fachade.concrete.tarifas;
 
 import co.edu.uco.unidaddeportivaelbernabeu.business.assembler.dto.concrete.tarifas.TarifaEstandarDTODomainAssembler;
 import co.edu.uco.unidaddeportivaelbernabeu.business.fachade.FacadeWithoutReturn;
@@ -13,7 +13,7 @@ public class CrearTarifaEstandarFachadaImpl implements FacadeWithoutReturn<Tarif
 
     private DAOFactory factory;
 
-    public CrearTarifaEstandarFachadaImpl(){
+    public CrearTarifaEstandarFachadaImpl() {
         factory = DAOFactory.getFactory(Factory.AZURE_SQL);
     }
 
@@ -21,16 +21,16 @@ public class CrearTarifaEstandarFachadaImpl implements FacadeWithoutReturn<Tarif
     public void ejecutar(TarifaEstandarDTO tarifaEstandar) {
         factory.iniciarTransaccion();
 
-        try{
+        try {
             var usecase = new CrearTarifaEstandarImpl(factory);
             var tarifaEstandarDomain = TarifaEstandarDTODomainAssembler.obtenerInstancia().ensamblarDominio(tarifaEstandar);
             usecase.ejecutar(tarifaEstandarDomain);
 
             factory.confirmarTransaccion();
-        } catch (final UnidadDeportivaElBernabeuException exception){
+        } catch (final UnidadDeportivaElBernabeuException exception) {
             factory.cancelarTransaccion();
             throw exception;
-        } catch (final Exception exception){
+        } catch (final Exception exception) {
             factory.cancelarTransaccion();
 
             var mensajeUsuario = "Se ha presentado un problema tratando de crear la tarifa Estandar";
@@ -38,11 +38,8 @@ public class CrearTarifaEstandarFachadaImpl implements FacadeWithoutReturn<Tarif
 
             throw new BusinessUDElBernabeuException(mensajeTecnico, mensajeUsuario, exception);
 
-        }  finally {
+        } finally {
             factory.cerrarConexion();
         }
-
-
     }
-
 }

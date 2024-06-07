@@ -15,7 +15,7 @@ import co.edu.uco.unidaddeportivaelbernabeu.data.dao.factory.DAOFactory;
 import co.edu.uco.unidaddeportivaelbernabeu.data.dao.sql.azuresql.espaciosdeportivos.DeporteAzureSqlDAO;
 import co.edu.uco.unidaddeportivaelbernabeu.data.dao.sql.azuresql.espaciosdeportivos.TipoEspacioDeportivoAzureSqlDAO;
 import co.edu.uco.unidaddeportivaelbernabeu.data.dao.sql.azuresql.espaciosdeportivos.UnidadDeportivaAzureSqlDAO;
-import co.edu.uco.unidaddeportivaelbernabeu.data.dao.sql.tarifas.TarifaEstandarAzureSqlDAO;
+import co.edu.uco.unidaddeportivaelbernabeu.data.dao.sql.azuresql.tarifas.TarifaEstandarAzureSqlDAO;
 import co.edu.uco.unidaddeportivaelbernabeu.data.dao.tarifas.TarifaEstandarDAO;
 
 public final class AzureSqlDAOFactory extends DAOFactory {
