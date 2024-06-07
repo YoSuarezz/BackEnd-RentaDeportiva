@@ -3,6 +3,7 @@ package co.edu.uco.unidaddeportivaelbernabeu.business.usecase.concrete;
 import co.edu.uco.unidaddeportivaelbernabeu.business.assembler.entity.concrete.TipoEspacioDeportivoEntityDomainAssembler;
 import co.edu.uco.unidaddeportivaelbernabeu.business.domain.TipoEspacioDeportivoDomain;
 import co.edu.uco.unidaddeportivaelbernabeu.business.usecase.UseCaseWithoutReturn;
+import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.custom.BusinessUDElBernabeuException;
 import co.edu.uco.unidaddeportivaelbernabeu.data.dao.factory.DAOFactory;
 import co.edu.uco.unidaddeportivaelbernabeu.entity.TipoEspacioDeportivoEntity;
 
@@ -28,24 +29,30 @@ public class RegistrarTipoEspacioDeportivoImpl implements UseCaseWithoutReturn<T
     }
 
     private void validarDatos(TipoEspacioDeportivoDomain tipoEspacioDeportivo) {
-            if (tipoEspacioDeportivo.getNombre() == null || tipoEspacioDeportivo.getNombre().trim().isEmpty()) {
-            throw new IllegalArgumentException("El nombre del tipo de espacio deportivo es obligatorio.");
+        if (tipoEspacioDeportivo.getNombre() == null || tipoEspacioDeportivo.getNombre().trim().isEmpty()) {
+            var mensajeUsuario = "El nombre del tipo de espacio deportivo es obligatorio, por favor ingrese un nombre valido";
+            var mensajeTecnico ="El nombre del tipo de espacio deportivo es obligatorio, por favor ingrese un nombre valido ";
+            throw new BusinessUDElBernabeuException(mensajeUsuario,mensajeTecnico);
         }
 
-        // Validación de la longitud del nombre
         if (tipoEspacioDeportivo.getNombre().length() > 20) {
-            throw new IllegalArgumentException("El nombre del tipo de espacio deportivo no puede exceder los 20 caracteres.");
+            var mensajeUsuario = "El nombre del tipo de espacio no puede exceder los 20 caracteres, por favor intente nuevamente con un nombre valido";
+            var mensajeTecnico ="El nombre del tipo de espacio deportivo no puede exceder los 20 caracteres, por favor intente nuevamente con un nombre valido  ";
+            throw new BusinessUDElBernabeuException(mensajeUsuario,mensajeTecnico);
         }
 
-        // Validación de formato para el nombre utilizando expresiones regulares (solo letras y espacios, por ejemplo)
         if (!tipoEspacioDeportivo.getNombre().matches("^[A-Za-z ]+$")) {
-            throw new IllegalArgumentException("El nombre del tipo de espacio deportivo solo puede contener letras y espacios.");
+            var mensajeUsuario = "El nombre del tipo de espacio no puede tener letras y espacios, por favor intente nuevamente con un nombre valido";
+            var mensajeTecnico ="El nombre del tipo de espacio no puede tener letras y espacios, por favor intente nuevamente con un nombre valido ";
+            throw new BusinessUDElBernabeuException(mensajeUsuario,mensajeTecnico);
         }
 
-        // Validación de rango para la cantidad
-        if (tipoEspacioDeportivo.getCantidad() <= 0 || tipoEspacioDeportivo.getCantidad() > 49) {
-            throw new IllegalArgumentException("La cantidad debe ser mayor que cero y menor o igual que 49.");
+        if (tipoEspacioDeportivo.getCantidad() < 0 || tipoEspacioDeportivo.getCantidad() > 49) {
+            var mensajeUsuario = "La cantidad de espacios debe ser un numero que este entre 1 y 49";
+            var mensajeTecnico ="La cantidad de espacios debe ser un numero que este entre 1 y 49 ";
+            throw new BusinessUDElBernabeuException(mensajeUsuario,mensajeTecnico);
         }
+
     }
 
     private boolean existeEspacioDeportivo(TipoEspacioDeportivoEntity tipoEspacioDeportivoEntity) {
