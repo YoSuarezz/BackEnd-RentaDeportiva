@@ -6,6 +6,8 @@ import co.edu.uco.unidaddeportivaelbernabeu.business.usecase.UseCaseWithoutRetur
 import co.edu.uco.unidaddeportivaelbernabeu.data.dao.factory.DAOFactory;
 import co.edu.uco.unidaddeportivaelbernabeu.entity.TipoEspacioDeportivoEntity;
 
+import java.util.List;
+
 public class ActualizarTipoEspacioDeportivoImpl implements UseCaseWithoutReturn<TipoEspacioDeportivoDomain> {
 
     private final DAOFactory factory;
@@ -18,11 +20,11 @@ public class ActualizarTipoEspacioDeportivoImpl implements UseCaseWithoutReturn<
     public void ejecutar(TipoEspacioDeportivoDomain tipoEspacioDeportivo) {
         var tipoEspacioDeportivoEntity = TipoEspacioDeportivoEntityDomainAssembler.obtenerInstancia().ensamblarEntidad(tipoEspacioDeportivo);
 
-        /*if (!existenciaEspacioDeportivo(tipoEspacioDeportivoEntity)) {
+        if (!existenciaEspacioDeportivo(tipoEspacioDeportivoEntity)) {
             throw new IllegalArgumentException("No existe el tipo de espacio deportivo que se desea editar");
         }
 
-        validarDatos(tipoEspacioDeportivo);*/
+        validarDatos(tipoEspacioDeportivo);
 
         factory.getTipoEspacioDeportivoDAO().actualizar(tipoEspacioDeportivoEntity);
     }
@@ -43,10 +45,26 @@ public class ActualizarTipoEspacioDeportivoImpl implements UseCaseWithoutReturn<
         if (tipoEspacioDeportivo.getCantidad() <= 0 || tipoEspacioDeportivo.getCantidad() > 49) {
             throw new IllegalArgumentException("La cantidad debe ser mayor que cero y menor o igual que 49.");
         }
+
+        var tipoEspacioDeportivoEntity = TipoEspacioDeportivoEntityDomainAssembler.obtenerInstancia().ensamblarEntidad(tipoEspacioDeportivo);
+
+        if (nombreDuplicado(tipoEspacioDeportivoEntity)) {
+            throw new IllegalArgumentException("Ya existe un tipo de espacio deportivo con el mismo nombre.");
+        }
     }
 
     private boolean existenciaEspacioDeportivo(TipoEspacioDeportivoEntity tipoEspacioDeportivo) {
         var resultado = factory.getTipoEspacioDeportivoDAO().consultar(TipoEspacioDeportivoEntity.build(tipoEspacioDeportivo.getId()));
         return !resultado.isEmpty();
+    }
+
+    private boolean nombreDuplicado(TipoEspacioDeportivoEntity tipoEspacioDeportivoEntity) {
+        List<TipoEspacioDeportivoEntity> espacios = factory.getTipoEspacioDeportivoDAO().consultar(TipoEspacioDeportivoEntity.build());
+        for (TipoEspacioDeportivoEntity espacio : espacios) {
+            if (espacio.getNombre().equalsIgnoreCase(tipoEspacioDeportivoEntity.getNombre()) && espacio.getId() != tipoEspacioDeportivoEntity.getId()) {
+                return true;
+            }
+        }
+        return false;
     }
 }
