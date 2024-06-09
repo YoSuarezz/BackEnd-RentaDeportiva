@@ -10,7 +10,7 @@ import java.util.List;
 
 public final class DeporteEntityDomainAssembler implements EntityDomainAssembler <DeporteDomain, DeporteEntity> {
 
-private  static final EntityDomainAssembler <DeporteDomain, DeporteEntity> instancia = new DeporteEntityDomainAssembler();
+    private  static final EntityDomainAssembler <DeporteDomain, DeporteEntity> instancia = new DeporteEntityDomainAssembler();
 
     public static final EntityDomainAssembler <DeporteDomain, DeporteEntity> obtenerInstancia(){
         return instancia;
@@ -30,8 +30,7 @@ private  static final EntityDomainAssembler <DeporteDomain, DeporteEntity> insta
 
     @Override
     public List<DeporteDomain> ensamblarListaDominios(List<DeporteEntity> listaEntidades) {
-        var listaEntidadesTmp = ObjectHelper.getObjectHelper()
-                .getDefault(listaEntidades, new ArrayList<DeporteEntity>());
+        var listaEntidadesTmp = ObjectHelper.getObjectHelper().getDefault(listaEntidades, new ArrayList<DeporteEntity>());
         var resultados = new ArrayList<DeporteDomain>();
 
         for (DeporteEntity deporteEntity : listaEntidadesTmp){

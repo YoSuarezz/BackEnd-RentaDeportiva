@@ -11,7 +11,9 @@ public class ConsultarTipoEspacioDeportivoImpl implements UseCaseWithReturn<Tipo
 
     private final DAOFactory factory;
 
-    public ConsultarTipoEspacioDeportivoImpl(final DAOFactory factory) {this.factory = factory;}
+    public ConsultarTipoEspacioDeportivoImpl(final DAOFactory factory) {
+        this.factory = factory;
+    }
 
 
     @Override
