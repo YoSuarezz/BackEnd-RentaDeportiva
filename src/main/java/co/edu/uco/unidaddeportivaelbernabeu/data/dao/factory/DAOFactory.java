@@ -8,6 +8,7 @@ import co.edu.uco.unidaddeportivaelbernabeu.data.dao.espaciosdeportivos.TipoEspa
 import co.edu.uco.unidaddeportivaelbernabeu.data.dao.espaciosdeportivos.UnidadDeportivaDAO;
 import co.edu.uco.unidaddeportivaelbernabeu.data.dao.factory.enums.Factory;
 import co.edu.uco.unidaddeportivaelbernabeu.data.dao.factory.azuresql.AzureSqlDAOFactory;
+import co.edu.uco.unidaddeportivaelbernabeu.data.dao.tarifas.MonedaDAO;
 import co.edu.uco.unidaddeportivaelbernabeu.data.dao.tarifas.TarifaEstandarDAO;
 import co.edu.uco.unidaddeportivaelbernabeu.data.dao.usuarioingreso.UsuarioDAO;
 
@@ -67,4 +68,6 @@ public abstract class DAOFactory {
     public abstract TarifaEstandarDAO getTarifaEstandarDAO();
 
     public abstract UsuarioDAO getUsuarioDAO();
+
+    public abstract MonedaDAO getMonedaDAO();
 }
