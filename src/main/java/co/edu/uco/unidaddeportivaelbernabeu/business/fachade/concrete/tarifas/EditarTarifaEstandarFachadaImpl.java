@@ -35,7 +35,7 @@ public class EditarTarifaEstandarFachadaImpl implements FacadeWithoutReturn<Tari
         } catch (final Exception exception) {
             factory.cancelarTransaccion();
 
-            var mensajeUsuario = "Se ha presentado un problema tratando de crear la tarifa Estandar";
+            var mensajeUsuario = "Se ha presentado un problema tratando de editar la tarifa Estandar";
             var mensajeTecnico = "Se ha presentado un problema INESPERADO tratando de editar la informacion de la tarifa estandar en el metodo ejecutar de la clase EditarTarifaEstandarFachadaImpl. Por favor revise la traza completa del problema";
 
             throw new BusinessUDElBernabeuException(mensajeTecnico, mensajeUsuario, exception);

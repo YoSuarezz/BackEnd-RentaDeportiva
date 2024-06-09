@@ -16,7 +16,6 @@ import co.edu.uco.unidaddeportivaelbernabeu.entity.espaciosdeportivos.DeporteEnt
 
 public final class DeporteAzureSqlDAO extends SqlConnection implements DeporteDAO {
 
-
     public DeporteAzureSqlDAO(final Connection connection) {
         super(connection);
     }

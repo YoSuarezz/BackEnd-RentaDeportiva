@@ -4,4 +4,5 @@ import co.edu.uco.unidaddeportivaelbernabeu.data.dao.general.ConsultarDAO;
 import co.edu.uco.unidaddeportivaelbernabeu.entity.usuarioingreso.UsuarioEntity;
 
 public interface UsuarioDAO extends ConsultarDAO<UsuarioEntity> {
+    boolean autenticarUsuario(String usuario, String contrasena);
 }

@@ -141,7 +141,7 @@ public final class MessageCatalogBase implements MessageCatalog {
 		mensajes.put(CodigoMensaje.M00083.getIdentificador(), new Mensaje(CodigoMensaje.M00083,
 				"La cantidad de espacios debe ser un numero que este entre 1 y 49"));
 		mensajes.put(CodigoMensaje.M00084.getIdentificador(), new Mensaje(CodigoMensaje.M00084,
-				"Ya existe una tarifa estándar para este deporte."));
+				"Ya existe una tarifa estándar para este tipo de espacio deportivo."));
 		mensajes.put(CodigoMensaje.M00085.getIdentificador(), new Mensaje(CodigoMensaje.M00085,
 				"El ID debe ser positivo."));
 		mensajes.put(CodigoMensaje.M00086.getIdentificador(), new Mensaje(CodigoMensaje.M00086,

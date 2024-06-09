@@ -44,7 +44,7 @@ public class CrearTarifaEstandarImpl implements UseCaseWithoutReturn<TarifaEstan
             var mensajeUsurio = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00085);
             throw new BusinessUDElBernabeuException(mensajeUsurio);
         }
-        if (tarifaEstandar.getPrecioPorHora() <= 0) {
+        if (tarifaEstandar.getPrecioPorHora() < 0) {
             var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00086);
             throw new BusinessUDElBernabeuException(mensajeUsuario);
         }
