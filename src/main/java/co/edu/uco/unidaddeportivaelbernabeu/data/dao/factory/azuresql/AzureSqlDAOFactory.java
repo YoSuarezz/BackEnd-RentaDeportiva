@@ -15,8 +15,10 @@ import co.edu.uco.unidaddeportivaelbernabeu.data.dao.factory.DAOFactory;
 import co.edu.uco.unidaddeportivaelbernabeu.data.dao.sql.azuresql.espaciosdeportivos.DeporteAzureSqlDAO;
 import co.edu.uco.unidaddeportivaelbernabeu.data.dao.sql.azuresql.espaciosdeportivos.TipoEspacioDeportivoAzureSqlDAO;
 import co.edu.uco.unidaddeportivaelbernabeu.data.dao.sql.azuresql.espaciosdeportivos.UnidadDeportivaAzureSqlDAO;
+import co.edu.uco.unidaddeportivaelbernabeu.data.dao.sql.azuresql.tarifas.MonedaAzureSqlDAO;
 import co.edu.uco.unidaddeportivaelbernabeu.data.dao.sql.azuresql.tarifas.TarifaEstandarAzureSqlDAO;
 import co.edu.uco.unidaddeportivaelbernabeu.data.dao.sql.azuresql.usuarioingreso.UsuarioAzureSqlDAO;
+import co.edu.uco.unidaddeportivaelbernabeu.data.dao.tarifas.MonedaDAO;
 import co.edu.uco.unidaddeportivaelbernabeu.data.dao.tarifas.TarifaEstandarDAO;
 import co.edu.uco.unidaddeportivaelbernabeu.data.dao.usuarioingreso.UsuarioDAO;
 
@@ -89,5 +91,10 @@ public final class AzureSqlDAOFactory extends DAOFactory {
 	@Override
 	public UsuarioDAO getUsuarioDAO() {
 		return new UsuarioAzureSqlDAO(connection);
+	}
+
+	@Override
+	public MonedaDAO getMonedaDAO() {
+		return new MonedaAzureSqlDAO(connection);
 	}
 }

@@ -28,9 +28,9 @@ public class DeporteController {
         HttpStatus httpStatusResponse = HttpStatus.OK;
 
         try {
-            final var paisDtoFilter = DeporteDTO.build().setId(NumericHelper.convertToInt(id)).setNombre(nombre);
+            final var deporteDtoFilter = DeporteDTO.build().setId(NumericHelper.convertToInt(id)).setNombre(nombre);
             final ConsultarDeportesFachadaImpl fachada = new ConsultarDeportesFachadaImpl();
-            deporteResponse.setDatos(fachada.ejecutar(paisDtoFilter));
+            deporteResponse.setDatos(fachada.ejecutar(deporteDtoFilter));
             deporteResponse.getMensajes().add(MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00055));
         } catch (final UnidadDeportivaElBernabeuException exception){
             exception.printStackTrace();

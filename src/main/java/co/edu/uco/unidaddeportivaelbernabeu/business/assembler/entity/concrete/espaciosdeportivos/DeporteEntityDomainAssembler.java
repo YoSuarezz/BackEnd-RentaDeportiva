@@ -2,6 +2,7 @@ package co.edu.uco.unidaddeportivaelbernabeu.business.assembler.entity.concrete.
 
 import co.edu.uco.unidaddeportivaelbernabeu.business.assembler.entity.EntityDomainAssembler;
 import co.edu.uco.unidaddeportivaelbernabeu.business.domain.espaciosdeportivos.DeporteDomain;
+import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.helpers.NumericHelper;
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.helpers.ObjectHelper;
 import co.edu.uco.unidaddeportivaelbernabeu.entity.espaciosdeportivos.DeporteEntity;
 
@@ -18,7 +19,7 @@ public final class DeporteEntityDomainAssembler implements EntityDomainAssembler
 
     @Override
     public final DeporteDomain ensamblarDominio(final DeporteEntity entity) {
-        var deporteEntityTemp = ObjectHelper.getObjectHelper().getDefault(entity, DeporteEntity.build(0));
+        var deporteEntityTemp = ObjectHelper.getObjectHelper().getDefault(entity, DeporteEntity.build(NumericHelper.ZERO));
         return DeporteDomain.crear(deporteEntityTemp.getId(), deporteEntityTemp.getNombre());
     }
 

@@ -29,13 +29,13 @@ public class EditarTarifaEstandarImpl implements UseCaseWithoutReturn<TarifaEsta
 
         //POL 02 Asegurar que no exista una tarifa estandar vigente para un mismo tipo de espacio a excepcion de que sea la que se esta editando
         if (existeOtraTarifaParaDeporte(tarifaEstandar)) {
-            var mensajeUsuario = "Ya existe otra tarifa estandar para el tipo de espacio deportivo al cual quieres editar la tarifa estandar.";
+            var mensajeUsuario = "Ya existe otra tarifa estandar para el tipo de espacio deportivo al cual le quieres asignar la tarifa estandar.";
             throw new BusinessUDElBernabeuException(mensajeUsuario);
         }
 
         //POL 03 Asegurar que si exista el tipo de espacio deportivo al cual se le va a asignar la tarifa estandar en su edicion.
         if (!existeTipoEspacioDeportivo(tarifaEstandar.getTipoEspacioDeportivo().getId())) {
-            var mensajeUsuario = "No existe el tipo de espacio deportivo al cual quieres aplicar la tarifa estandar que se esta editando";
+            var mensajeUsuario = "No existe el tipo de espacio deportivo al cual quieres aplicar la tarifa estandar.";
             throw new BusinessUDElBernabeuException(mensajeUsuario);
         }
 

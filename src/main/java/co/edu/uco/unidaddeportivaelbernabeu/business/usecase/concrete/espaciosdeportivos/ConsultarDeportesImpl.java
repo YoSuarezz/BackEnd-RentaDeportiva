@@ -14,6 +14,7 @@ public final class ConsultarDeportesImpl implements UseCaseWithReturn<DeporteDom
     public ConsultarDeportesImpl(final DAOFactory factory) {
         this.factory = factory;
     }
+
     @Override
     public final List<DeporteDomain> ejecutar(final DeporteDomain deporte) {
         var deporteEntity = DeporteEntityDomainAssembler.obtenerInstancia().ensamblarEntidad(deporte);

@@ -137,7 +137,7 @@ public final class MessageCatalogBase implements MessageCatalog {
 		mensajes.put(CodigoMensaje.M00081.getIdentificador(), new Mensaje(CodigoMensaje.M00081,
 				"El nombre del tipo de espacio deportivo no puede exceder los 20 caracteres, por favor intente nuevamente con un nombre valido"));
 		mensajes.put(CodigoMensaje.M00082.getIdentificador(), new Mensaje(CodigoMensaje.M00082,
-				"El nombre del tipo de espacio no puede tener letras y espacios, por favor intente nuevamente con un nombre valido"));
+				"El nombre del tipo de espacio solo puede tener letras y espacios, por favor intente nuevamente con un nombre valido"));
 		mensajes.put(CodigoMensaje.M00083.getIdentificador(), new Mensaje(CodigoMensaje.M00083,
 				"La cantidad de espacios debe ser un numero que este entre 1 y 49"));
 		mensajes.put(CodigoMensaje.M00084.getIdentificador(), new Mensaje(CodigoMensaje.M00084,
