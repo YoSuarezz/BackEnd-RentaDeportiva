@@ -84,11 +84,11 @@ public class TarifaEstandarAzureSqlDAO implements TarifaEstandarDAO {
 
             int rowsAffected = statement.executeUpdate();
             if (rowsAffected == 0) {
-                throw new DataUDElBernabeuException("No se encontró la tarifa estándar con el ID especificado.");
+                throw new DataUDElBernabeuException(MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00115));
             }
         } catch (SQLException exception) {
             var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00002);
-            var mensajeTecnico = "Se ha presentado un problema INESPERADO tratando de actualizar las tarifas estándar en la base de datos.";
+            var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00116);
 
             throw new DataUDElBernabeuException(mensajeTecnico, mensajeUsuario, exception);
         }
