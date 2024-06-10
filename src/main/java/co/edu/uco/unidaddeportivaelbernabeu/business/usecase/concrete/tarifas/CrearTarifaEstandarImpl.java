@@ -40,11 +40,12 @@ public class CrearTarifaEstandarImpl implements UseCaseWithoutReturn<TarifaEstan
     }
 
     private void validarTarifa(TarifaEstandarDomain tarifaEstandar) {
-        if (tarifaEstandar.getId() < 0) {
-            var mensajeUsurio = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00085);
-            throw new BusinessUDElBernabeuException(mensajeUsurio);
+        if (tarifaEstandar.getTipoEspacioDeportivo() == null || tarifaEstandar.getTipoEspacioDeportivo().getId() <= 0) {
+            var mensajeUsuario = "Debe seleccionar un tipo de espacio deportivo";
+            throw new BusinessUDElBernabeuException(mensajeUsuario);
         }
-        if (tarifaEstandar.getPrecioPorHora() < 0) {
+
+        if (tarifaEstandar.getPrecioPorHora() <= 0) {
             var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00086);
             throw new BusinessUDElBernabeuException(mensajeUsuario);
         }
@@ -53,7 +54,7 @@ public class CrearTarifaEstandarImpl implements UseCaseWithoutReturn<TarifaEstan
             throw new BusinessUDElBernabeuException(mensajeUsuario);
         }
         if (tarifaEstandar.getFechaHoraInicio() == null) {
-            var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje((CodigoMensaje.M00088));
+            var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00088);
             throw new BusinessUDElBernabeuException(mensajeUsuario);
         }
         if (tarifaEstandar.getFechaHoraFin() == null) {
@@ -68,7 +69,10 @@ public class CrearTarifaEstandarImpl implements UseCaseWithoutReturn<TarifaEstan
             var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00104);
             throw new BusinessUDElBernabeuException(mensajeUsuario);
         }
-
+        if (tarifaEstandar.getMoneda() == null || tarifaEstandar.getMoneda().getId() <= 0) {
+            var mensajeUsuario = "La moneda es obligatoria y debe ser válida.";
+            throw new BusinessUDElBernabeuException(mensajeUsuario);
+        }
     }
 
     private boolean existeTipoEspacioDeportivo(int tipoEspacioDeportivoId) {

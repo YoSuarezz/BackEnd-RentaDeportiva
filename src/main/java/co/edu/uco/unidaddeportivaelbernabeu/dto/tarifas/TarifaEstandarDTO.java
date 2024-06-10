@@ -13,6 +13,7 @@ public class TarifaEstandarDTO {
 
     private int id;
     private TipoEspacioDeportivoDTO tipoEspacioDeportivo;
+    private MonedaDTO moneda;
     private int precioPorHora;
     private String nombre;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
@@ -20,9 +21,10 @@ public class TarifaEstandarDTO {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime fechaHoraFin;
 
-    public TarifaEstandarDTO(int id, TipoEspacioDeportivoDTO tipoEspacioDeportivo, int precioPorHora, String nombre, LocalDateTime fechaHoraInicio, LocalDateTime fechaHoraFin) {
+    public TarifaEstandarDTO(final int id,final TipoEspacioDeportivoDTO tipoEspacioDeportivo,final MonedaDTO moneda,final int precioPorHora,final String nombre,final LocalDateTime fechaHoraInicio,final LocalDateTime fechaHoraFin) {
         setId(id);
         setTipoEspacioDeportivo(tipoEspacioDeportivo);
+        setMoneda(moneda);
         setPrecioPorHora(precioPorHora);
         setNombre(nombre);
         setFechaHoraInicio(fechaHoraInicio);
@@ -55,6 +57,15 @@ public class TarifaEstandarDTO {
 
     public final TarifaEstandarDTO setTipoEspacioDeportivo(TipoEspacioDeportivoDTO tipoEspacioDeportivo) {
         this.tipoEspacioDeportivo = ObjectHelper.getObjectHelper().getDefault(tipoEspacioDeportivo, TipoEspacioDeportivoDTO.build());
+        return this;
+    }
+
+    public MonedaDTO getMoneda() {
+        return moneda;
+    }
+
+    public final TarifaEstandarDTO setMoneda(MonedaDTO moneda) {
+        this.moneda = ObjectHelper.getObjectHelper().getDefault(moneda, MonedaDTO.build());
         return this;
     }
 
@@ -96,5 +107,4 @@ public class TarifaEstandarDTO {
         DateHelper.validateDates(this.fechaHoraInicio, this.fechaHoraFin);
         return this;
     }
-
 }

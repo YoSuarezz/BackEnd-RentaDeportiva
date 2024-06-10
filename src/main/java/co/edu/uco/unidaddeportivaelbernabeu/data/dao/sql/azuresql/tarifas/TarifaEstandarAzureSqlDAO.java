@@ -5,6 +5,7 @@ import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.messagecatal
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.messagecatalog.data.CodigoMensaje;
 import co.edu.uco.unidaddeportivaelbernabeu.data.dao.tarifas.TarifaEstandarDAO;
 import co.edu.uco.unidaddeportivaelbernabeu.entity.TipoEspacioDeportivoEntity;
+import co.edu.uco.unidaddeportivaelbernabeu.entity.tarifas.MonedaEntity;
 import co.edu.uco.unidaddeportivaelbernabeu.entity.tarifas.TarifaEstandarEntity;
 
 import java.sql.*;
@@ -21,14 +22,15 @@ public class TarifaEstandarAzureSqlDAO implements TarifaEstandarDAO {
 
     @Override
     public void crear(TarifaEstandarEntity entidad) {
-        final String sql = "INSERT INTO TarifaEstandar (tipoEspacioDeportivoId, precioPorHora, nombre, fechaHoraInicio, fechaHoraFin) " +
-                "VALUES (?, ?, ?, ?, ?)";
+        final String sql = "INSERT INTO TarifaEstandar (tipoEspacioDeportivoId, precioPorHora, nombre, fechaHoraInicio, fechaHoraFin, monedaId) " +
+                "VALUES (?, ?, ?, ?, ?, ?)";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, entidad.getTipoEspacioDeportivo().getId());
             statement.setInt(2, entidad.getPrecioPorHora());
             statement.setString(3, entidad.getNombre());
             statement.setTimestamp(4, Timestamp.valueOf(entidad.getFechaHoraInicio().withSecond(0).withNano(0)));
             statement.setTimestamp(5, Timestamp.valueOf(entidad.getFechaHoraFin().withSecond(0).withNano(0)));
+            statement.setInt(6, entidad.getMoneda().getId());
 
             statement.executeUpdate();
         } catch (SQLException exception) {
@@ -41,7 +43,7 @@ public class TarifaEstandarAzureSqlDAO implements TarifaEstandarDAO {
 
     @Override
     public List<TarifaEstandarEntity> consultarPorTipoEspacioDeportivo(int tipoEspacioDeportivoId) {
-        final String sql = "SELECT id, tipoEspacioDeportivoId, nombre, precioPorHora, fechaHoraInicio, fechaHoraFin FROM TarifaEstandar WHERE tipoEspacioDeportivoId = ?";
+        final String sql = "SELECT id, tipoEspacioDeportivoId, nombre, precioPorHora, fechaHoraInicio, fechaHoraFin, monedaId FROM TarifaEstandar WHERE tipoEspacioDeportivoId = ?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, tipoEspacioDeportivoId);
 
@@ -51,6 +53,7 @@ public class TarifaEstandarAzureSqlDAO implements TarifaEstandarDAO {
                     tarifas.add(TarifaEstandarEntity.build(
                             resultSet.getInt("id"),
                             TipoEspacioDeportivoEntity.build(resultSet.getInt("tipoEspacioDeportivoId")),
+                            MonedaEntity.build(resultSet.getInt("monedaId")),
                             resultSet.getString("nombre"),
                             resultSet.getInt("precioPorHora"),
                             resultSet.getTimestamp("fechaHoraInicio").toLocalDateTime(),
@@ -69,14 +72,15 @@ public class TarifaEstandarAzureSqlDAO implements TarifaEstandarDAO {
 
     @Override
     public void actualizar(TarifaEstandarEntity entidad) {
-        final String sql = "UPDATE TarifaEstandar SET tipoEspacioDeportivoId = ?, precioPorHora = ?, nombre = ?, fechaHoraInicio = ?, fechaHoraFin = ? WHERE id = ?";
+        final String sql = "UPDATE TarifaEstandar SET tipoEspacioDeportivoId = ?, precioPorHora = ?, nombre = ?, fechaHoraInicio = ?, fechaHoraFin = ?, monedaId = ? WHERE id = ?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, entidad.getTipoEspacioDeportivo().getId());
             statement.setInt(2, entidad.getPrecioPorHora());
             statement.setString(3, entidad.getNombre());
             statement.setTimestamp(4, Timestamp.valueOf(entidad.getFechaHoraInicio().withSecond(0).withNano(0)));
             statement.setTimestamp(5, Timestamp.valueOf(entidad.getFechaHoraFin().withSecond(0).withNano(0)));
-            statement.setInt(6, entidad.getId());
+            statement.setInt(6, entidad.getMoneda().getId());
+            statement.setInt(7, entidad.getId());
 
             int rowsAffected = statement.executeUpdate();
             if (rowsAffected == 0) {
@@ -92,7 +96,7 @@ public class TarifaEstandarAzureSqlDAO implements TarifaEstandarDAO {
     @Override
     public List<TarifaEstandarEntity> consultar(TarifaEstandarEntity criterio) {
         List<TarifaEstandarEntity> resultados = new ArrayList<>();
-        String sql = "SELECT id, tipoEspacioDeportivoId, nombre, precioPorHora, fechaHoraInicio, fechaHoraFin FROM TarifaEstandar";
+        String sql = "SELECT id, tipoEspacioDeportivoId, monedaId , nombre, precioPorHora, fechaHoraInicio, fechaHoraFin FROM TarifaEstandar";
         try (PreparedStatement statement = connection.prepareStatement(sql);
              ResultSet resultSet = statement.executeQuery()) {
 
@@ -100,6 +104,7 @@ public class TarifaEstandarAzureSqlDAO implements TarifaEstandarDAO {
                 TarifaEstandarEntity tarifa = new TarifaEstandarEntity(
                         resultSet.getInt("id"),
                         TipoEspacioDeportivoEntity.build(resultSet.getInt("tipoEspacioDeportivoId")),
+                        MonedaEntity.build(resultSet.getInt("monedaId")),
                         resultSet.getString("nombre"),
                         resultSet.getInt("precioPorHora"),
                         resultSet.getTimestamp("fechaHoraInicio").toLocalDateTime(),
@@ -116,4 +121,3 @@ public class TarifaEstandarAzureSqlDAO implements TarifaEstandarDAO {
         return resultados;
     }
 }
-

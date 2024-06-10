@@ -3,9 +3,11 @@ package co.edu.uco.unidaddeportivaelbernabeu.business.assembler.dto.concrete.tar
 import co.edu.uco.unidaddeportivaelbernabeu.business.assembler.dto.DTODomainAssembler;
 import co.edu.uco.unidaddeportivaelbernabeu.business.assembler.dto.concrete.TipoEspacioDeportivoDTODomainAssembler;
 import co.edu.uco.unidaddeportivaelbernabeu.business.domain.TipoEspacioDeportivoDomain;
+import co.edu.uco.unidaddeportivaelbernabeu.business.domain.tarifas.MonedaDomain;
 import co.edu.uco.unidaddeportivaelbernabeu.business.domain.tarifas.TarifaEstandarDomain;
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.helpers.ObjectHelper;
 import co.edu.uco.unidaddeportivaelbernabeu.dto.TipoEspacioDeportivoDTO;
+import co.edu.uco.unidaddeportivaelbernabeu.dto.tarifas.MonedaDTO;
 import co.edu.uco.unidaddeportivaelbernabeu.dto.tarifas.TarifaEstandarDTO;
 
 import java.util.ArrayList;
@@ -16,6 +18,8 @@ public class TarifaEstandarDTODomainAssembler implements DTODomainAssembler<Tari
     private static final DTODomainAssembler<TarifaEstandarDomain, TarifaEstandarDTO> instancia = new TarifaEstandarDTODomainAssembler();
 
     private static final DTODomainAssembler<TipoEspacioDeportivoDomain, TipoEspacioDeportivoDTO> tipoEspacioDeportivoAssembler = TipoEspacioDeportivoDTODomainAssembler.obtenerInstancia();
+
+    private static final DTODomainAssembler<MonedaDomain, MonedaDTO> monedaAssembler = MonedaDTODomainAssembler.obtenerInstancia();
 
     private TarifaEstandarDTODomainAssembler(){
         super();
@@ -29,9 +33,11 @@ public class TarifaEstandarDTODomainAssembler implements DTODomainAssembler<Tari
     public TarifaEstandarDomain ensamblarDominio(TarifaEstandarDTO dto) {
         var tarifaEstandarDTOTemp = ObjectHelper.getObjectHelper().getDefault(dto, new TarifaEstandarDTO());
         var tipoEspacioDeportivoDomain = tipoEspacioDeportivoAssembler.ensamblarDominio(tarifaEstandarDTOTemp.getTipoEspacioDeportivo());
+        var monedaDomain = monedaAssembler.ensamblarDominio(tarifaEstandarDTOTemp.getMoneda());
 
         return TarifaEstandarDomain.crear(tarifaEstandarDTOTemp.getId(),
                 tipoEspacioDeportivoDomain,
+                monedaDomain,
                 tarifaEstandarDTOTemp.getPrecioPorHora(),
                 tarifaEstandarDTOTemp.getNombre(),
                 tarifaEstandarDTOTemp.getFechaHoraInicio(),

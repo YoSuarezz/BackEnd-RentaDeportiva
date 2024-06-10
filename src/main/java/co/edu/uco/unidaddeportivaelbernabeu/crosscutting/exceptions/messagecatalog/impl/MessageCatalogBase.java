@@ -142,9 +142,9 @@ public final class MessageCatalogBase implements MessageCatalog {
 		mensajes.put(CodigoMensaje.M00084.getIdentificador(), new Mensaje(CodigoMensaje.M00084,
 				"Ya existe una tarifa estándar para este tipo de espacio deportivo."));
 		mensajes.put(CodigoMensaje.M00085.getIdentificador(), new Mensaje(CodigoMensaje.M00085,
-				"El ID debe ser positivo."));
+				"Debe seleccionar un tipo de espacio deportivo."));
 		mensajes.put(CodigoMensaje.M00086.getIdentificador(), new Mensaje(CodigoMensaje.M00086,
-				"El precio por hora debe ser positivo."));
+				"El precio por hora debe ser obligatorio y mayor a 0"));
 		mensajes.put(CodigoMensaje.M00087.getIdentificador(), new Mensaje(CodigoMensaje.M00087,
 				"El nombre no puede ser nulo o vacío."));
 		mensajes.put(CodigoMensaje.M00088.getIdentificador(), new Mensaje(CodigoMensaje.M00088,

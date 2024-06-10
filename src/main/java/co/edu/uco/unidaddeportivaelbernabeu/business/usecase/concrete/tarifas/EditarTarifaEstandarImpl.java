@@ -77,6 +77,10 @@ public class EditarTarifaEstandarImpl implements UseCaseWithoutReturn<TarifaEsta
             var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00104);
             throw new BusinessUDElBernabeuException(mensajeUsuario);
         }
+        if (tarifaEstandar.getMoneda() == null || tarifaEstandar.getMoneda().getId() <= 0) {
+            var mensajeUsuario = "La moneda no puede ser nula o inválida.";
+            throw new BusinessUDElBernabeuException(mensajeUsuario);
+        }
     }
 
     private boolean existeOtraTarifaParaDeporte(TarifaEstandarDomain tarifaEstandar) {

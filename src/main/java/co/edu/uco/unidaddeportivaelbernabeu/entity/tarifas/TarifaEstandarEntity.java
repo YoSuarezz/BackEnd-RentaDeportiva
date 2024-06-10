@@ -12,31 +12,35 @@ public class TarifaEstandarEntity {
 
     private int id;
     private TipoEspacioDeportivoEntity tipoEspacioDeportivo;
+    private MonedaEntity moneda;
     private int precioPorHora;
     private String nombre;
     private LocalDateTime fechaHoraInicio;
     private LocalDateTime fechaHoraFin;
 
-    public TarifaEstandarEntity(int id, TipoEspacioDeportivoEntity tipoEspacioDeportivo, String nombre,
-                                int precioPorHora, LocalDateTime fechaHoraInicio, LocalDateTime fechaHoraFin) {
+    public TarifaEstandarEntity(final int id,final TipoEspacioDeportivoEntity tipoEspacioDeportivo,final MonedaEntity moneda, final String nombre,
+                                final int precioPorHora,final LocalDateTime fechaHoraInicio,final LocalDateTime fechaHoraFin) {
         setId(id);
         setTipoEspacioDeportivo(tipoEspacioDeportivo);
+        setMoneda(moneda);
         setNombre(nombre);
         setPrecioPorHora(precioPorHora);
         setFechaHoraInicio(fechaHoraInicio);
         setFechaHoraFin(fechaHoraFin);
     }
 
-    public TarifaEstandarEntity(int id) {
+    public TarifaEstandarEntity(final int id) {
         setId(id);
         setTipoEspacioDeportivo(TipoEspacioDeportivoEntity.build());
+        setMoneda(MonedaEntity.build());
         setNombre(TextHelper.EMPTY);
         setPrecioPorHora(NumericHelper.ZERO);
     }
 
-    public TarifaEstandarEntity(int id, TipoEspacioDeportivoEntity tipoEspacioDeportivo, String nombre) {
+    public TarifaEstandarEntity(int id, TipoEspacioDeportivoEntity tipoEspacioDeportivo,MonedaEntity moneda, String nombre) {
         setId(id);
         setTipoEspacioDeportivo(tipoEspacioDeportivo);
+        setMoneda(moneda);
         setNombre(nombre);
     }
 
@@ -58,6 +62,15 @@ public class TarifaEstandarEntity {
 
     public final TarifaEstandarEntity setTipoEspacioDeportivo(final TipoEspacioDeportivoEntity tipoEspacioDeportivo) {
         this.tipoEspacioDeportivo = ObjectHelper.getObjectHelper().getDefault(tipoEspacioDeportivo, TipoEspacioDeportivoEntity.build());
+        return this;
+    }
+
+    public MonedaEntity getMoneda() {
+        return moneda;
+    }
+
+    public final TarifaEstandarEntity setMoneda(final MonedaEntity moneda) {
+        this.moneda = ObjectHelper.getObjectHelper().getDefault(moneda, MonedaEntity.build());
         return this;
     }
 
@@ -96,16 +109,16 @@ public class TarifaEstandarEntity {
     }
 
     public static final TarifaEstandarEntity build(final int id, final TipoEspacioDeportivoEntity tipoEspacioDeportivo,
-                                                   final String nombre, final int precioPorHora,
+                                                   final MonedaEntity moneda, final String nombre, final int precioPorHora,
                                                    final LocalDateTime fechaHoraInicio, final LocalDateTime fechaHoraFin){
-        return new TarifaEstandarEntity(id, tipoEspacioDeportivo, nombre, precioPorHora, fechaHoraInicio, fechaHoraFin);
+        return new TarifaEstandarEntity(id, tipoEspacioDeportivo,moneda, nombre, precioPorHora, fechaHoraInicio, fechaHoraFin);
     }
 
     public static final TarifaEstandarEntity build(){
         return new TarifaEstandarEntity(NumericHelper.ZERO);
     }
 
-    public static final TarifaEstandarEntity build(final int id, String nombre, final TipoEspacioDeportivoEntity tipoEspacioDeportivo){
-        return new TarifaEstandarEntity(id, tipoEspacioDeportivo, nombre);
+    public static final TarifaEstandarEntity build(final int id, String nombre, final TipoEspacioDeportivoEntity tipoEspacioDeportivo, final MonedaEntity moneda){
+        return new TarifaEstandarEntity(id, tipoEspacioDeportivo, moneda, nombre);
     }
 }
