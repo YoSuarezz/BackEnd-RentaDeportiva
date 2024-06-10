@@ -57,7 +57,7 @@ public class UsuarioController {
             final var usuarioDtoFilter = UsuarioDTO.build().setId(NumericHelper.convertToInt(id)).setUsuario(usuario);
             final ConsultarUsuariosFachadaImpl fachada = new ConsultarUsuariosFachadaImpl();
             usuarioResponse.setDatos(fachada.ejecutar(usuarioDtoFilter));
-            usuarioResponse.getMensajes().add(MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00055));
+            usuarioResponse.getMensajes().add("Usuarios Consultados Exitosamente");
         } catch (final UnidadDeportivaElBernabeuException exception) {
             exception.printStackTrace();
             usuarioResponse.getMensajes().add(exception.getMensajeUsuario());

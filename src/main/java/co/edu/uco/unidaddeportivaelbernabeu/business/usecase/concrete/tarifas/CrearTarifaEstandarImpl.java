@@ -26,22 +26,25 @@ public class CrearTarifaEstandarImpl implements UseCaseWithoutReturn<TarifaEstan
 
         var tarifaEstandarEntity = TarifaEstandarEntityDomainAssembler.obtenerInstancia().ensamblarEntidad(tarifaEstandar);
 
-        if (existeTarifaParaDeporte(tarifaEstandarEntity.getTipoEspacioDeportivo().getId())) {
+        //Pol5 ---> Implementacion
+        if (existeTarifaParaEspacio(tarifaEstandarEntity.getTipoEspacioDeportivo().getId())) {
             var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00084);
             throw new BusinessUDElBernabeuException(mensajeUsuario);
         }
 
+
+        //Pol 2 ---> Implementacion
         if (!existeTipoEspacioDeportivo(tarifaEstandarEntity.getTipoEspacioDeportivo().getId())) {
             var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00101);
             throw new BusinessUDElBernabeuException(mensajeUsuario);
         }
-
         factory.getTarifaEstandarDAO().crear(tarifaEstandarEntity);
     }
 
+    //Pol3 ---> Obligatoriedad, formato, Rango
     private void validarTarifa(TarifaEstandarDomain tarifaEstandar) {
         if (tarifaEstandar.getTipoEspacioDeportivo() == null || tarifaEstandar.getTipoEspacioDeportivo().getId() <= 0) {
-            var mensajeUsuario = "Debe seleccionar un tipo de espacio deportivo";
+            var mensajeUsuario = "Se debe seleccionar un tipo de espacio deportivo";
             throw new BusinessUDElBernabeuException(mensajeUsuario);
         }
 
@@ -49,6 +52,7 @@ public class CrearTarifaEstandarImpl implements UseCaseWithoutReturn<TarifaEstan
             var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00086);
             throw new BusinessUDElBernabeuException(mensajeUsuario);
         }
+
         if (tarifaEstandar.getNombre() == null || tarifaEstandar.getNombre().trim().isEmpty()) {
             var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00087);
             throw new BusinessUDElBernabeuException(mensajeUsuario);
@@ -70,11 +74,13 @@ public class CrearTarifaEstandarImpl implements UseCaseWithoutReturn<TarifaEstan
             throw new BusinessUDElBernabeuException(mensajeUsuario);
         }
         if (tarifaEstandar.getMoneda() == null || tarifaEstandar.getMoneda().getId() <= 0) {
-            var mensajeUsuario = "La moneda es obligatoria y debe ser válida.";
+            var mensajeUsuario = "La moneda es obligatoria y debe ser seleccionada.";
             throw new BusinessUDElBernabeuException(mensajeUsuario);
         }
     }
 
+
+    //Pol2 ---> Verificar que el TipoEspacioDeportivo si existe
     private boolean existeTipoEspacioDeportivo(int tipoEspacioDeportivoId) {
         var tipoEspacioDeportivoDAO = factory.getTipoEspacioDeportivoDAO();
         var criterio = TipoEspacioDeportivoEntity.build(tipoEspacioDeportivoId);
@@ -83,7 +89,8 @@ public class CrearTarifaEstandarImpl implements UseCaseWithoutReturn<TarifaEstan
         return !tiposEspacio.isEmpty();
     }
 
-    private boolean existeTarifaParaDeporte(int tipoEspacioDeportivoId) {
+    //Pol5 ---> Asegurar que no existe una tarifa estandar ya vigente para ese tipo de espacio deportivo
+    private boolean existeTarifaParaEspacio(int tipoEspacioDeportivoId) {
         var tipoEspacioDeportivoDAO = factory.getTipoEspacioDeportivoDAO();
         var criterio = TipoEspacioDeportivoEntity.build(tipoEspacioDeportivoId);
         List<TipoEspacioDeportivoEntity> tiposEspacio = tipoEspacioDeportivoDAO.consultar(criterio);

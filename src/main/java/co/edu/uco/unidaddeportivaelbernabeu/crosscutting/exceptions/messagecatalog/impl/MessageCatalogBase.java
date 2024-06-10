@@ -146,11 +146,11 @@ public final class MessageCatalogBase implements MessageCatalog {
 		mensajes.put(CodigoMensaje.M00086.getIdentificador(), new Mensaje(CodigoMensaje.M00086,
 				"El precio por hora debe ser obligatorio y mayor a 0"));
 		mensajes.put(CodigoMensaje.M00087.getIdentificador(), new Mensaje(CodigoMensaje.M00087,
-				"El nombre no puede ser nulo o vacío."));
+				"El nombre es obligatorio y no puede ser nulo o vacio."));
 		mensajes.put(CodigoMensaje.M00088.getIdentificador(), new Mensaje(CodigoMensaje.M00088,
-				"La fecha y hora de inicio no pueden ser nulas o vacias."));
+				"La fecha y hora de inicio es obligatoria no pueden ser nulas o vacias."));
 		mensajes.put(CodigoMensaje.M00089.getIdentificador(), new Mensaje(CodigoMensaje.M00089,
-				"La fecha y hora de fin no pueden ser nulas o vacias."));
+				"La fecha y hora de fin es obligatoria no pueden ser nulas o vacias."));
 		mensajes.put(CodigoMensaje.M00090.getIdentificador(), new Mensaje(CodigoMensaje.M00090,
 				"La fecha de inicio no puede ser posterior a la fecha de fin."));
 		mensajes.put(CodigoMensaje.M00091.getIdentificador(), new Mensaje(CodigoMensaje.M00091,
@@ -180,7 +180,7 @@ public final class MessageCatalogBase implements MessageCatalog {
 		mensajes.put(CodigoMensaje.M00103.getIdentificador(), new Mensaje(CodigoMensaje.M00103,
 				"Se ha presentado un problema inesperado tratando de eliminar el tipo de espacio de deportivo"));
 		mensajes.put(CodigoMensaje.M00104.getIdentificador(), new Mensaje(CodigoMensaje.M00104,
-				"El nombre de la tarifa estandar no puede exceder los 35 caracteres, por favor intente nuevamente con un nombre valido"));
+				"El nombre de la tarifa estandar no puede exceder los 50 caracteres, por favor intente nuevamente con un nombre valido"));
 		mensajes.put(CodigoMensaje.M00105.getIdentificador(), new Mensaje(CodigoMensaje.M00105,
 				"No existe el deporte con el cual se esperaba crear el tipo de espacio deportivo"));
 
