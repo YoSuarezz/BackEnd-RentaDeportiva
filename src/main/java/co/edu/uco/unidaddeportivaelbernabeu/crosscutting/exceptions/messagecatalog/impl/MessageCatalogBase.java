@@ -1,6 +1,5 @@
 package co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.messagecatalog.impl;
 
-import co.edu.uco.unidaddeportivaelbernabeu.business.usecase.concrete.EliminarTipoEspacioDeportivoImpl;
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.custom.CrosscuttingUDElBernabeuException;
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.messagecatalog.MessageCatalog;
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.messagecatalog.data.CodigoMensaje;
@@ -65,9 +64,9 @@ public final class MessageCatalogBase implements MessageCatalog {
 		mensajes.put(CodigoMensaje.M00040.getIdentificador(), new Mensaje(CodigoMensaje.M00040,
 				"No existe configurada una factoria de datos para una base de datos ORACLE"));
 		mensajes.put(CodigoMensaje.M00041.getIdentificador(), new Mensaje(CodigoMensaje.M00041,
-				"No existe configurada una factoria de datos para una base de datos MYSQL"));
+				"El deporte debe contener unicamente letras y espacios, intente por favor nuevamente con un nombre valido "));
 		mensajes.put(CodigoMensaje.M00042.getIdentificador(), new Mensaje(CodigoMensaje.M00042,
-				"No existe configurada una factoria de datos para una base de datos POSTGESQL"));
+				"El nombre del Deporte no puede exceder los 20 caracteres, por favor intente nuevamente con un deporte valido "));
 		mensajes.put(CodigoMensaje.M00043.getIdentificador(), new Mensaje(CodigoMensaje.M00043,
 				"No existe configurada una factoria de datos para una base de datos SQL SERVER"));
 		mensajes.put(CodigoMensaje.M00044.getIdentificador(), new Mensaje(CodigoMensaje.M00044,
@@ -133,13 +132,13 @@ public final class MessageCatalogBase implements MessageCatalog {
 		mensajes.put(CodigoMensaje.M00079.getIdentificador(), new Mensaje(CodigoMensaje.M00079,
 				"No es posible establecer el nombre debido a que ya hay otro tipo de espacio deportivo con el mismo nombre"));
 		mensajes.put(CodigoMensaje.M00080.getIdentificador(), new Mensaje(CodigoMensaje.M00080,
-				"El nombre del tipo de espacio deportivo es obligatorio, por favor ingrese un nombre valido"));
+				"Por favor complete todos los campos"));
 		mensajes.put(CodigoMensaje.M00081.getIdentificador(), new Mensaje(CodigoMensaje.M00081,
 				"El nombre del tipo de espacio deportivo no puede exceder los 20 caracteres, por favor intente nuevamente con un nombre valido"));
 		mensajes.put(CodigoMensaje.M00082.getIdentificador(), new Mensaje(CodigoMensaje.M00082,
 				"El nombre del tipo de espacio solo puede tener letras y espacios, por favor intente nuevamente con un nombre valido"));
 		mensajes.put(CodigoMensaje.M00083.getIdentificador(), new Mensaje(CodigoMensaje.M00083,
-				"La cantidad de espacios debe ser un numero que este entre 1 y 49"));
+				"La cantidad de espacios debe ser un numero que este entre 1 y 49, y el campo no puede estar vacío "));
 		mensajes.put(CodigoMensaje.M00084.getIdentificador(), new Mensaje(CodigoMensaje.M00084,
 				"Ya existe una tarifa estándar para este tipo de espacio deportivo."));
 		mensajes.put(CodigoMensaje.M00085.getIdentificador(), new Mensaje(CodigoMensaje.M00085,
@@ -184,6 +183,7 @@ public final class MessageCatalogBase implements MessageCatalog {
 				"El nombre de la tarifa estandar no puede exceder los 35 caracteres, por favor intente nuevamente con un nombre valido"));
 		mensajes.put(CodigoMensaje.M00105.getIdentificador(), new Mensaje(CodigoMensaje.M00105,
 				"No existe el deporte con el cual se esperaba crear el tipo de espacio deportivo"));
+
 	}
 	@Override
 	public final String obtenerContenidoMensaje(final CodigoMensaje codigo, final String... parametros) {

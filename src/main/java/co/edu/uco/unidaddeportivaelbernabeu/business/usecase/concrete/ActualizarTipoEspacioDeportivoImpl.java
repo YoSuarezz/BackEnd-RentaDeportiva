@@ -42,25 +42,39 @@ public class ActualizarTipoEspacioDeportivoImpl implements UseCaseWithoutReturn<
     }
     //Pol Validar que los datos a editar cumplan con reglas de obligatoriedad, formato, longitud y rango
     private void validarDatos(TipoEspacioDeportivoDomain tipoEspacioDeportivo) {
-        if (tipoEspacioDeportivo.getNombre() == null || tipoEspacioDeportivo.getNombre().trim().isEmpty()) {
+
+        // Que los datos ingresados no sean vacios
+        if (tipoEspacioDeportivo.getNombre().isEmpty() ||
+                tipoEspacioDeportivo.getNombre() == null ||
+                tipoEspacioDeportivo.getEspacio().trim().isEmpty()||
+                tipoEspacioDeportivo.getEspacio() == null)  {
+
             var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00080);
             throw new BusinessUDElBernabeuException(mensajeUsuario);
         }
 
+
+        //Que el nombre no exceda los 20 caracteres ¿
         if (tipoEspacioDeportivo.getNombre().length() > 20) {
             var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00081);
             throw new BusinessUDElBernabeuException(mensajeUsuario);
         }
 
+        //Que el nombre solo contenga letras y espacios
         if (!tipoEspacioDeportivo.getNombre().matches("^[A-Za-z ]+$")) {
             var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00082);
             throw new BusinessUDElBernabeuException(mensajeUsuario);
         }
 
-        if (tipoEspacioDeportivo.getCantidad() < 0 || tipoEspacioDeportivo.getCantidad() > 49) {
+        //Que la cantidad de espacios este entre 1 y 49
+        if (tipoEspacioDeportivo.getCantidad() <= 0 || tipoEspacioDeportivo.getCantidad() > 49) {
             var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00083);
             throw new BusinessUDElBernabeuException(mensajeUsuario);
         }
+
+
+
+
 
     }
 

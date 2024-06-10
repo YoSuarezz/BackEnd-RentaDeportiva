@@ -8,6 +8,9 @@ public final class NumericHelper {
 		super();
 	}
 
+	public static boolean isNullOrEmpty(final String value) {
+		return value == null;
+	}
 	public static final int convertToInt(final String value) {
 		try {
 			return Integer.valueOf(value);
@@ -15,4 +18,6 @@ public final class NumericHelper {
 			return ZERO;
 		}
 	}
+
+
 }
