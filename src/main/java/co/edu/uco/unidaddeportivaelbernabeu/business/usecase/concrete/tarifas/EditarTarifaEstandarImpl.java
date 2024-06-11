@@ -29,19 +29,19 @@ public class EditarTarifaEstandarImpl implements UseCaseWithoutReturn<TarifaEsta
 
         //POL 02 Asegurar que no exista una tarifa estandar vigente para un mismo tipo de espacio a excepcion de que sea la que se esta editando
         if (existeOtraTarifaParaDeporte(tarifaEstandar)) {
-            var mensajeUsuario = "Ya existe otra tarifa estandar para el tipo de espacio deportivo al cual le quieres asignar la tarifa estandar.";
+            var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00122);
             throw new BusinessUDElBernabeuException(mensajeUsuario);
         }
 
         //POL 03 Asegurar que si exista el tipo de espacio deportivo al cual se le va a asignar la tarifa estandar en su edicion.
         if (!existeTipoEspacioDeportivo(tarifaEstandar.getTipoEspacioDeportivo().getId())) {
-            var mensajeUsuario = "No existe el tipo de espacio deportivo al cual quieres aplicar la tarifa estandar.";
+            var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00123);
             throw new BusinessUDElBernabeuException(mensajeUsuario);
         }
 
         //POL 04 Asegurar que exista la tarifa estandar que se va a editar
         if (!existeTarifa(tarifaEstandar.getId())) {
-            var mensajeUsuario = "No existe la tarifa estandar que se desea editar.";
+            var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00124);
             throw new BusinessUDElBernabeuException(mensajeUsuario);
         }
 
@@ -50,7 +50,7 @@ public class EditarTarifaEstandarImpl implements UseCaseWithoutReturn<TarifaEsta
 
     private void validarTarifa(TarifaEstandarDomain tarifaEstandar) {
         if (tarifaEstandar.getId() <= 0) {
-            var mensajeUsuario = "No existe la tarifa estandar que se desea editar";
+            var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00124);
             throw new BusinessUDElBernabeuException(mensajeUsuario);
         }
         if (tarifaEstandar.getPrecioPorHora() <= 0) {
@@ -78,7 +78,7 @@ public class EditarTarifaEstandarImpl implements UseCaseWithoutReturn<TarifaEsta
             throw new BusinessUDElBernabeuException(mensajeUsuario);
         }
         if (tarifaEstandar.getMoneda() == null || tarifaEstandar.getMoneda().getId() <= 0) {
-            var mensajeUsuario = "La moneda no puede ser nula o inválida.";
+            var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00125);
             throw new BusinessUDElBernabeuException(mensajeUsuario);
         }
     }

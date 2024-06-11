@@ -53,8 +53,33 @@ public final class MessageCatalogExternalService implements MessageCatalog {
 				"Se ha presentado un problema al consultar los tipos de espacio deportivo"));
 		mensajes.put(CodigoMensaje.M00067.getIdentificador(), new Mensaje(CodigoMensaje.M00067,
 				"Se ha presentado un problema consultando los datos de los tipos de espacios deportivos en la base de datos."));
+		mensajes.put(CodigoMensaje.M00106.getIdentificador(), new Mensaje(CodigoMensaje.M00106,
+				"No ha sido posible consultar la informacion de los usuarios, por favor intentelo de nuevo o comuniquese con el admin"));
+		mensajes.put(CodigoMensaje.M00107.getIdentificador(), new Mensaje(CodigoMensaje.M00107,
+				"Se ha presentado un problema ejecutando la sentencia SQL en la base de datos Azure SQL"));
+		mensajes.put(CodigoMensaje.M00108.getIdentificador(), new Mensaje(CodigoMensaje.M00108,
+				"No ha sido posible llevar a cabo la consulta de informacion de informacion de los usuarios. Por favor intente de nuevo y en caso de persistir el problema, comuniquese conel administrador de la UD El Bernabeu"));
+		mensajes.put(CodigoMensaje.M00109.getIdentificador(), new Mensaje(CodigoMensaje.M00109,
+				"Se ha presentado un INESPERADO problema ejecutando la sentencia SQL de consulta en la base de datos Azure SQL"));
+		mensajes.put(CodigoMensaje.M00110.getIdentificador(), new Mensaje(CodigoMensaje.M00110,
+				"No ha sido posible autenticar la informacion de los usuarios, por favor intentelo de nuevo o comuniquese con el admin"));
+		mensajes.put(CodigoMensaje.M00111.getIdentificador(), new Mensaje(CodigoMensaje.M00111,
+				"Se ha presentado un INESPERADO problema ejecutando la sentencia SQL de autenticacion de los usuarios en la base de datos Azure SQL"));
+		mensajes.put(CodigoMensaje.M00112.getIdentificador(), new Mensaje(CodigoMensaje.M00112,
+				"No ha sido posible llevar a cabo la autenticacion de informacion de informacion de los usuarios. Por favor intente de nuevo y en caso de persistir el problema, comuniquese conel administrador de la UD El Bernabeu"));
+		mensajes.put(CodigoMensaje.M00113.getIdentificador(), new Mensaje(CodigoMensaje.M00113,
+				"Se ha presentado un problema INESPERADO  ejecutando la sentencia SQL de autenticacion en la base de datos Azure SQL"));
+		mensajes.put(CodigoMensaje.M00114.getIdentificador(), new Mensaje(CodigoMensaje.M00114,
+				"No ha sido posible consultar la información de las monedas. Por favor, inténtelo de nuevo o comuníquese con el administrador de la Unidad Deportiva El Bernabeu..."));
+		mensajes.put(CodigoMensaje.M00115.getIdentificador(), new Mensaje(CodigoMensaje.M00115,
+				"Se ha presentado un problema ejecutando la sentancia SQL de consulta de las monedas en la base de datos Azure SQL"));
+		mensajes.put(CodigoMensaje.M00116.getIdentificador(), new Mensaje(CodigoMensaje.M00116,
+				"No ha sido posible llevar a cabo la consulta de la informacion de los monedas. Por favor intente de nuevo y en caso de pérsisitir el problema, comuniquese con el administrador de la Unidad Deportiva El Bernabeu..."));
+		mensajes.put(CodigoMensaje.M00117.getIdentificador(), new Mensaje(CodigoMensaje.M00117,
+				"Se ha presentado un problema INESPERADO ejecutando la sentancia SQL de consulta de las monedas en la base de datos Azure SQL"));
 
 	}
+
 
 	@Override
 	public final String obtenerContenidoMensaje(final CodigoMensaje codigo, final String... parametros) {

@@ -19,17 +19,17 @@ public final class AutenticarUsuarioImpl implements UseCaseWithReturn<UsuarioDom
     public Boolean ejecutar(final UsuarioDomain usuario) {
 
         if (usuario.getUsuario().isEmpty() && usuario.getContrasena().isEmpty()) {
-            var mensajeUsuario = "Los campo usuario y contraseña no pueden estar vacíos.";
+            var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00118);
             throw new BusinessUDElBernabeuException(mensajeUsuario);
         }
 
         if (usuario.getUsuario().isEmpty()) {
-            var mensajeUsuario = "El campo usuario no puede estar vacío";
+            var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00119);
             throw new BusinessUDElBernabeuException(mensajeUsuario);
         }
 
         if (usuario.getContrasena().isEmpty()) {
-            var mensajeUsuario = "El campo contraseña no puede estar vacío.";
+            var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00120);
             throw new BusinessUDElBernabeuException(mensajeUsuario);
         }
 
@@ -37,8 +37,7 @@ public final class AutenticarUsuarioImpl implements UseCaseWithReturn<UsuarioDom
         boolean isAuthenticated = usuarioDAO.autenticarUsuario(usuario.getUsuario(), usuario.getContrasena());
 
         if (!isAuthenticated) {
-
-            var mensajeUsuario = "El usuario y/o contraseña son incorrectos.";
+            var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00121);
             throw new BusinessUDElBernabeuException(mensajeUsuario);
         }
         return true;

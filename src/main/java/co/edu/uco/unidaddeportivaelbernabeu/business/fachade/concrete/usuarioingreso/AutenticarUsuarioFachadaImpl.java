@@ -32,8 +32,8 @@ public final class AutenticarUsuarioFachadaImpl implements FacadeWithReturn<Usua
             throw exception;
         } catch (Exception exception) {
             factory.cancelarTransaccion();
-            var mensajeUsuario = "Se ha presentado un problema tratando de autenticar el usuario";
-            var mensajeTecnico = "Se ha presentado un problema INESPERADO tratando de autenticar el usuario";
+            var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00130);
+            var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00131);
 
             throw new BusinessUDElBernabeuException(mensajeTecnico, mensajeUsuario);
         } finally {

@@ -30,7 +30,7 @@ public class UsuarioController {
             final AutenticarUsuarioFachadaImpl fachada = new AutenticarUsuarioFachadaImpl();
             boolean autenticado = fachada.ejecutar(usuario);
             usuarioResponse.getDatos().add(usuario);
-            usuarioResponse.getMensajes().add(autenticado ? "Usuario autenticado exitosamente." : "Credenciales incorrectas.");
+            usuarioResponse.getMensajes().add(autenticado ? MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00136) : MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00137) );
             if (!autenticado) {
                 httpStatusResponse = HttpStatus.UNAUTHORIZED;
             }
@@ -57,7 +57,7 @@ public class UsuarioController {
             final var usuarioDtoFilter = UsuarioDTO.build().setId(NumericHelper.convertToInt(id)).setUsuario(usuario);
             final ConsultarUsuariosFachadaImpl fachada = new ConsultarUsuariosFachadaImpl();
             usuarioResponse.setDatos(fachada.ejecutar(usuarioDtoFilter));
-            usuarioResponse.getMensajes().add("Usuarios Consultados Exitosamente");
+            usuarioResponse.getMensajes().add(MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00138));
         } catch (final UnidadDeportivaElBernabeuException exception) {
             exception.printStackTrace();
             usuarioResponse.getMensajes().add(exception.getMensajeUsuario());

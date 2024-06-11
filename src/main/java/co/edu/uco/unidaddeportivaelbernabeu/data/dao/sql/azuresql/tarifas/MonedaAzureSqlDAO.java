@@ -50,12 +50,12 @@ public class MonedaAzureSqlDAO extends SqlConnection implements MonedaDAO {
                 }
             }
         } catch (SQLException exception) {
-            var mensajeUsuario = "No ha sido posible consultar la información de los deportes. Por favor, inténtelo de nuevo o comuníquese con el administrador de la Unidad Deportiva El Bernabeu...";
-            var mensajeTecnico ="Se ha presentado un problema ejecutando la sentancia SQL de consulta de las unidades deportivas en la base de datos Azure SQL";
+            var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00114);
+            var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00115);
             throw new DataUDElBernabeuException(mensajeTecnico, mensajeUsuario, exception);
         } catch (final Exception exception) {
-            var mensajeUsuario = "No ha sido posible llevar a cabo la consulta de la informacion de los deportes. Por favor intente de nuevo y en caso de pérsisitir el problema, comuniquese con el administrador de la Unidad Deportiva El Bernabeu...";
-            var mensajeTecnico = "Se ha presentado un problema INESPERADO ejecutando la sentancia SQL de consulta de las unidades deportivas en la base de datos Azure SQL";
+            var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00116);
+            var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00117);
 
             throw new DataUDElBernabeuException(mensajeTecnico, mensajeUsuario, exception);
         }

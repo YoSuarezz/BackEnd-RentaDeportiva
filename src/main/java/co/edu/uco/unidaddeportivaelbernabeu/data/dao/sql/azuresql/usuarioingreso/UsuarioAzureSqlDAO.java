@@ -54,12 +54,12 @@ public final class UsuarioAzureSqlDAO extends SqlConnection implements UsuarioDA
                 }
             }
         } catch (SQLException exception) {
-            var mensajeUsuario = "No ha sido posible consultar la informacion de los usuarios, por favor intentelo de nuevo o comuniquese con el admin";
-            var mensajeTecnico = "Se ha presentado un problema ejecutando la sentencia SQL en la base de datos Azure SQL";
+            var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00106);
+            var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00107);
             throw new DataUDElBernabeuException(mensajeTecnico, mensajeUsuario, exception);
         } catch (final Exception exception) {
-            var mensajeUsuario = "No ha sido posible llevar a cabo la consulta de informacion de informacion de los usuarios. Por favor intente de nuevo y en caso de persistir el problema, comuniquese conel administrador de la UD El Bernabeu";
-            var mensajeTecnico = "Se ha presentado un INESPERADO problema ejecutando la sentencia SQL en la base de datos Azure SQL";
+            var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00108);
+            var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00109);
 
             throw new DataUDElBernabeuException(mensajeTecnico, mensajeUsuario, exception);
         }
@@ -78,12 +78,12 @@ public final class UsuarioAzureSqlDAO extends SqlConnection implements UsuarioDA
                 return resultado.next();
             }
         } catch (SQLException exception) {
-            var mensajeUsuario = "No ha sido posible autenticar la informacion de los usuarios, por favor intentelo de nuevo o comuniquese con el admin";
-            var mensajeTecnico = "Se ha presentado un problema ejecutando la sentencia SQL en la base de datos Azure SQL";
+            var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00110);
+            var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00111);
             throw new DataUDElBernabeuException(mensajeTecnico, mensajeUsuario, exception);
         } catch (final Exception exception) {
-            var mensajeUsuario = "No ha sido posible llevar a cabo la autenticacion de informacion de informacion de los usuarios. Por favor intente de nuevo y en caso de persistir el problema, comuniquese conel administrador de la UD El Bernabeu";
-            var mensajeTecnico = "Se ha presentado un INESPERADO problema ejecutando la sentencia SQL en la base de datos Azure SQL";
+            var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00112);
+            var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00113);
 
             throw new DataUDElBernabeuException(mensajeTecnico, mensajeUsuario, exception);
         }

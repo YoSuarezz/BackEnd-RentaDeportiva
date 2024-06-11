@@ -144,7 +144,7 @@ public final class MessageCatalogBase implements MessageCatalog {
 		mensajes.put(CodigoMensaje.M00085.getIdentificador(), new Mensaje(CodigoMensaje.M00085,
 				"Debe seleccionar un tipo de espacio deportivo."));
 		mensajes.put(CodigoMensaje.M00086.getIdentificador(), new Mensaje(CodigoMensaje.M00086,
-				"El precio por hora debe ser obligatorio y mayor a 0"));
+				"El precio por hora es obligatorio y debe ser mayor a 0"));
 		mensajes.put(CodigoMensaje.M00087.getIdentificador(), new Mensaje(CodigoMensaje.M00087,
 				"El nombre es obligatorio y no puede ser nulo o vacio."));
 		mensajes.put(CodigoMensaje.M00088.getIdentificador(), new Mensaje(CodigoMensaje.M00088,
@@ -174,17 +174,65 @@ public final class MessageCatalogBase implements MessageCatalog {
 		mensajes.put(CodigoMensaje.M00100.getIdentificador(), new Mensaje(CodigoMensaje.M00100,
 				"Se ha presentado un problema INESPERADO tratando de consultar las tarifas estándar en la base de datos."));
 		mensajes.put(CodigoMensaje.M00101.getIdentificador(), new Mensaje(CodigoMensaje.M00101,
-				"El tipo de espacio deportivo seleccionado no existe."));
+				"El tipo de espacio deportivo seleccionado para asignarle una tarifa estandar no existe."));
 		mensajes.put(CodigoMensaje.M00102.getIdentificador(), new Mensaje(CodigoMensaje.M00102,
 				"se ha presentado un problema tratando de eliminar el tipo de espacio de deportivo"));
 		mensajes.put(CodigoMensaje.M00103.getIdentificador(), new Mensaje(CodigoMensaje.M00103,
 				"Se ha presentado un problema inesperado tratando de eliminar el tipo de espacio de deportivo"));
 		mensajes.put(CodigoMensaje.M00104.getIdentificador(), new Mensaje(CodigoMensaje.M00104,
-				"El nombre de la tarifa estandar no puede exceder los 50 caracteres, por favor intente nuevamente con un nombre valido"));
+				"El nombre de la tarifa estandar no puede exceder los 60 caracteres, por favor intente nuevamente con un nombre valido"));
 		mensajes.put(CodigoMensaje.M00105.getIdentificador(), new Mensaje(CodigoMensaje.M00105,
 				"No existe el deporte con el cual se esperaba crear el tipo de espacio deportivo"));
+        mensajes.put(CodigoMensaje.M00118.getIdentificador(), new Mensaje(CodigoMensaje.M00118,
+                "Los campos Usuario y Contraseña son obligatorios y no pueden estar vacíos."));
+        mensajes.put(CodigoMensaje.M00119.getIdentificador(), new Mensaje(CodigoMensaje.M00119,
+                "El campo Usuario es obligatorio y no puede estar vacío"));
+        mensajes.put(CodigoMensaje.M00120.getIdentificador(), new Mensaje(CodigoMensaje.M00120,
+                "El campo Contraseña es obligatorio y no puede estar vacío."));
+        mensajes.put(CodigoMensaje.M00121.getIdentificador(), new Mensaje(CodigoMensaje.M00121,
+                "El usuario y/o contraseña son incorrectos O el Usuario no se encuentra ACTIVO"));
+        mensajes.put(CodigoMensaje.M00122.getIdentificador(), new Mensaje(CodigoMensaje.M00122,
+                "Ya existe otra tarifa estandar para el tipo de espacio deportivo al cual le quieres asignar la tarifa estandar."));
+        mensajes.put(CodigoMensaje.M00123.getIdentificador(), new Mensaje(CodigoMensaje.M00123,
+                "No existe el tipo de espacio deportivo al cual quieres aplicar la tarifa estandar."));
+        mensajes.put(CodigoMensaje.M00124.getIdentificador(), new Mensaje(CodigoMensaje.M00124,
+                "No existe la tarifa estandar que se desea editar."));
+        mensajes.put(CodigoMensaje.M00125.getIdentificador(), new Mensaje(CodigoMensaje.M00125,
+                "La moneda no puede ser nula o inválida."));
+        mensajes.put(CodigoMensaje.M00126.getIdentificador(), new Mensaje(CodigoMensaje.M00126,
+                "Se debe seleccionar un tipo de espacio deportivo"));
+        mensajes.put(CodigoMensaje.M00127.getIdentificador(), new Mensaje(CodigoMensaje.M00127,
+                "La moneda es obligatoria y debe ser seleccionada."));
+        mensajes.put(CodigoMensaje.M00128.getIdentificador(), new Mensaje(CodigoMensaje.M00128,
+                "Se ha presentado un problema tratando de consultar la informacion del usuario"));
+        mensajes.put(CodigoMensaje.M00129.getIdentificador(), new Mensaje(CodigoMensaje.M00129,
+                "Se ha presentado un problema INESPERADO tratando de consultar la informacion del usuario"));
+        mensajes.put(CodigoMensaje.M00130.getIdentificador(), new Mensaje(CodigoMensaje.M00130,
+                "Se ha presentado un problema tratando de autenticar el usuario"));
+        mensajes.put(CodigoMensaje.M00131.getIdentificador(), new Mensaje(CodigoMensaje.M00131,
+                "Se ha presentado un problema INESPERADO tratando de autenticar el usuario en el metodo ejecutar de la clase AutenticarUsuarioFachadaImpl. Por favor revise la traza completa del problema"));
+        mensajes.put(CodigoMensaje.M00132.getIdentificador(), new Mensaje(CodigoMensaje.M00132,
+                "Se ha presentado un problema tratando de editar la tarifa Estandar"));
+        mensajes.put(CodigoMensaje.M00133.getIdentificador(), new Mensaje(CodigoMensaje.M00133,
+                "Se ha presentado un problema INESPERADO tratando de editar la informacion de la tarifa estandar en el metodo ejecutar de la clase EditarTarifaEstandarFachadaImpl. Por favor revise la traza completa del problema"));
+        mensajes.put(CodigoMensaje.M00134.getIdentificador(), new Mensaje(CodigoMensaje.M00134,
+                "Se ha presentado un problema tratando de consultar la informacion de las monedas."));
+        mensajes.put(CodigoMensaje.M00135.getIdentificador(), new Mensaje(CodigoMensaje.M00135,
+                "Se ha presentado un problema INESPERADO tratando de consultar la informacion de las monedas en el metodo ejecutar de la clase ConsultarMonedasFachadaImpl. Por favor revise la traza completa del problema"));
+        mensajes.put(CodigoMensaje.M00136.getIdentificador(), new Mensaje(CodigoMensaje.M00136,
+                "Usuario autenticado exitosamente."));
+        mensajes.put(CodigoMensaje.M00137.getIdentificador(), new Mensaje(CodigoMensaje.M00137,
+                "Credenciales incorrectas."));
+        mensajes.put(CodigoMensaje.M00138.getIdentificador(), new Mensaje(CodigoMensaje.M00138,
+                "Usuarios Consultados Exitosamente"));
+        mensajes.put(CodigoMensaje.M00139.getIdentificador(), new Mensaje(CodigoMensaje.M00139,
+                "Se ha editado correctamente la tarifa estandar para el tipo de espacio deportivo."));
+        mensajes.put(CodigoMensaje.M00140.getIdentificador(), new Mensaje(CodigoMensaje.M00140,
+                "Monedas consultadas exitosamente"));
 
-	}
+
+
+    }
 	@Override
 	public final String obtenerContenidoMensaje(final CodigoMensaje codigo, final String... parametros) {
 		return obtenerMensaje(codigo, parametros).getContenido();

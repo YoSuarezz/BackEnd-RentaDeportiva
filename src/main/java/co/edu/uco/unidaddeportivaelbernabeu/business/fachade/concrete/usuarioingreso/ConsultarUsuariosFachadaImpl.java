@@ -35,8 +35,8 @@ public final class ConsultarUsuariosFachadaImpl implements FacadeWithReturn<Usua
             throw exception;
         } catch (Exception exception) {
             factory.cancelarTransaccion();
-            var mensajeUsuario = "Se ha presentado un problema tratando de consultar la informacion del usuario";
-            var mensajeTecnico = "Se ha presentado un problema INESPERADO tratando de consultar la informacion del usuario";
+            var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00128);
+            var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00129);
 
             throw new BusinessUDElBernabeuException(mensajeTecnico, mensajeUsuario);
         } finally {

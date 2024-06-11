@@ -44,7 +44,7 @@ public class CrearTarifaEstandarImpl implements UseCaseWithoutReturn<TarifaEstan
     //Pol3 ---> Obligatoriedad, formato, Rango
     private void validarTarifa(TarifaEstandarDomain tarifaEstandar) {
         if (tarifaEstandar.getTipoEspacioDeportivo() == null || tarifaEstandar.getTipoEspacioDeportivo().getId() <= 0) {
-            var mensajeUsuario = "Se debe seleccionar un tipo de espacio deportivo";
+            var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00126);
             throw new BusinessUDElBernabeuException(mensajeUsuario);
         }
 
@@ -69,12 +69,12 @@ public class CrearTarifaEstandarImpl implements UseCaseWithoutReturn<TarifaEstan
             var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00090);
             throw new BusinessUDElBernabeuException(mensajeUsuario);
         }
-        if (tarifaEstandar.getNombre().length() > 50) {
+        if (tarifaEstandar.getNombre().length() > 60) {
             var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00104);
             throw new BusinessUDElBernabeuException(mensajeUsuario);
         }
         if (tarifaEstandar.getMoneda() == null || tarifaEstandar.getMoneda().getId() <= 0) {
-            var mensajeUsuario = "La moneda es obligatoria y debe ser seleccionada.";
+            var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00127);
             throw new BusinessUDElBernabeuException(mensajeUsuario);
         }
     }

@@ -33,7 +33,7 @@ public class MonedaController {
             final var monedaDtoFilter = MonedaDTO.build().setId(NumericHelper.convertToInt(id)).setNombre(nombre);
             final ConsultarMonedasFachadaImpl fachada = new ConsultarMonedasFachadaImpl();
             monedaResponse.setDatos(fachada.ejecutar(monedaDtoFilter));
-            monedaResponse.getMensajes().add("Monedas consultadas exitosamente");
+            monedaResponse.getMensajes().add(MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00140));
         } catch (final UnidadDeportivaElBernabeuException exception){
             exception.printStackTrace();
             monedaResponse.getMensajes().add(exception.getMensajeUsuario());

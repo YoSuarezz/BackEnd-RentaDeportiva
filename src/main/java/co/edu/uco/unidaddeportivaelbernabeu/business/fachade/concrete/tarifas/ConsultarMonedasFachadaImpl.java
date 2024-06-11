@@ -38,8 +38,8 @@ public class ConsultarMonedasFachadaImpl implements UseCaseWithReturn<MonedaDTO,
             throw exception;
         }catch (Exception exception){
             factory.cancelarTransaccion();
-            var mensajeUsuario = "Se ha presentado un problema tratando de consultar la informacion de las monedas.";
-            var mensajeTecnico = "Se ha presentado un problema INESPERADO tratando de consultar la informacion de las monedas.";
+            var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00134);
+            var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00135);
 
             throw new BusinessUDElBernabeuException(mensajeTecnico, mensajeUsuario);
         } finally {
