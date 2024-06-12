@@ -42,6 +42,38 @@ public class TarifaEstandarAzureSqlDAO implements TarifaEstandarDAO {
     }
 
     @Override
+    public List<TarifaEstandarEntity> consultarPorNombre(String nombreTarifa) {
+        List<TarifaEstandarEntity> tarifas = new ArrayList<>();
+        String sql = "SELECT id, tipoEspacioDeportivoId, nombre, precioPorHora, fechaHoraInicio, fechaHoraFin, monedaId FROM TarifaEstandar WHERE nombre = ?";
+
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, nombreTarifa);
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    TarifaEstandarEntity tarifa = new TarifaEstandarEntity(
+                            resultSet.getInt("id"),
+                            TipoEspacioDeportivoEntity.build(resultSet.getInt("tipoEspacioDeportivoId")),
+                            MonedaEntity.build(resultSet.getInt("monedaId")),
+                            resultSet.getString("nombre"),
+                            resultSet.getInt("precioPorHora"),
+                            resultSet.getTimestamp("fechaHoraInicio").toLocalDateTime(),
+                            resultSet.getTimestamp("fechaHoraFin").toLocalDateTime()
+                    );
+                    tarifas.add(tarifa);
+                }
+            }
+        } catch (SQLException exception) {
+            var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00002);
+            var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00100);
+            throw new DataUDElBernabeuException(mensajeTecnico, mensajeUsuario, exception);
+        }
+
+        return tarifas;
+    }
+
+
+    @Override
     public List<TarifaEstandarEntity> consultarPorTipoEspacioDeportivo(int tipoEspacioDeportivoId) {
         final String sql = "SELECT id, tipoEspacioDeportivoId, nombre, precioPorHora, fechaHoraInicio, fechaHoraFin, monedaId FROM TarifaEstandar WHERE tipoEspacioDeportivoId = ?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {

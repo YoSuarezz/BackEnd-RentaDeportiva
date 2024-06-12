@@ -6,7 +6,10 @@ import co.edu.uco.unidaddeportivaelbernabeu.business.usecase.UseCaseWithoutRetur
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.custom.BusinessUDElBernabeuException;
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.messagecatalog.MessageCatalogStrategy;
 import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.exceptions.messagecatalog.data.CodigoMensaje;
+import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.helpers.NumericHelper;
+import co.edu.uco.unidaddeportivaelbernabeu.crosscutting.helpers.ObjectHelper;
 import co.edu.uco.unidaddeportivaelbernabeu.data.dao.factory.DAOFactory;
+import co.edu.uco.unidaddeportivaelbernabeu.dto.tarifas.TarifaEstandarDTO;
 import co.edu.uco.unidaddeportivaelbernabeu.entity.TipoEspacioDeportivoEntity;
 import co.edu.uco.unidaddeportivaelbernabeu.entity.tarifas.TarifaEstandarEntity;
 
@@ -19,6 +22,9 @@ public class EditarTarifaEstandarImpl implements UseCaseWithoutReturn<TarifaEsta
     public EditarTarifaEstandarImpl(DAOFactory factory) {
         this.factory = factory;
     }
+
+    public static final int MAX_NOMBRE_LENGTH = 50;
+
 
     @Override
     public void ejecutar(TarifaEstandarDomain tarifaEstandar) {
@@ -49,23 +55,23 @@ public class EditarTarifaEstandarImpl implements UseCaseWithoutReturn<TarifaEsta
     }
 
     private void validarTarifa(TarifaEstandarDomain tarifaEstandar) {
-        if (tarifaEstandar.getId() <= 0) {
+        if (tarifaEstandar.getId() <= NumericHelper.ZERO) {
             var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00124);
             throw new BusinessUDElBernabeuException(mensajeUsuario);
         }
-        if (tarifaEstandar.getPrecioPorHora() <= 0) {
+        if (tarifaEstandar.getPrecioPorHora() <= NumericHelper.ZERO) {
             var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00086);
             throw new BusinessUDElBernabeuException(mensajeUsuario);
         }
-        if (tarifaEstandar.getNombre() == null || tarifaEstandar.getNombre().trim().isEmpty()) {
+        if (tarifaEstandar.getNombre() == ObjectHelper.getObjectHelper().getDefault(tarifaEstandar, TarifaEstandarDTO.build()) || tarifaEstandar.getNombre().trim().isEmpty()) {
             var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00087);
             throw new BusinessUDElBernabeuException(mensajeUsuario);
         }
-        if (tarifaEstandar.getFechaHoraInicio() == null) {
+        if (tarifaEstandar.getFechaHoraInicio() == ObjectHelper.getObjectHelper().getDefault(tarifaEstandar, TarifaEstandarDTO.build())) {
             var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00088);
             throw new BusinessUDElBernabeuException(mensajeUsuario);
         }
-        if (tarifaEstandar.getFechaHoraFin() == null) {
+        if (tarifaEstandar.getFechaHoraFin() == ObjectHelper.getObjectHelper().getDefault(tarifaEstandar, TarifaEstandarDTO.build())) {
             var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00089);
             throw new BusinessUDElBernabeuException(mensajeUsuario);
         }
@@ -73,12 +79,16 @@ public class EditarTarifaEstandarImpl implements UseCaseWithoutReturn<TarifaEsta
             var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00090);
             throw new BusinessUDElBernabeuException(mensajeUsuario);
         }
-        if (tarifaEstandar.getNombre().length() > 50) {
+        if (tarifaEstandar.getNombre().length() > MAX_NOMBRE_LENGTH) {
             var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00104);
             throw new BusinessUDElBernabeuException(mensajeUsuario);
         }
-        if (tarifaEstandar.getMoneda() == null || tarifaEstandar.getMoneda().getId() <= 0) {
+        if (tarifaEstandar.getMoneda() == null || tarifaEstandar.getMoneda().getId() <= NumericHelper.ZERO) {
             var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00125);
+            throw new BusinessUDElBernabeuException(mensajeUsuario);
+        }
+        if (existeTarifaConMismoNombre(tarifaEstandar)) {
+            var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00141);
             throw new BusinessUDElBernabeuException(mensajeUsuario);
         }
     }
@@ -97,6 +107,15 @@ public class EditarTarifaEstandarImpl implements UseCaseWithoutReturn<TarifaEsta
         List<TipoEspacioDeportivoEntity> tiposEspacio = tipoEspacioDeportivoDAO.consultar(criterio);
 
         return !tiposEspacio.isEmpty();
+    }
+
+    private boolean existeTarifaConMismoNombre(TarifaEstandarDomain tarifaEstandar) {
+        var tarifaEstandarDAO = factory.getTarifaEstandarDAO();
+        List<TarifaEstandarEntity> tarifas = tarifaEstandarDAO.consultarPorNombre(tarifaEstandar.getNombre());
+
+        // Verifica que la tarifa encontrada no sea la misma que se está editando
+        return tarifas.stream()
+                .anyMatch(tarifa -> tarifa.getId() != tarifaEstandar.getId());
     }
 
     private boolean existeTarifa(int tarifaId) {

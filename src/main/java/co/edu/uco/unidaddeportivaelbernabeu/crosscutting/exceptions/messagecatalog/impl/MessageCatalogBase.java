@@ -180,7 +180,7 @@ public final class MessageCatalogBase implements MessageCatalog {
 		mensajes.put(CodigoMensaje.M00103.getIdentificador(), new Mensaje(CodigoMensaje.M00103,
 				"Se ha presentado un problema inesperado tratando de eliminar el tipo de espacio de deportivo"));
 		mensajes.put(CodigoMensaje.M00104.getIdentificador(), new Mensaje(CodigoMensaje.M00104,
-				"El nombre de la tarifa estandar no puede exceder los 60 caracteres, por favor intente nuevamente con un nombre valido"));
+				"El nombre de la tarifa estandar no puede exceder los 50 caracteres, por favor intente nuevamente con un nombre valido"));
 		mensajes.put(CodigoMensaje.M00105.getIdentificador(), new Mensaje(CodigoMensaje.M00105,
 				"No existe el deporte con el cual se esperaba crear el tipo de espacio deportivo"));
         mensajes.put(CodigoMensaje.M00118.getIdentificador(), new Mensaje(CodigoMensaje.M00118,
@@ -190,7 +190,7 @@ public final class MessageCatalogBase implements MessageCatalog {
         mensajes.put(CodigoMensaje.M00120.getIdentificador(), new Mensaje(CodigoMensaje.M00120,
                 "El campo Contraseña es obligatorio y no puede estar vacío."));
         mensajes.put(CodigoMensaje.M00121.getIdentificador(), new Mensaje(CodigoMensaje.M00121,
-                "El usuario y/o contraseña son incorrectos O el Usuario no se encuentra ACTIVO"));
+                "El usuario y/o contraseña son incorrectos o el Usuario no se encuentra activo"));
         mensajes.put(CodigoMensaje.M00122.getIdentificador(), new Mensaje(CodigoMensaje.M00122,
                 "Ya existe otra tarifa estandar para el tipo de espacio deportivo al cual le quieres asignar la tarifa estandar."));
         mensajes.put(CodigoMensaje.M00123.getIdentificador(), new Mensaje(CodigoMensaje.M00123,
@@ -229,8 +229,8 @@ public final class MessageCatalogBase implements MessageCatalog {
                 "Se ha editado correctamente la tarifa estandar para el tipo de espacio deportivo."));
         mensajes.put(CodigoMensaje.M00140.getIdentificador(), new Mensaje(CodigoMensaje.M00140,
                 "Monedas consultadas exitosamente"));
-
-
+		mensajes.put(CodigoMensaje.M00141.getIdentificador(), new Mensaje(CodigoMensaje.M00141,
+				"No pueden existir dos tarifas estandar con el mismo nombre"));
 
     }
 	@Override
